@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import { defaultLocale, type Locale } from "@/config/i18n.config";
+import { ensureTrailingSlash } from "@/lib/ensure-trailing-slash";
+import { withBasePath } from "@/lib/with-base-path";
+
+interface Props extends HTMLAttributes<"a"> {
+	locale?: Locale;
+}
+
+const { href, locale, ...rest } = Astro.props;
+
+const localisedHref =
+	typeof href === "string"
+		? withBasePath(
+				"/" + (locale ?? Astro.currentLocale ?? defaultLocale) + ensureTrailingSlash(href),
+			)
+		: href;
+const pathname = localisedHref instanceof URL ? localisedHref.pathname : localisedHref;
+const isCurrent = pathname === Astro.url.pathname;
+---
+
+<a {...rest} aria-current={isCurrent ? "page" : undefined} href={localisedHref}>
+	<slot />
+</a>

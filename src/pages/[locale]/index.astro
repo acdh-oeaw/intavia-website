@@ -1,0 +1,107 @@
+---
+import { Image } from "astro:assets";
+
+import Link from "@/components/link.astro";
+import MainContent from "@/components/main-content.astro";
+import PageSection from "@/components/page-section.astro";
+import PageTitle from "@/components/page-title.astro";
+import { locales } from "@/config/i18n.config";
+import PageLayout from "@/layouts/page-layout.astro";
+import { getCollectionName } from "@/lib/content/get-collection-name";
+import { getSingletonName } from "@/lib/content/get-singleton-name";
+import { reader } from "@/lib/content/reader";
+import { getImageImport } from "@/lib/get-image-import";
+import { createI18n } from "@/lib/i18n";
+
+export function getStaticPaths() {
+	return Promise.all(
+		locales.map(async (locale) => {
+			const singleton = getSingletonName("indexPage", locale);
+			const page = await reader().singletons[singleton].readOrThrow();
+
+			return { params: { locale }, props: { page } };
+		}),
+	);
+}
+
+const { locale } = Astro.params;
+
+const { page } = Astro.props;
+
+const { t } = await createI18n(locale);
+
+const documentTitle = t("IndexPage.meta.title");
+const { hero, main } = page;
+---
+
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent>
+		<PageSection>
+			<div>
+				{/* @ts-expect-error Upstream type issue. */}
+				<Image alt="" fetchpriority="high" loading="eager" src={getImageImport(hero.image)} />
+				<PageTitle>{hero.title}</PageTitle>
+				<p>{hero.leadIn}</p>
+				<div>
+					{
+						hero.links.map((link) => {
+							return <Link href={link.href}>{link.label}</Link>;
+						})
+					}
+				</div>
+			</div>
+		</PageSection>
+
+		{
+			main.sections.map((section) => {
+				switch (section.discriminant) {
+					case "cardsSection": {
+						const { title, cards, variant } = section.value;
+
+						return (
+							<PageSection>
+								<h2>{title}</h2>
+								<ul role="list">
+									{cards.map(async (card) => {
+										switch (card.discriminant) {
+											case "custom": {
+												const { title, image, summary } = card.value;
+
+												return (
+													<article>
+														<h3>{title}</h3>
+													</article>
+												);
+											}
+
+											case "page": {
+												const id = card.value.reference;
+												const collectionName = getCollectionName("pages", locale);
+												const page = await reader().collections[collectionName].readOrThrow(id);
+												const { title, image, summary } = page;
+
+												return (
+													<article>
+														<h3>{title}</h3>
+													</article>
+												);
+											}
+
+											default: {
+												return null;
+											}
+										}
+									})}
+								</ul>
+							</PageSection>
+						);
+					}
+
+					default: {
+						return null;
+					}
+				}
+			})
+		}
+	</MainContent>
+</PageLayout>

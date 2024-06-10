@@ -1,0 +1,90 @@
+{
+	"ColorSchemeSwitcher": {
+		"color-schemes": {
+			"dark": "Dunkel",
+			"light": "Hell",
+			"system": "System"
+		},
+		"change": "Farbschema ändern"
+	},
+	"ContactForm": {
+		"email": "Email-Adresse",
+		"message": "Nachricht",
+		"status": {
+			"invalid-input": "Ungültige Eingabe.",
+			"success": "Nachricht erfolgreich gesendet.",
+			"unknown-error": "Konnte Nachricht nicht senden."
+		},
+		"subject": "Betreff",
+		"submit": "Absenden"
+	},
+	"ContactPage": {
+		"meta": {
+			"title": "Kontakt"
+		},
+		"title": "Kontakt"
+	},
+	"FootnoteContent": {
+		"back": "Zurück zu Referenz {count}"
+	},
+	"FootnoteSection": {
+		"footnotes": "Fußnoten"
+	},
+	"ImageCarousel": {
+		"next": "Nächste",
+		"previous": "Vorherige",
+		"slide": "{current} von {total}",
+		"start": "Starten",
+		"stop": "Pausieren"
+	},
+	"ImprintPage": {
+		"meta": {
+			"title": "Impressum"
+		},
+		"title": "Impressum"
+	},
+	"IndexPage": {
+		"meta": {
+			"title": "Startseite"
+		}
+	},
+	"LocaleSwitcher": {
+		"current-locale": "Aktuelle Sprache: {locale}",
+		"switch-locale": "Sprache wechseln",
+		"switch-locale-to": "Zu {locale} wechseln"
+	},
+	"Mdx": {
+		"FootnoteBackLabel": "Zurück zur Referenz {reference}",
+		"Footnotes": "Fußnoten"
+	},
+	"MobileNavToggle": {
+		"label": "Navigationsmenü öffnen"
+	},
+	"NotFoundPage": {
+		"meta": {
+			"title": "Seite nicht gefunden"
+		},
+		"title": "Seite nicht gefunden"
+	},
+	"Search": {
+		"close-dialog": "Dialogfenster schließen",
+		"search": "Suchen"
+	},
+	"SkipLink": {
+		"skip-to-main-content": "Zum Hauptinhalt springen"
+	},
+	"TableOfContents": {
+		"tableOfContents": "Inhaltsverzeichnis"
+	},
+	"WebsiteFooter": {
+		"links": {
+			"imprint": "Impressum"
+		}
+	},
+	"WebsiteHeader": {
+		"links": {
+			"home": "Startseite"
+		},
+		"navigation-primary": "Primär"
+	}
+}

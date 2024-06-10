@@ -1,0 +1,11 @@
+{
+	"links": [
+		{
+			"discriminant": "link",
+			"value": {
+				"label": "About",
+				"href": "/about/"
+			}
+		}
+	]
+}

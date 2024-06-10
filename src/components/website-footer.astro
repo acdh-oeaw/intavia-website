@@ -1,0 +1,32 @@
+---
+import Link from "@/components/link.astro";
+import type { Locale } from "@/config/i18n.config";
+import { createI18n } from "@/lib/i18n";
+
+const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
+
+const imprint = t("WebsiteFooter.links.imprint");
+---
+
+<footer class="border-t">
+	<div class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 py-6 text-sm">
+		<div>
+			<Link
+				class="underline decoration-dotted underline-offset-4 hover:no-underline"
+				href="/imprint"
+			>
+				{imprint}
+			</Link>
+		</div>
+
+		<div>
+			&copy; {new Date().getUTCFullYear()}
+			<a
+				class="underline decoration-dotted underline-offset-4 hover:no-underline"
+				href="https://www.oeaw.ac.at/acdh"
+			>
+				ACDH-CH
+			</a>
+		</div>
+	</div>
+</footer>

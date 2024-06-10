@@ -1,0 +1,84 @@
+---
+import type { Locale } from "@/config/i18n.config";
+import { createI18n } from "@/lib/i18n";
+
+const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
+
+const label = t("ColorSchemeSwitcher.change");
+
+const colorSchemes = {
+	system: t("ColorSchemeSwitcher.color-schemes.system"),
+	light: t("ColorSchemeSwitcher.color-schemes.light"),
+	dark: t("ColorSchemeSwitcher.color-schemes.dark"),
+};
+---
+
+<color-scheme-switcher>
+	<label>
+		<span class="sr-only">{label}</span>
+		<select data-color-scheme-switcher>
+			{
+				Object.entries(colorSchemes).map(([value, label]) => {
+					return <option value={value}>{label}</option>;
+				})
+			}
+		</select>
+	</label>
+</color-scheme-switcher>
+
+<script>
+	import { assert } from "@acdh-oeaw/lib";
+
+	import type { ColorScheme } from "@/lib/color-scheme";
+
+	class ColorSchemeSwitcher extends HTMLElement {
+		selectElement: HTMLSelectElement;
+
+		constructor() {
+			super();
+
+			const selectElement = this.querySelector("select");
+			assert(selectElement);
+
+			this.selectElement = selectElement;
+
+			this.getColorScheme = this.getColorScheme.bind(this);
+			this.setColorScheme = this.setColorScheme.bind(this);
+			this.onSelectColorScheme = this.onSelectColorScheme.bind(this);
+			this.init = this.init.bind(this);
+			this.update = this.update.bind(this);
+
+			this.init();
+			window.__colorScheme.subscribe(this.update);
+		}
+
+		getColorScheme() {
+			const colorSchemeState = window.__colorScheme.get();
+			return colorSchemeState.kind === "system" ? "system" : colorSchemeState.colorScheme;
+		}
+
+		setColorScheme(value: ColorScheme | "system") {
+			window.__colorScheme.set(value === "system" ? null : value);
+		}
+
+		onSelectColorScheme(event: Event) {
+			const value = (event.currentTarget as HTMLSelectElement).value as ColorScheme | "system";
+			this.setColorScheme(value);
+		}
+
+		init() {
+			this.update();
+			this.selectElement.addEventListener("change", this.onSelectColorScheme);
+		}
+
+		update() {
+			const selectedKey = this.getColorScheme();
+
+			this.selectElement.querySelectorAll("option").forEach((optionElement) => {
+				optionElement.selected = optionElement.value === selectedKey;
+			});
+		}
+	}
+
+	window.customElements.define("color-scheme-switcher", ColorSchemeSwitcher);
+</script>
