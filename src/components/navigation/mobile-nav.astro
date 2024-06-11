@@ -2,7 +2,6 @@
 import { Icon } from "astro-icon/components";
 
 import Link from "@/components/link.astro";
-import LocaleSwitcher from "@/components/locale-switcher.astro";
 import { mobileNavId } from "@/components/navigation/constants";
 import Search from "@/components/search.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
@@ -104,7 +103,6 @@ const navigation = await getNavigation(locale);
 	<hr class="my-6" />
 
 	<div class="flex justify-between">
-		<LocaleSwitcher />
 		<Search />
 	</div>
 </div>

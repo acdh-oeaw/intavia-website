@@ -5,10 +5,8 @@ import sitemap from "@astrojs/sitemap";
 import keystatic from "@keystatic/astro";
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
-import type { Writable } from "type-fest";
 import { loadEnv } from "vite";
 
-import { defaultLocale, locales } from "./src/config/i18n.config";
 // import { createConfig as createMdxConfig } from "./src/config/mdx.config";
 import { ensureTrailingSlash } from "./src/lib/ensure-trailing-slash";
 
@@ -28,11 +26,6 @@ export default defineConfig({
 		// actions: true,
 		contentCollectionCache: true,
 		rewriting: true,
-	},
-	i18n: {
-		defaultLocale,
-		locales: locales as Writable<typeof locales>,
-		routing: "manual",
 	},
 	integrations: [
 		icon({
@@ -57,16 +50,7 @@ export default defineConfig({
 		keystatic(),
 		mdx(),
 		react(),
-		sitemap({
-			i18n: {
-				defaultLocale,
-				locales: Object.fromEntries(
-					locales.map((locale) => {
-						return [locale, locale];
-					}),
-				),
-			},
-		}),
+		sitemap(),
 	],
 	/** Use `@/lib/content/mdx.ts` instead of astro's built-in markdown processor. */
 	// // @ts-expect-error Astro types are incomplete.

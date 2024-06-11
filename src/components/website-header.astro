@@ -1,8 +1,6 @@
 ---
 import { Image } from "astro:assets";
 
-import ColorSchemeSwitcher from "@/components/color-scheme-switcher.astro";
-import LocaleSwitcher from "@/components/locale-switcher.astro";
 import MobileNav from "@/components/navigation/mobile-nav.astro";
 import MobileNavToggle from "@/components/navigation/mobile-nav-toggle.astro";
 import NavMenu from "@/components/navigation/nav-menu.astro";
@@ -15,7 +13,6 @@ import Search from "@/components/search.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import { getNavigation } from "@/lib/get-navigation";
 import { createI18n } from "@/lib/i18n";
-import logoDark from "~/public/assets/images/acdh-ch-logo-dark.svg";
 import logoLight from "~/public/assets/images/acdh-ch-logo-light.svg";
 
 const locale = (Astro.currentLocale as Locale | undefined) ?? defaultLocale;
@@ -30,21 +27,8 @@ const home = t("WebsiteHeader.links.home");
 		class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 py-6 text-sm font-medium"
 	>
 		<Navigation class="flex-1" label={t("WebsiteHeader.navigation-primary")}>
-			<NavMenuLink class="-ml-4 inline-flex shrink-0 items-center gap-x-2" href={`/${locale}`}>
-				<Image
-					alt=""
-					class="block size-8 dark:hidden"
-					fetchpriority="high"
-					loading="eager"
-					src={logoLight}
-				/>
-				<Image
-					alt=""
-					class="hidden size-8 dark:block"
-					fetchpriority="high"
-					loading="eager"
-					src={logoDark}
-				/>
+			<NavMenuLink class="-ml-4 inline-flex shrink-0 items-center gap-x-2" href="/">
+				<Image alt="" class="block size-8" fetchpriority="high" loading="eager" src={logoLight} />
 				<span>{home}</span>
 			</NavMenuLink>
 
@@ -134,8 +118,6 @@ const home = t("WebsiteHeader.links.home");
 
 		<div class="-mr-4 hidden items-center gap-x-4 lg:mr-0 lg:flex">
 			<Search />
-			<ColorSchemeSwitcher />
-			<LocaleSwitcher />
 		</div>
 	</div>
 

@@ -19,10 +19,6 @@ import { createI18n } from "@/lib/i18n";
 const cache = new Map<Locale, CompileOptions>();
 
 const typography: Record<Locale, TypographicOptions> = {
-	de: {
-		openingQuotes: { double: "„", single: "‚" },
-		closingQuotes: { double: "“", single: "‘" },
-	},
 	en: {
 		openingQuotes: { double: "“", single: "‘" },
 		closingQuotes: { double: "”", single: "’" },

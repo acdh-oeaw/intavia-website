@@ -5,7 +5,7 @@ import Link from "@/components/link.astro";
 import MainContent from "@/components/main-content.astro";
 import PageSection from "@/components/page-section.astro";
 import PageTitle from "@/components/page-title.astro";
-import { locales } from "@/config/i18n.config";
+import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
 import { getCollectionName } from "@/lib/content/get-collection-name";
 import { getSingletonName } from "@/lib/content/get-singleton-name";
@@ -13,22 +13,10 @@ import { reader } from "@/lib/content/reader";
 import { getImageImport } from "@/lib/get-image-import";
 import { createI18n } from "@/lib/i18n";
 
-export function getStaticPaths() {
-	return Promise.all(
-		locales.map(async (locale) => {
-			const singleton = getSingletonName("indexPage", locale);
-			const page = await reader().singletons[singleton].readOrThrow();
-
-			return { params: { locale }, props: { page } };
-		}),
-	);
-}
-
-const { locale } = Astro.params;
-
-const { page } = Astro.props;
-
 const { t } = await createI18n(locale);
+
+const singleton = getSingletonName("indexPage", locale);
+const page = await reader().singletons[singleton].readOrThrow();
 
 const documentTitle = t("IndexPage.meta.title");
 const { hero, main } = page;
@@ -38,17 +26,9 @@ const { hero, main } = page;
 	<MainContent>
 		<PageSection>
 			<div>
-				{/* @ts-expect-error Upstream type issue. */}
 				<Image alt="" fetchpriority="high" loading="eager" src={getImageImport(hero.image)} />
 				<PageTitle>{hero.title}</PageTitle>
-				<p>{hero.leadIn}</p>
-				<div>
-					{
-						hero.links.map((link) => {
-							return <Link href={link.href}>{link.label}</Link>;
-						})
-					}
-				</div>
+				<p>{hero.subtitle}</p>
 			</div>
 		</PageSection>
 
@@ -58,19 +38,33 @@ const { hero, main } = page;
 					case "cardsSection": {
 						const { title, cards, variant } = section.value;
 
+						const variants = {
+							fluid: "grid-fluid-cols-80",
+							"two-columns": "grid-cols-2",
+							"three-columns": "grid-cols-3",
+							"four-columns": "grid-cols-4",
+						};
+
 						return (
 							<PageSection>
 								<h2>{title}</h2>
-								<ul role="list">
+								<ul class:list={["grid gap-8", variants[variant]]} role="list">
 									{cards.map(async (card) => {
 										switch (card.discriminant) {
 											case "custom": {
-												const { title, image, summary } = card.value;
+												const { title, image, summary, link } = card.value;
 
 												return (
-													<article>
-														<h3>{title}</h3>
-													</article>
+													<li>
+														<article>
+															{image ? <Image alt="" src={getImageImport(image)} /> : null}
+															<h3>{title}</h3>
+															<p>{summary}</p>
+															<footer>
+																<Link href={link.href}>{link.label}</Link>
+															</footer>
+														</article>
+													</li>
 												);
 											}
 
@@ -81,9 +75,16 @@ const { hero, main } = page;
 												const { title, image, summary } = page;
 
 												return (
-													<article>
-														<h3>{title}</h3>
-													</article>
+													<li>
+														<article>
+															{image ? <Image alt="" src={getImageImport(image)} /> : null}
+															<h3>{title}</h3>
+															<p>{summary}</p>
+															<footer>
+																<Link href={`/${id}`}>{card.value.link.label}</Link>
+															</footer>
+														</article>
+													</li>
 												);
 											}
 

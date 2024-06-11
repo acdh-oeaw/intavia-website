@@ -10,9 +10,7 @@ import type { WebSite, WithContext } from "schema-dts";
 
 import Analytics from "@/components/analytics.astro";
 import { env } from "@/config/env.config";
-import { defaultLocale, type Locale, locales } from "@/config/i18n.config";
-import { createColorSchemeScript } from "@/lib/color-scheme";
-import { getUnprefixedPathname } from "@/lib/get-unprefixed-pathname";
+import type { Locale } from "@/config/i18n.config";
 import { createI18n } from "@/lib/i18n";
 import { safeJsonLdReplacer } from "@/lib/safe-json-ld-replacer";
 import { withBasePath } from "@/lib/with-base-path";
@@ -43,8 +41,6 @@ const jsonLd: WithContext<WebSite> = {
 	description: metadata.description,
 };
 
-const pathname = getUnprefixedPathname(Astro.url.pathname);
-
 const matomoBaseUrl = env.PUBLIC_MATOMO_BASE_URL;
 const matomoId = env.PUBLIC_MATOMO_ID;
 const googleSiteVerification = env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -53,7 +49,7 @@ const googleSiteVerification = env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 <html lang={locale}>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="color-scheme" content="light dark" />
+		<meta name="color-scheme" content="light" />
 		<meta charset="utf-8" />
 
 		<title>{[title, metadata.title].join(" | ")}</title>
@@ -63,23 +59,6 @@ const googleSiteVerification = env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 		<link rel="canonical" href={canonicalUrl} />
 		<link rel="manifest" href={manifestUrl} />
-
-		{
-			locales.map((locale) => {
-				return (
-					<link
-						rel="alternate"
-						href={new URL(withBasePath(`/${locale}${pathname}`), Astro.site)}
-						hreflang={locale}
-					/>
-				);
-			})
-		}
-		<link
-			rel="alternate"
-			href={new URL(withBasePath(`/${defaultLocale}${pathname}`), Astro.site)}
-			hreflang="x-default"
-		/>
 
 		<link rel="sitemap" href={sitemapUrl} />
 		<link rel="alternate" type="application/rss+xml" title={metadata.title} href={rssUrl} />
@@ -117,11 +96,6 @@ const googleSiteVerification = env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 		<link rel="preload" as="font" type="font/woff2" href={inter} crossorigin />
 
 		<ViewTransitions />
-
-		<script
-			is:inline
-			set:html={`(${String(createColorSchemeScript)})("uiColorScheme", "ui-color-scheme");`}
-		/>
 
 		<script
 			is:inline

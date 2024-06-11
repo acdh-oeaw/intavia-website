@@ -10,6 +10,7 @@ const config: Config = {
 		"./src/@(components|layouts|pages)/**/*.@(astro|css|ts|tsx)",
 		"./src/styles/**/*.css",
 	],
+	darkMode: undefined,
 	presets: [preset],
 	theme: {
 		extend: {

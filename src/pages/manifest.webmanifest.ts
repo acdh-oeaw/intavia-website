@@ -1,9 +1,7 @@
-import { defaultLocale } from "@/config/i18n.config";
+import { defaultLocale as locale } from "@/config/i18n.config";
 import { createI18n } from "@/lib/i18n";
 
 export async function GET() {
-	const locale = defaultLocale;
-
 	const { t } = await createI18n(locale);
 
 	const metadata = t("metadata");

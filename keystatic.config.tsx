@@ -245,9 +245,9 @@ function createComponents(
 }
 
 const collections = {
-	pages: createCollection("/pages/", (path, assetPath, locale) => {
+	pages: createCollection("/pages/", (path, assetPath, _locale) => {
 		return collection({
-			label: `Pages (${locale})`,
+			label: "Pages",
 			path,
 			slugField: "title",
 			format: { contentField: "content" },
@@ -286,7 +286,7 @@ const collections = {
 const singletons = {
 	indexPage: createSingleton("/index-page/", (path, assetPath, locale) => {
 		return singleton({
-			label: `Home page (${locale})`,
+			label: "Home page",
 			path,
 			format: { data: "json" },
 			entryLayout: "form",
@@ -298,40 +298,16 @@ const singletons = {
 							label: "Title",
 							validation: { isRequired: true },
 						}),
+						subtitle: fields.text({
+							label: "Subtitle",
+							multiline: true,
+							validation: { isRequired: true },
+						}),
 						image: fields.image({
 							label: "Image",
 							...createAssetPaths(assetPath),
 							validation: { isRequired: true },
 						}),
-						leadIn: fields.text({
-							label: "Lead in",
-							multiline: true,
-							validation: { isRequired: true },
-						}),
-						links: fields.array(
-							fields.object(
-								{
-									label: fields.text({
-										label: "Label",
-										validation: { isRequired: true },
-									}),
-									href: fields.url({
-										label: "URL",
-										validation: { isRequired: true },
-									}),
-								},
-								{
-									label: "Link",
-								},
-							),
-							{
-								label: "Links",
-								itemLabel(props) {
-									return props.fields.label.value;
-								},
-								validation: { length: { min: 1 } },
-							},
-						),
 					},
 					{
 						label: "Hero section",
@@ -420,6 +396,9 @@ const singletons = {
 													},
 													page: {
 														label: "Page card",
+														itemLabel(props) {
+															return props.fields.title.value;
+														},
 														schema: fields.object(
 															{
 																title: fields.text({
@@ -431,6 +410,17 @@ const singletons = {
 																	collection: getCollectionName("pages", locale),
 																	validation: { isRequired: true },
 																}),
+																link: fields.object(
+																	{
+																		label: fields.text({
+																			label: "Label",
+																			validation: { isRequired: true },
+																		}),
+																	},
+																	{
+																		label: "Link",
+																	},
+																),
 															},
 															{
 																label: "Page card",
@@ -461,9 +451,9 @@ const singletons = {
 			},
 		});
 	}),
-	metadata: createSingleton("/metadata/", (path, _assetPath, locale) => {
+	metadata: createSingleton("/metadata/", (path, _assetPath, _locale) => {
 		return singleton({
-			label: `Metadata (${locale})`,
+			label: "Metadata",
 			path,
 			format: { data: "json" },
 			entryLayout: "form",
@@ -489,7 +479,7 @@ const singletons = {
 	}),
 	navigation: createSingleton("/navigation/", (path, _assetPath, locale) => {
 		return singleton({
-			label: `Navigation (${locale})`,
+			label: "Navigation",
 			path,
 			format: { data: "json" },
 			entryLayout: "form",
@@ -610,14 +600,14 @@ const singletons = {
 export default config({
 	ui: {
 		brand: {
-			name: "ACDH-CH",
+			name: "InTaVia",
 			// @ts-expect-error `ReactNode` is a valid return type.
 			mark: Logo,
 		},
 		navigation: {
-			Pages: ["de_indexPage", "en_indexPage", "---", "de_pages", "en_pages"],
-			Navigation: ["de_navigation", "en_navigation"],
-			Settings: ["de_metadata", "en_metadata"],
+			Pages: ["en_indexPage", "en_pages"],
+			Navigation: ["en_navigation"],
+			Settings: ["en_metadata"],
 		},
 	},
 	storage:
@@ -639,17 +629,13 @@ export default config({
 					kind: "local",
 				},
 	collections: {
-		de_pages: collections.pages("de"),
 		en_pages: collections.pages("en"),
 	},
 	singletons: {
-		de_indexPage: singletons.indexPage("de"),
 		en_indexPage: singletons.indexPage("en"),
 
-		de_metadata: singletons.metadata("de"),
 		en_metadata: singletons.metadata("en"),
 
-		de_navigation: singletons.navigation("de"),
 		en_navigation: singletons.navigation("en"),
 	},
 });
