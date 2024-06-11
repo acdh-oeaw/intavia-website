@@ -271,6 +271,7 @@ const collections = {
 					multiline: true,
 					validation: { isRequired: true },
 				}),
+				date: fields.date({ label: "Date (temporary)" }),
 				content: fields.mdx({
 					label: "Content",
 					options: {

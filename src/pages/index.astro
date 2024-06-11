@@ -72,16 +72,17 @@ const { hero, main } = page;
 												const id = card.value.reference;
 												const collectionName = getCollectionName("pages", locale);
 												const page = await reader().collections[collectionName].readOrThrow(id);
-												const { title, image, summary } = page;
+												const { image, summary } = page;
 
 												return (
-													<li>
+													<li class="overflow-hidden rounded-md border">
 														<article>
 															{image ? <Image alt="" src={getImageImport(image)} /> : null}
-															<h3>{title}</h3>
-															<p>{summary}</p>
-															<footer>
-																<Link href={`/${id}`}>{card.value.link.label}</Link>
+															<p class="p-2">{summary}</p>
+															<footer class="flex justify-end">
+																<Link href={`/${id}`} class="m-2 rounded-md border p-2">
+																	{card.value.link.label}
+																</Link>
 															</footer>
 														</article>
 													</li>

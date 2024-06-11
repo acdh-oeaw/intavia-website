@@ -1,30 +1,30 @@
 {
-  "hero": {
-    "title": "InTaVia: In/Tangible European Heritage",
-    "subtitle": "Visual Analysis, Curation & Communication",
-    "image": "/assets/content/en/index-page/hero/image.png"
-  },
-  "main": {
-    "sections": [
-      {
-        "discriminant": "cardsSection",
-        "value": {
-          "title": "About",
-          "variant": "fluid",
-          "cards": [
-            {
-              "discriminant": "page",
-              "value": {
-                "title": "About",
-                "reference": "about",
-                "link": {
-                  "label": "Read more"
-                }
-              }
-            }
-          ]
-        }
-      }
-    ]
-  }
+	"hero": {
+		"title": "InTaVia: In/Tangible European Heritage",
+		"subtitle": "Visual Analysis, Curation & Communication",
+		"image": "/assets/content/index-page/hero/image.png"
+	},
+	"main": {
+		"sections": [
+			{
+				"discriminant": "cardsSection",
+				"value": {
+					"title": "About",
+					"variant": "fluid",
+					"cards": [
+						{
+							"discriminant": "page",
+							"value": {
+								"title": "About",
+								"reference": "about",
+								"link": {
+									"label": "Read more"
+								}
+							}
+						}
+					]
+				}
+			}
+		]
+	}
 }

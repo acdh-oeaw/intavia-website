@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 import MainContent from "@/components/main-content.astro";
 import PageSection from "@/components/page-section.astro";
 import PageTitle from "@/components/page-title.astro";
@@ -7,6 +9,7 @@ import PageLayout from "@/layouts/page-layout.astro";
 import { getCollectionName } from "@/lib/content/get-collection-name";
 import { processMdx } from "@/lib/content/mdx";
 import { reader } from "@/lib/content/reader";
+import { getImageImport } from "@/lib/get-image-import";
 
 export async function getStaticPaths() {
 	const collection = getCollectionName("pages", locale);
@@ -20,15 +23,16 @@ export async function getStaticPaths() {
 const { page } = Astro.props;
 
 const documentTitle = page.title;
-const { title } = page;
+const { title, image } = page;
 const { default: Content } = await processMdx(await page.content(), locale);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
 	<MainContent>
 		<PageSection>
+			{image && <Image alt="" src={getImageImport(image)} class="h-56 object-cover" />}
 			<PageTitle>{title}</PageTitle>
-			<div class="prose prose-sm">
+			<div class="prose prose-lg prose-em:italic">
 				<Content />
 			</div>
 		</PageSection>

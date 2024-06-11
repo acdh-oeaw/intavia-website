@@ -13,23 +13,26 @@ import Search from "@/components/search.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import { getNavigation } from "@/lib/get-navigation";
 import { createI18n } from "@/lib/i18n";
-import logoLight from "~/public/assets/images/acdh-ch-logo-light.svg";
+import logoLight from "~/public/assets/images/intavia-logos/intavia_logo_short_1000dpi_transparent.png";
 
 const locale = (Astro.currentLocale as Locale | undefined) ?? defaultLocale;
 const { t } = await createI18n(locale);
 const navigation = await getNavigation(locale);
-
-const home = t("WebsiteHeader.links.home");
 ---
 
-<header class="border-b">
+<header class="border-b-[3px]">
 	<div
 		class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 py-6 text-sm font-medium"
 	>
-		<Navigation class="flex-1" label={t("WebsiteHeader.navigation-primary")}>
+		<Navigation class="h-fit flex-1" label={t("WebsiteHeader.navigation-primary")}>
 			<NavMenuLink class="-ml-4 inline-flex shrink-0 items-center gap-x-2" href="/">
-				<Image alt="" class="block size-8" fetchpriority="high" loading="eager" src={logoLight} />
-				<span>{home}</span>
+				<Image
+					alt=""
+					class="block h-20 w-auto"
+					fetchpriority="high"
+					loading="eager"
+					src={logoLight}
+				/>
 			</NavMenuLink>
 
 			<ul class="hidden flex-1 flex-wrap items-center gap-x-2 lg:flex" role="list">

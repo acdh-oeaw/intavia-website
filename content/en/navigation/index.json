@@ -1,11 +1,127 @@
 {
-	"links": [
-		{
-			"discriminant": "link",
-			"value": {
-				"label": "About",
-				"href": "/about/"
-			}
-		}
-	]
+  "links": [
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "About",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "About",
+              "reference": "about"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Team",
+              "reference": "team"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Advisory Board",
+              "reference": "advisory-board"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Associated Organizations",
+              "reference": "associated-organizations"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Imprint",
+              "reference": "imprint"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Research",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Overall Aims",
+              "reference": "overall-aims"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "System Architecture",
+              "reference": "system-architecture"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Work Packages",
+              "reference": "work-packages"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Results",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Publications & Presentations",
+              "reference": "publications"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Tools",
+              "reference": "tools"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Follow us",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Subscribe",
+              "reference": "subscribe"
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "X (fka Twitter)",
+              "href": "https://x.com/projectintavia"
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "YouTube",
+              "href": "https://www.youtube.com/@InTaVia/playlists"
+            }
+          }
+        ]
+      }
+    }
+  ]
 }
