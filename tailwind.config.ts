@@ -14,6 +14,12 @@ const config: Config = {
 	presets: [preset],
 	theme: {
 		extend: {
+			colors: {
+				brand: {
+					DEFAULT: "hsl(87.6 100% 78.2% / <alpha-value>)",
+					intent: "hsl(88.3 51.4% 58.8% / <alpha-value>)",
+				},
+			},
 			typography: {
 				DEFAULT: {
 					css: {
