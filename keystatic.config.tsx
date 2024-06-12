@@ -244,14 +244,65 @@ function createComponents(
 	return pick(allComponents, components);
 }
 
+const defaultCollection = (
+	label: string,
+	path:
+		| `${string}/**/${string}`
+		| `${string}/**`
+		| `${string}/*/${string}`
+		| `${string}/*`
+		| undefined,
+	assetPath: `/${string}/`,
+	_locale: "en",
+	previewUrl = "/{slug}",
+) =>
+	collection({
+		label,
+		path,
+		slugField: "title",
+		format: { contentField: "content" },
+		previewUrl: createPreviewUrl(previewUrl),
+		entryLayout: "content",
+		columns: ["title"],
+		schema: {
+			title: fields.slug({
+				name: {
+					label: "Title",
+					validation: { isRequired: true },
+				},
+			}),
+			image: fields.image({
+				label: "Image",
+				...createAssetPaths(assetPath),
+				// validation: { isRequired: false },
+			}),
+			summary: fields.text({
+				label: "Summary",
+				multiline: true,
+				validation: { isRequired: true },
+			}),
+			date: fields.date({ label: "Date (temporary)" }),
+			content: fields.mdx({
+				label: "Content",
+				options: {
+					image: createAssetPaths(assetPath),
+				},
+				components: createComponents(assetPath),
+			}),
+		},
+	});
+
 const collections = {
-	pages: createCollection("/pages/", (path, assetPath, _locale) => {
+	pages: createCollection("/pages/", (path, assetPath, _locale) =>
+		defaultCollection("Pages", path, assetPath, _locale),
+	),
+	collections: createCollection("/collections/", (path, assetPath, _locale) => {
 		return collection({
-			label: "Pages",
+			label: "Collections",
 			path,
 			slugField: "title",
 			format: { contentField: "content" },
-			previewUrl: createPreviewUrl("/{slug}"),
+			previewUrl: createPreviewUrl("/collections/{slug}"),
 			entryLayout: "content",
 			columns: ["title"],
 			schema: {
@@ -271,7 +322,6 @@ const collections = {
 					multiline: true,
 					validation: { isRequired: true },
 				}),
-				date: fields.date({ label: "Date (temporary)" }),
 				content: fields.mdx({
 					label: "Content",
 					options: {
@@ -279,6 +329,99 @@ const collections = {
 					},
 					components: createComponents(assetPath),
 				}),
+				main: fields.object(
+					{
+						sections: fields.blocks(
+							{
+								cardsSection: {
+									label: "Cards section",
+									itemLabel(props) {
+										return props.fields.title.value + " (Cards)";
+									},
+									schema: fields.object(
+										{
+											title: fields.text({
+												label: "Title",
+												validation: { isRequired: true },
+											}),
+											variant: fields.select({
+												label: "Variant",
+												options: [
+													{
+														label: "Fluid",
+														value: "fluid",
+													},
+													{
+														label: "Two columns",
+														value: "two-columns",
+													},
+													{
+														label: "Three columns",
+														value: "three-columns",
+													},
+													{
+														label: "Four columns",
+														value: "four-columns",
+													},
+												],
+												defaultValue: "fluid",
+											}),
+											cards: fields.blocks(
+												{
+													page: {
+														label: "Page card",
+														itemLabel(props) {
+															return props.fields.title.value;
+														},
+														schema: fields.object(
+															{
+																title: fields.text({
+																	label: "Title",
+																	validation: { isRequired: true },
+																}),
+																reference: fields.relationship({
+																	label: "Page",
+																	collection: getCollectionName("pages", _locale),
+																	validation: { isRequired: true },
+																}),
+																link: fields.object(
+																	{
+																		label: fields.text({
+																			label: "Label",
+																			validation: { isRequired: true },
+																		}),
+																	},
+																	{
+																		label: "Link",
+																	},
+																),
+															},
+															{
+																label: "Page card",
+															},
+														),
+													},
+												},
+												{
+													label: "Cards",
+													validation: { length: { min: 1 } },
+												},
+											),
+										},
+										{
+											label: "Cards section",
+										},
+									),
+								},
+							},
+							{
+								label: "Sections",
+								validation: { length: { min: 1 } },
+							},
+						),
+					},
+					{ label: "Main content" },
+				),
 			},
 		});
 	}),
@@ -606,7 +749,7 @@ export default config({
 			mark: Logo,
 		},
 		navigation: {
-			Pages: ["en_indexPage", "en_pages"],
+			Pages: ["en_indexPage", "en_pages", "en_collections"],
 			Navigation: ["en_navigation"],
 			Settings: ["en_metadata"],
 		},
@@ -631,6 +774,7 @@ export default config({
 				},
 	collections: {
 		en_pages: collections.pages("en"),
+		en_collections: collections.collections("en"),
 	},
 	singletons: {
 		en_indexPage: singletons.indexPage("en"),
