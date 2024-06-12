@@ -348,6 +348,10 @@ const collections = {
 												label: "Variant",
 												options: [
 													{
+														label: "Single column",
+														value: "single-column",
+													},
+													{
 														label: "Fluid",
 														value: "fluid",
 													},
