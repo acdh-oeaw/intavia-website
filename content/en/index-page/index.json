@@ -1,30 +1,128 @@
 {
-	"hero": {
-		"title": "InTaVia: In/Tangible European Heritage",
-		"subtitle": "Visual Analysis, Curation & Communication",
-		"image": "/assets/content/index-page/hero/image.png"
-	},
-	"main": {
-		"sections": [
-			{
-				"discriminant": "cardsSection",
-				"value": {
-					"title": "About",
-					"variant": "fluid",
-					"cards": [
-						{
-							"discriminant": "page",
-							"value": {
-								"title": "About",
-								"reference": "about",
-								"link": {
-									"label": "Read more"
-								}
-							}
-						}
-					]
-				}
-			}
-		]
-	}
+  "hero": {
+    "title": "InTaVia: In/Tangible European Heritage",
+    "subtitle": "Visual Analysis, Curation & Communication",
+    "image": "/assets/content/en/index-page/hero/image.png"
+  },
+  "main": {
+    "sections": [
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "About",
+          "variant": "four-columns",
+          "cards": [
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "About",
+                "reference": "about",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Team",
+                "reference": "team",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Advisory Board",
+                "reference": "advisory-board",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Associated Organizations",
+                "reference": "associated-organizations",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "Results",
+          "variant": "two-columns",
+          "cards": [
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Publications & presentations",
+                "reference": "publications",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Tools",
+                "reference": "tools",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "discriminant": "cardsSection",
+        "value": {
+          "title": "News",
+          "variant": "fluid",
+          "cards": [
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "InTaVia 5th Newsletter / Cultural heritage: a VAST expanse of multivarious challenges",
+                "reference": "newsletters/intavia-5th-newsletter-cultural-heritage-a-vast-expanse-of-multivarious-challenges",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "CaTCH – Capturing the IntAngible of Cultural Heritage",
+                "reference": "catch-capturing-the-intangible-of-cultural-heritageultural-heritage",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "InTaVia 4th Newsletter / There’s History in all Men’s Lives",
+                "reference": "newsletters/intavia-4th-newsletter-theres-history-in-all-mens-lives",
+                "link": {
+                  "label": "Read more"
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
 }
