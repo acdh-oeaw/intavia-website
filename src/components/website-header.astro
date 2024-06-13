@@ -48,6 +48,15 @@ const navigation = await getNavigation(locale);
 									</li>
 								);
 							}
+							case "collection": {
+								const { label, reference } = item.value;
+
+								return (
+									<li>
+										<NavMenuLink href={`/collections/${String(reference)}`}>{label}</NavMenuLink>
+									</li>
+								);
+							}
 
 							case "page": {
 								const { label, reference } = item.value;
@@ -80,6 +89,17 @@ const navigation = await getNavigation(locale);
 																);
 															}
 
+															case "collection": {
+																const { label, reference } = link.value;
+
+																return (
+																	<li>
+																		<NavMenuItem href={`/collections/${String(reference)}`}>
+																			{label}
+																		</NavMenuItem>
+																	</li>
+																);
+															}
 															case "page": {
 																const { label, reference } = link.value;
 

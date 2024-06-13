@@ -78,6 +78,34 @@
         "label": "Results",
         "links": [
           {
+            "discriminant": "collection",
+            "value": {
+              "label": "Activities",
+              "reference": "events"
+            }
+          },
+          {
+            "discriminant": "collection",
+            "value": {
+              "label": "Case studies",
+              "reference": "case-studies"
+            }
+          },
+          {
+            "discriminant": "collection",
+            "value": {
+              "label": "Conference proceedings",
+              "reference": "conference-proceedings"
+            }
+          },
+          {
+            "discriminant": "collection",
+            "value": {
+              "label": "Deliverables",
+              "reference": "deliverables"
+            }
+          },
+          {
             "discriminant": "page",
             "value": {
               "label": "Publications & Presentations",
@@ -90,8 +118,22 @@
               "label": "Tools",
               "reference": "tools"
             }
+          },
+          {
+            "discriminant": "collection",
+            "value": {
+              "label": "Tutorials",
+              "reference": "tutorials"
+            }
           }
         ]
+      }
+    },
+    {
+      "discriminant": "collection",
+      "value": {
+        "label": "News",
+        "reference": "newsletters"
       }
     },
     {
@@ -118,6 +160,35 @@
             "value": {
               "label": "YouTube",
               "href": "https://www.youtube.com/@InTaVia/playlists"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Events",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "CaTCH – Capturing the IntAngible of Cultural Heritage",
+              "reference": "events/catch-capturing-the-intangible-of-cultural-heritage"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "There is History in All Men’s Lives, Ljubljana, September 25th-26th",
+              "reference": "theres-history-in-all-mens-lives-ljubljana-25-26-september"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Smashing the Silos! The Future of Cultural Heritage Information and Visualization, Graz, July 9th",
+              "reference": "events/smashing-the-silos-the-future-of-cultural-heritage-information-and-visualization-graz-july-9th"
             }
           }
         ]

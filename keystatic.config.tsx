@@ -320,7 +320,6 @@ const collections = {
 				summary: fields.text({
 					label: "Summary",
 					multiline: true,
-					validation: { isRequired: true },
 				}),
 				content: fields.mdx({
 					label: "Content",
@@ -329,103 +328,6 @@ const collections = {
 					},
 					components: createComponents(assetPath),
 				}),
-				main: fields.object(
-					{
-						sections: fields.blocks(
-							{
-								cardsSection: {
-									label: "Cards section",
-									itemLabel(props) {
-										return props.fields.title.value + " (Cards)";
-									},
-									schema: fields.object(
-										{
-											title: fields.text({
-												label: "Title",
-												validation: { isRequired: true },
-											}),
-											variant: fields.select({
-												label: "Variant",
-												options: [
-													{
-														label: "Single column",
-														value: "single-column",
-													},
-													{
-														label: "Fluid",
-														value: "fluid",
-													},
-													{
-														label: "Two columns",
-														value: "two-columns",
-													},
-													{
-														label: "Three columns",
-														value: "three-columns",
-													},
-													{
-														label: "Four columns",
-														value: "four-columns",
-													},
-												],
-												defaultValue: "fluid",
-											}),
-											cards: fields.blocks(
-												{
-													page: {
-														label: "Page card",
-														itemLabel(props) {
-															return props.fields.title.value;
-														},
-														schema: fields.object(
-															{
-																title: fields.text({
-																	label: "Title",
-																	validation: { isRequired: true },
-																}),
-																reference: fields.relationship({
-																	label: "Page",
-																	collection: getCollectionName("pages", _locale),
-																	validation: { isRequired: true },
-																}),
-																link: fields.object(
-																	{
-																		label: fields.text({
-																			label: "Label",
-																			validation: { isRequired: true },
-																		}),
-																	},
-																	{
-																		label: "Link",
-																	},
-																),
-															},
-															{
-																label: "Page card",
-															},
-														),
-													},
-												},
-												{
-													label: "Cards",
-													validation: { length: { min: 1 } },
-												},
-											),
-										},
-										{
-											label: "Cards section",
-										},
-									),
-								},
-							},
-							{
-								label: "Sections",
-								validation: { length: { min: 1 } },
-							},
-						),
-					},
-					{ label: "Main content" },
-				),
 			},
 		});
 	}),
@@ -474,7 +376,6 @@ const singletons = {
 										{
 											title: fields.text({
 												label: "Title",
-												validation: { isRequired: true },
 											}),
 											variant: fields.select({
 												label: "Variant",
@@ -650,6 +551,23 @@ const singletons = {
 								}),
 							}),
 						},
+						collection: {
+							label: "Collection",
+							itemLabel(props) {
+								return props.fields.label.value + " (Collection)";
+							},
+							schema: fields.object({
+								label: fields.text({
+									label: "Label",
+									validation: { isRequired: true },
+								}),
+								reference: fields.relationship({
+									label: "Collection",
+									collection: getCollectionName("collections", locale),
+									validation: { isRequired: true },
+								}),
+							}),
+						},
 						page: {
 							label: "Page",
 							itemLabel(props) {
@@ -719,6 +637,28 @@ const singletons = {
 												},
 												{
 													label: "Page",
+												},
+											),
+										},
+										collection: {
+											label: "Collection",
+											itemLabel(props) {
+												return props.fields.label.value + " (Collection)";
+											},
+											schema: fields.object(
+												{
+													label: fields.text({
+														label: "Label",
+														validation: { isRequired: true },
+													}),
+													reference: fields.relationship({
+														label: "Collection",
+														collection: getCollectionName("collections", locale),
+														validation: { isRequired: true },
+													}),
+												},
+												{
+													label: "Collection",
 												},
 											),
 										},

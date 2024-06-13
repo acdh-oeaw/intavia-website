@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 
+import Link from "@/components/link.astro";
 import MainContent from "@/components/main-content.astro";
 import PageSection from "@/components/page-section.astro";
-import Link from "@/components/link.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
@@ -21,63 +21,71 @@ export async function getStaticPaths() {
 	});
 }
 
+async function getStaticEntries(id: string) {
+	const collection = getCollectionName("pages", locale);
+	const pages = (await reader().collections[collection].all())
+		.filter((entry) => entry.slug.startsWith(id))
+		.sort((a, b) => new Date(b.entry.date ?? 0).getTime() - new Date(a.entry.date ?? 0).getTime());
+
+	return pages;
+}
+
 const { page } = Astro.props;
 
+const entries = await getStaticEntries(Astro.params.id);
+
 const documentTitle = page.title;
-const { title, image, main } = page;
-const { default: Content } = await processMdx(await page.content(), locale);
+const { title, image, content, summary } = page;
+const procContent = await content();
+const { default: Content } = await processMdx(procContent, locale);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
 	<MainContent>
 		<PageSection>
 			{image && <Image alt="" src={getImageImport(image)} class="h-56 object-cover" />}
-			<PageTitle>{title}</PageTitle>
-			<div class="prose prose-lg prose-em:italic">
-				<Content />
+			<div>
+				<PageTitle>{title}</PageTitle>
+				{summary && <h3>{summary}</h3>}
 			</div>
-			{
-				main &&
-					main.sections.map((section) => {
-						const { title, cards, variant } = section.value;
 
-						const variants = {
-							"single-column": "grid-cols-1",
-							fluid: "grid-fluid-cols-80",
-							"two-columns": "grid-cols-2",
-							"three-columns": "grid-cols-3",
-							"four-columns": "grid-cols-4",
-						};
+			<Content class="prose prose-lg" />
 
-						return (
-							<PageSection>
-								<h2>{title}</h2>
-								<ul class:list={["grid gap-8", variants[variant]]} role="list">
-									{cards.map(async (card) => {
-										const id = card.value.reference;
-										const collectionName = getCollectionName("pages", locale);
-										const page = await reader().collections[collectionName].readOrThrow(id);
-										const { image, summary } = page;
-
-										return (
-											<li class="overflow-hidden rounded-md border">
-												<article>
-													{image ? <Image alt="" src={getImageImport(image)} /> : null}
-													<p class="p-2">{summary}</p>
-													<footer class="flex justify-end">
-														<Link href={`/${id}`} class="m-2 rounded-md border p-2">
-															{card.value.link.label}
-														</Link>
-													</footer>
-												</article>
-											</li>
-										);
-									})}
-								</ul>
-							</PageSection>
-						);
-					})
-			}
+			<PageSection class="px-0 pt-0">
+				<ul class="grid grid-cols-1 gap-8" role="list">
+					{
+						entries.map((entry) => {
+							return (
+								<li class="overflow-hidden rounded-md border">
+									<article>
+										{entry.entry.image ? (
+											<Image
+												alt=""
+												class="max-h-[16rem] w-full object-cover"
+												src={getImageImport(entry.entry.image)}
+											/>
+										) : null}
+										<h2 class="p-2 text-2xl">{entry.entry.title}</h2>
+										<div class="grid grid-cols-[auto_1fr]">
+											<div>
+												<p class="p-2">{entry.entry.summary}</p>
+											</div>
+											<div class="flex items-end justify-end">
+												<Link
+													href={`/${String(entry.slug)}`}
+													class="m-2 w-max rounded-md border p-2 transition hover:bg-neutral-200 active:bg-neutral-300"
+												>
+													Read more
+												</Link>
+											</div>
+										</div>
+									</article>
+								</li>
+							);
+						})
+					}
+				</ul>
+			</PageSection>
 		</PageSection>
 	</MainContent>
 </PageLayout>
