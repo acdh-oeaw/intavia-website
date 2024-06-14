@@ -73,8 +73,6 @@ test.describe("app", () => {
 				short_name: i18n.t("metadata.shortTitle"),
 				description: i18n.t("metadata.description"),
 				icons: [
-					{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" },
-					{ src: "/icon-maskable.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" },
 					{ src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
 					{ src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
 				],
@@ -88,13 +86,6 @@ test.describe("app", () => {
 
 	test("should serve a favicon.ico", async ({ request }) => {
 		const response = await request.get("/favicon.ico");
-		const status = response.status();
-
-		expect(status).toEqual(200);
-	});
-
-	test("should serve an svg favicon", async ({ request }) => {
-		const response = await request.get("/icon.svg");
 		const status = response.status();
 
 		expect(status).toEqual(200);
