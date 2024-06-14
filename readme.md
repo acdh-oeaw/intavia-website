@@ -1,6 +1,6 @@
-# website template
+# intavia website
 
-template repository for project websites.
+website for the invavia project.
 
 ## how to run
 
