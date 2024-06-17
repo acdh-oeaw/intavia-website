@@ -381,6 +381,10 @@ const singletons = {
 												label: "Variant",
 												options: [
 													{
+														label: "One Column",
+														value: "one-column",
+													},
+													{
 														label: "Fluid",
 														value: "fluid",
 													},

@@ -25,10 +25,14 @@ const { hero, main } = page;
 <PageLayout locale={locale} title={documentTitle}>
 	<MainContent>
 		<PageSection>
-			<div>
-				<Image alt="" fetchpriority="high" loading="eager" src={getImageImport(hero.image)} />
-				<PageTitle>{hero.title}</PageTitle>
-				<p>{hero.subtitle}</p>
+			<div class="flex flex-col gap-2">
+				<div
+					style={"background-image: url(" + hero.image + ")"}
+					class="-m-4 flex aspect-[3.5] flex-col justify-end gap-2 bg-[rgba(0,0,0,0.2)] bg-cover p-4 text-white bg-blend-multiply"
+				>
+					<PageTitle>{hero.title}</PageTitle>
+					<p class="text-lg">{hero.subtitle}</p>
+				</div>
 			</div>
 		</PageSection>
 
@@ -39,6 +43,7 @@ const { hero, main } = page;
 						const { title, cards, variant } = section.value;
 
 						const variants = {
+							"one-column": "grid-cols-1",
 							fluid: "grid-fluid-cols-80",
 							"two-columns": "grid-cols-2",
 							"three-columns": "grid-cols-3",
@@ -46,8 +51,8 @@ const { hero, main } = page;
 						};
 
 						return (
-							<PageSection>
-								<h2>{title}</h2>
+							<PageSection class="border-t">
+								<h2 class="text-3xl font-black">{title}</h2>
 								<ul class:list={["grid gap-8", variants[variant]]} role="list">
 									{cards.map(async (card) => {
 										switch (card.discriminant) {
@@ -72,13 +77,20 @@ const { hero, main } = page;
 												const id = card.value.reference;
 												const collectionName = getCollectionName("pages", locale);
 												const page = await reader().collections[collectionName].readOrThrow(id);
-												const { image, summary } = page;
+												const {
+													title,
+													//	image,
+													summary,
+												} = page;
 
 												return (
 													<li class="overflow-hidden rounded-md border">
-														<article>
-															{image ? <Image alt="" src={getImageImport(image)} /> : null}
-															<p class="p-2">{summary}</p>
+														<article class="flex h-full flex-col justify-between">
+															<div>
+																{/* {image ? <Image alt="" src={getImageImport(image)} /> : null} */}
+																<h2 class="p-2 text-xl font-semibold">{title}</h2>
+																<p class="p-2">{summary}</p>
+															</div>
 															<footer class="flex justify-end">
 																<Link href={`/${id}`} class="m-2 rounded-md border p-2">
 																	{card.value.link.label}

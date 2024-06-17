@@ -88,7 +88,7 @@
         "discriminant": "cardsSection",
         "value": {
           "title": "News",
-          "variant": "fluid",
+          "variant": "one-column",
           "cards": [
             {
               "discriminant": "page",
