@@ -3,6 +3,7 @@
 import type { MDXComponents } from "mdx/types";
 
 import Callout from "@/components/content/callout.astro";
+import Disclosure from "@/components/content/disclosure.astro";
 import Download from "@/components/content/download.astro";
 import Figure from "@/components/content/figure.astro";
 import FootnoteContent from "@/components/content/footnote-content.astro";
@@ -20,6 +21,7 @@ export function useMDXComponents(): MDXComponents {
 		// @ts-expect-error It's fine.
 		a: Link,
 		Callout,
+		Disclosure,
 		Download,
 		Figure,
 		FootnoteContent,

@@ -85,7 +85,9 @@ const navigation = await getNavigation(locale);
 
 																return (
 																	<li>
-																		<NavMenuItem href={href}>{label}</NavMenuItem>
+																		<NavMenuItem target="_blank" href={href}>
+																			{label}
+																		</NavMenuItem>
 																	</li>
 																);
 															}

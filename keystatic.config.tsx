@@ -11,10 +11,12 @@ import {
 } from "@keystatic/core";
 import { block, mark, repeating, wrapper } from "@keystatic/core/content-components";
 import {
+	ChevronDownIcon,
 	DownloadIcon,
 	GridIcon,
 	ImageIcon,
 	InfoIcon,
+	ListCollapseIcon,
 	ListIcon,
 	SuperscriptIcon,
 	VideoIcon,
@@ -86,6 +88,30 @@ function createComponents(
 					],
 					defaultValue: "note",
 				}),
+			},
+		}),
+		Disclosure: wrapper({
+			label: "Disclosure",
+			description: "An extendable content box.",
+			icon: <ListCollapseIcon />,
+			schema: {
+				title: fields.text({
+					label: "Title",
+					validation: { isRequired: true },
+				}),
+			},
+			ContentView(props) {
+				return (
+					<div>
+						<NotEditable>
+							<h4 style={{ display: "flex", justifyItems: "center", gap: "0.5rem" }}>
+								<ChevronDownIcon className="size-5" />
+								<span>{props.value.title || "Press Edit to enter title"}</span>
+							</h4>
+						</NotEditable>
+						<div>{props.children}</div>
+					</div>
+				);
 			},
 		}),
 		Download: mark({
@@ -169,6 +195,10 @@ function createComponents(
 						{
 							label: "Two columns, right is 4x as wide",
 							value: "one-four-columns",
+						},
+						{
+							label: "Two columns, left is 4x as wide",
+							value: "four-one-columns",
 						},
 					],
 					defaultValue: "two-columns",

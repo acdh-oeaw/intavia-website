@@ -2,6 +2,7 @@
 interface Props {
 	variant:
 		| "four-columns"
+		| "four-one-columns"
 		| "one-four-columns"
 		| "one-three-columns"
 		| "one-two-columns"
@@ -18,9 +19,10 @@ const variants: Record<Props["variant"], string> = {
 	"one-two-columns": "grid-cols-[1fr_2fr]",
 	"one-three-columns": "grid-cols-[1fr_3fr]",
 	"one-four-columns": "grid-cols-[1fr_4fr]",
+	"four-one-columns": "grid-cols-[4fr_1fr]",
 };
 ---
 
-<div class:list={[variants[variant], "grid content-start gap-8"]}>
+<div class:list={[variants[variant], "grid content-start gap-x-8 gap-y-4"]}>
 	<slot />
 </div>
