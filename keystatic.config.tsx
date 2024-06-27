@@ -522,6 +522,60 @@ const singletons = {
 										},
 									),
 								},
+								slidesSection: {
+									label: "Slide Section",
+									itemLabel(props) {
+										return props.fields.title.value + " (Slides)";
+									},
+									schema: fields.object(
+										{
+											title: fields.text({
+												label: "Title",
+												validation: { isRequired: true },
+											}),
+											slides: fields.blocks(
+												{
+													defaultSlide: {
+														label: "Default slide",
+														itemLabel(props) {
+															return props.fields.title.value;
+														},
+														schema: fields.object(
+															{
+																title: fields.text({
+																	label: "Title",
+																	validation: { isRequired: true },
+																}),
+																summary: fields.text({
+																	label: "Summary",
+																	validation: { isRequired: true },
+																}),
+																image: fields.image({
+																	label: "Image",
+																	...createAssetPaths(assetPath),
+																	validation: { isRequired: true },
+																}),
+																page: fields.relationship({
+																	label: "Page",
+																	collection: getCollectionName("pages", locale),
+																	// validation: { isRequired: false },
+																}),
+															},
+															{
+																label: "Slide",
+															},
+														),
+													},
+												},
+												{
+													label: "Slides",
+													validation: { length: { min: 1 } },
+												},
+											),
+										},
+										{ label: "Slides section" },
+									),
+								},
 							},
 							{
 								label: "Sections",
@@ -555,6 +609,20 @@ const singletons = {
 				}),
 				twitter: fields.text({
 					label: "Twitter handle",
+					// validation: { isRequired: false },
+				}),
+			},
+		});
+	}),
+	zotero: createSingleton("/zotero/", (path, _assetPath, _locale) => {
+		return singleton({
+			label: "Zotero Config",
+			path,
+			format: { data: "json" },
+			entryLayout: "form",
+			schema: {
+				zotero: fields.text({
+					label: "Zotero user ID",
 					// validation: { isRequired: false },
 				}),
 			},
@@ -729,7 +797,7 @@ export default config({
 		navigation: {
 			Pages: ["en_indexPage", "en_pages", "en_collections"],
 			Navigation: ["en_navigation"],
-			Settings: ["en_metadata"],
+			Settings: ["en_metadata", "en_zotero"],
 		},
 	},
 	storage:
@@ -758,6 +826,7 @@ export default config({
 		en_indexPage: singletons.indexPage("en"),
 
 		en_metadata: singletons.metadata("en"),
+		en_zotero: singletons.zotero("en"),
 
 		en_navigation: singletons.navigation("en"),
 	},

@@ -79,7 +79,8 @@
 		"unist-util-visit": "^5.0.0",
 		"valibot": "^0.31.0",
 		"vfile": "^6.0.1",
-		"vite": "^5.2.13"
+		"vite": "^5.2.13",
+		"zotero-api-client": "^0.43.1"
 	},
 	"devDependencies": {
 		"@acdh-oeaw/eslint-config": "^1.0.7",
