@@ -11,6 +11,7 @@ import {
 } from "@keystatic/core";
 import { block, mark, repeating, wrapper } from "@keystatic/core/content-components";
 import {
+	BookMarkedIcon,
 	ChevronDownIcon,
 	DownloadIcon,
 	GridIcon,
@@ -267,13 +268,31 @@ function createComponents(
 				);
 			},
 		}),
+		ZoteroWrapper: wrapper({
+			label: "Zotero sources",
+			description: "List of sources from Zotero",
+			icon: <BookMarkedIcon />,
+			schema: {
+				user: fields.text({
+					label: "User ID",
+					validation: { isRequired: true },
+				}),
+				userPrivateKey: fields.text({
+					label: "User Private Key",
+					validation: { isRequired: true },
+				}),
+				collection: fields.text({
+					label: "Collection ID",
+					validation: { isRequired: true },
+				}),
+			},
+		}),
 	};
 
 	if (components == null) return allComponents;
 
 	return pick(allComponents, components);
 }
-
 const defaultCollection = (
 	label: string,
 	path:
@@ -357,6 +376,16 @@ const collections = {
 						image: createAssetPaths(assetPath),
 					},
 					components: createComponents(assetPath),
+				}),
+				sortBy: fields.select({
+					label: "Order by",
+					options: [
+						{ label: "Newest to oldest", value: "date:desc" },
+						{ label: "Oldest to newest", value: "date:asc" },
+						{ label: "A to Z", value: "alpha:asc" },
+						{ label: "Z to A", value: "alpha:desc" },
+					],
+					defaultValue: "date:desc",
 				}),
 			},
 		});
@@ -614,20 +643,6 @@ const singletons = {
 			},
 		});
 	}),
-	zotero: createSingleton("/zotero/", (path, _assetPath, _locale) => {
-		return singleton({
-			label: "Zotero Config",
-			path,
-			format: { data: "json" },
-			entryLayout: "form",
-			schema: {
-				zotero: fields.text({
-					label: "Zotero user ID",
-					// validation: { isRequired: false },
-				}),
-			},
-		});
-	}),
 	navigation: createSingleton("/navigation/", (path, _assetPath, locale) => {
 		return singleton({
 			label: "Navigation",
@@ -797,7 +812,7 @@ export default config({
 		navigation: {
 			Pages: ["en_indexPage", "en_pages", "en_collections"],
 			Navigation: ["en_navigation"],
-			Settings: ["en_metadata", "en_zotero"],
+			Settings: ["en_metadata"],
 		},
 	},
 	storage:
@@ -826,7 +841,6 @@ export default config({
 		en_indexPage: singletons.indexPage("en"),
 
 		en_metadata: singletons.metadata("en"),
-		en_zotero: singletons.zotero("en"),
 
 		en_navigation: singletons.navigation("en"),
 	},
