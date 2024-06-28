@@ -25,17 +25,30 @@ async function getStaticEntries(id: string) {
 	const collection = getCollectionName("pages", locale);
 	const pages = (await reader().collections[collection].all())
 		.filter((entry) => entry.slug.startsWith(id))
-		.sort((a, b) => new Date(b.entry.date ?? 0).getTime() - new Date(a.entry.date ?? 0).getTime());
-
+		.sort((a, b) => {
+			switch (sortBy) {
+				case "date:asc":
+					return new Date(b.entry.date ?? 0).getTime() - new Date(a.entry.date ?? 0).getTime();
+				case "date:desc":
+					return new Date(a.entry.date ?? 0).getTime() - new Date(b.entry.date ?? 0).getTime();
+				case "alpha:asc":
+					return a.entry.title < b.entry.title ? -1 : 1;
+				case "alpha:desc":
+					return a.entry.title > b.entry.title ? -1 : 1;
+				default:
+					return 0;
+			}
+		});
 	return pages;
 }
 
 const { page } = Astro.props;
 
+const { title, image, content, summary, sortBy } = page;
+const documentTitle = title;
+
 const entries = await getStaticEntries(Astro.params.id);
 
-const documentTitle = page.title;
-const { title, image, content, summary } = page;
 const procContent = await content();
 const { default: Content } = await processMdx(procContent, locale);
 ---

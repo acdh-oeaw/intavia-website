@@ -1,29 +1,24 @@
 ---
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import { ChevronLeft, ChevronRight, CirclePause, CirclePlay } from "lucide-react";
 
 import Link from "@/components/link.astro";
-import { defaultLocale, type Locale } from "@/config/i18n.config";
 import { generateUniqueId } from "@/lib/generate-unique-id";
 import { getImageImport } from "@/lib/get-image-import";
-import { createI18n } from "@/lib/i18n";
 
 interface Props {
 	title: string;
 	slides: ReadonlyArray<{
 		title: string;
 		summary: string;
-		alignment: "left" | "right";
 		image: string;
-		page: string;
+		page: string | null;
 	}>;
+	delay?: number;
 }
 
 const { slides, title } = Astro.props;
-
 const id = generateUniqueId();
-
-const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? defaultLocale);
 ---
 
 <image-carousel>
@@ -41,87 +36,68 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 					data-control-toggle
 					type="button"
 				>
-					<Icon
-						aria-label={t("ImageCarousel.stop")}
-						class="hidden size-6 group-data-[state=playing]:block"
-						name="lucide:circle-pause"
+					<CirclePause
+						aria-label="start"
+						className="hidden size-6 group-data-[state=playing]:block"
 					/>
-					<Icon
-						aria-label={t("ImageCarousel.start")}
-						class="hidden size-6 group-data-[state=paused]:block"
-						name="lucide:circle-play"
-					/>
+					<CirclePlay aria-label="stop" className="hidden size-6 group-data-[state=paused]:block" />
 				</button>
 			</div>
 			<div class="absolute right-8 top-8 z-10">
 				<button
 					aria-controls={id}
-					aria-label={t("ImageCarousel.previous")}
+					aria-label="previous"
 					class="rounded-md bg-[#00000080] p-2 text-white transition hover:bg-[#000000a0] focus-visible:bg-[#000000a0] focus-visible:outline-white"
 					data-control-previous
 					type="button"
 				>
-					<Icon class="size-6" name="lucide:chevron-left" />
+					<ChevronLeft className="size-6" />
 				</button>
 				<button
 					aria-controls={id}
-					aria-label={t("ImageCarousel.next")}
+					aria-label="next"
 					class="rounded-md bg-[#00000080] p-2 text-white transition hover:bg-[#000000a0] focus-visible:bg-[#000000a0] focus-visible:outline-white"
 					data-control-next
 					type="button"
 				>
-					<Icon class="size-6" name="lucide:chevron-right" />
+					<ChevronRight className="size-6" />
 				</button>
 			</div>
 		</div>
 
-		<div id={id} aria-live="off" class="relative aspect-[2.125]" data-carousel-items>
+		<div id={id} aria-live="off" class="relative aspect-[2.5]" data-carousel-items>
 			{
 				slides.map((slide, index) => {
-					const alignments = {
-						left: "left-0",
-						right: "right-0",
-					};
-
-					const href = `/${slide.page}`;
-
 					return (
 						<div
 							data-carousel-item
 							data-active={index === 0 ? "" : undefined}
 							role="group"
 							aria-roledescription="slide"
-							aria-label={t("ImageCarousel.slide", {
-								current: index,
-								total: slides.length,
-							})}
+							aria-label="slide"
 							class="group relative size-full"
 						>
-							<Link
-								class="block size-full -outline-offset-2 focus-visible:outline-white"
-								aria-label={slide.title}
-								href={href}
-							>
-								<Image
-									alt=""
-									class="size-full object-cover"
-									loading={index === 0 ? "eager" : undefined}
-									src={getImageImport(slide.image)}
-								/>
-							</Link>
-							<div
-								class:list={[
-									"absolute bottom-0 grid w-96 gap-y-2 border-t-4 bg-black/50 p-8 text-white",
-									alignments[slide.alignment],
-								]}
-							>
-								<h2 class="text-xl font-bold">
-									<Link class="focus-visible:outline-white" href={href}>
-										{slide.title}
-									</Link>
-								</h2>
-								<hr class="my-1 border" />
-								<div>{slide.summary}</div>
+							<Image
+								alt=""
+								class="size-full object-cover"
+								loading={index === 0 ? "eager" : undefined}
+								src={getImageImport(slide.image)}
+							/>
+							<div class="absolute bottom-0 grid w-full grid-cols-[1fr_auto] gap-4 gap-y-2 border-t-4 bg-black/80 p-4 text-white">
+								<div>
+									<h2 class="text-xl font-bold">
+										<Link class="focus-visible:outline-white">{slide.title}</Link>
+									</h2>
+									<hr class="my-1 border" />
+									<div>{slide.summary}</div>
+								</div>
+								{slide.page ? (
+									<footer class="mb-1 self-end">
+										<Link href={`/${slide.page}`} class="h-fit rounded-md border p-2">
+											Read more
+										</Link>
+									</footer>
+								) : null}
 							</div>
 						</div>
 					);
@@ -145,12 +121,11 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 		element.classList.add(
 			"absolute",
 			"invisible",
-			"translate-x-1/3",
 			"duration-500",
 			"transition-all",
 			"data-[active]:opacity-100",
-			"opacity-0 data-[active]:visible",
-			"data-[active]:translate-x-0",
+			"opacity-0",
+			"data-[active]:visible",
 		);
 	});
 </script>
@@ -208,7 +183,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 			next.addEventListener("click", onNextSlide);
 
 			let timer: ReturnType<typeof setInterval> | null = null;
-			const delay = 5000;
+			const delay = Astro.props.delay ?? 5000;
 
 			function play(force?: boolean) {
 				if (force) {

@@ -14,6 +14,7 @@ import GridItem from "@/components/content/grid-item.astro";
 import Img from "@/components/content/img.astro";
 import TableOfContents from "@/components/content/table-of-contents.astro";
 import Video from "@/components/content/video.astro";
+import ZoteroWrapper from "@/components/content/zotero-wrapper.astro";
 import Link from "@/components/link.astro";
 
 export function useMDXComponents(): MDXComponents {
@@ -22,6 +23,7 @@ export function useMDXComponents(): MDXComponents {
 		a: Link,
 		Callout,
 		Disclosure,
+		ZoteroWrapper,
 		Download,
 		Figure,
 		FootnoteContent,

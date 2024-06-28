@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 
+import ImageCarousel from "@/components/content/image-carousel.astro";
 import Link from "@/components/link.astro";
 import MainContent from "@/components/main-content.astro";
 import PageSection from "@/components/page-section.astro";
@@ -107,6 +108,21 @@ const { hero, main } = page;
 										}
 									})}
 								</ul>
+							</PageSection>
+						);
+					}
+
+					case "slidesSection": {
+						const { title, slides } = section.value;
+
+						return (
+							<PageSection class="border-t">
+								<h2 class="text-3xl font-black">{title}</h2>
+								<ImageCarousel
+									title="Carousel"
+									delay={9000}
+									slides={slides.map((slide) => slide.value)}
+								/>
 							</PageSection>
 						);
 					}

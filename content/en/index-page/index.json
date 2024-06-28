@@ -56,6 +56,41 @@
         }
       },
       {
+        "discriminant": "slidesSection",
+        "value": {
+          "title": "Research Aims",
+          "slides": [
+            {
+              "discriminant": "defaultSlide",
+              "value": {
+                "title": "Overall Aims",
+                "summary": "Representations of tangible objects of European cultural heritage (such as images, texts, music, films, buildings, or artifacts) have […]",
+                "image": "/assets/content/en/index-page/main/sections/1/value/slides/0/value/image.jpg",
+                "page": "overall-aims"
+              }
+            },
+            {
+              "discriminant": "defaultSlide",
+              "value": {
+                "title": "System Architecture",
+                "summary": "The InTaVia project aims to address major research challenges and bridge the semantic gap between large object databases, biography databases, and present-day […]",
+                "image": "/assets/content/en/index-page/main/sections/1/value/slides/1/value/image.jpg",
+                "page": "system-architecture"
+              }
+            },
+            {
+              "discriminant": "defaultSlide",
+              "value": {
+                "title": "Work Packages",
+                "summary": "The InTaVia project is structured into ten work packages. These packages guide research and developments along parallel tracks, while being synchronized by […]",
+                "image": "/assets/content/en/index-page/main/sections/1/value/slides/2/value/image.png",
+                "page": "work-packages"
+              }
+            }
+          ]
+        }
+      },
+      {
         "discriminant": "cardsSection",
         "value": {
           "title": "Results",

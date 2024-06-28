@@ -11,6 +11,7 @@ import {
 } from "@keystatic/core";
 import { block, mark, repeating, wrapper } from "@keystatic/core/content-components";
 import {
+	BookMarkedIcon,
 	ChevronDownIcon,
 	DownloadIcon,
 	GridIcon,
@@ -267,13 +268,31 @@ function createComponents(
 				);
 			},
 		}),
+		ZoteroWrapper: wrapper({
+			label: "Zotero sources",
+			description: "List of sources from Zotero",
+			icon: <BookMarkedIcon />,
+			schema: {
+				user: fields.text({
+					label: "User ID",
+					validation: { isRequired: true },
+				}),
+				userPrivateKey: fields.text({
+					label: "User Private Key",
+					validation: { isRequired: true },
+				}),
+				collection: fields.text({
+					label: "Collection ID",
+					validation: { isRequired: true },
+				}),
+			},
+		}),
 	};
 
 	if (components == null) return allComponents;
 
 	return pick(allComponents, components);
 }
-
 const defaultCollection = (
 	label: string,
 	path:
@@ -357,6 +376,16 @@ const collections = {
 						image: createAssetPaths(assetPath),
 					},
 					components: createComponents(assetPath),
+				}),
+				sortBy: fields.select({
+					label: "Order by",
+					options: [
+						{ label: "Newest to oldest", value: "date:desc" },
+						{ label: "Oldest to newest", value: "date:asc" },
+						{ label: "A to Z", value: "alpha:asc" },
+						{ label: "Z to A", value: "alpha:desc" },
+					],
+					defaultValue: "date:desc",
 				}),
 			},
 		});
@@ -520,6 +549,60 @@ const singletons = {
 										{
 											label: "Cards section",
 										},
+									),
+								},
+								slidesSection: {
+									label: "Slide Section",
+									itemLabel(props) {
+										return props.fields.title.value + " (Slides)";
+									},
+									schema: fields.object(
+										{
+											title: fields.text({
+												label: "Title",
+												validation: { isRequired: true },
+											}),
+											slides: fields.blocks(
+												{
+													defaultSlide: {
+														label: "Default slide",
+														itemLabel(props) {
+															return props.fields.title.value;
+														},
+														schema: fields.object(
+															{
+																title: fields.text({
+																	label: "Title",
+																	validation: { isRequired: true },
+																}),
+																summary: fields.text({
+																	label: "Summary",
+																	validation: { isRequired: true },
+																}),
+																image: fields.image({
+																	label: "Image",
+																	...createAssetPaths(assetPath),
+																	validation: { isRequired: true },
+																}),
+																page: fields.relationship({
+																	label: "Page",
+																	collection: getCollectionName("pages", locale),
+																	// validation: { isRequired: false },
+																}),
+															},
+															{
+																label: "Slide",
+															},
+														),
+													},
+												},
+												{
+													label: "Slides",
+													validation: { length: { min: 1 } },
+												},
+											),
+										},
+										{ label: "Slides section" },
 									),
 								},
 							},
