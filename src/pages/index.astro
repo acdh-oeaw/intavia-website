@@ -18,7 +18,7 @@ const { t } = await createI18n(locale);
 
 const reader = createReader();
 const page = await reader.singletons.indexPage.readOrThrow({
-  resolveLinkedFiles: true,
+	resolveLinkedFiles: true,
 });
 
 const documentTitle = t("IndexPage.meta.title");
@@ -26,130 +26,120 @@ const { hero, main } = page;
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
-  <MainContent>
-    <div class="relative bg-black py-8 text-white">
-      <Image
-        alt=""
-        class="absolute inset-0 size-full object-cover opacity-60"
-        loading="eager"
-        sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, 100vw"
-        src={getImageImport(hero.image)}
-        widths={[480, 768, 1280]}
-      />
-      <PageSection class="relative">
-        <PageTitle>{hero.title}</PageTitle>
-        <p class="text-3xl">{hero.subtitle}</p>
-      </PageSection>
-    </div>
+	<MainContent>
+		<div class="relative bg-black py-8 text-white">
+			<Image
+				alt=""
+				class="absolute inset-0 size-full object-cover opacity-60"
+				loading="eager"
+				sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, 100vw"
+				src={getImageImport(hero.image)}
+				widths={[480, 768, 1280]}
+			/>
+			<PageSection class="relative">
+				<PageTitle>{hero.title}</PageTitle>
+				<p class="text-3xl">{hero.subtitle}</p>
+			</PageSection>
+		</div>
 
-    {
-      main.sections.map(async (section) => {
-        switch (section.discriminant) {
-          case "data": {
-            const { collections, count, title } = section.value;
+		{
+			main.sections.map(async (section) => {
+				switch (section.discriminant) {
+					case "data": {
+						const { collections, count, title } = section.value;
 
-            let items = [];
+						let items = [];
 
-            for (const collection of collections) {
-              const entries = await reader.collections[collection].all({
-                resolveLinkedFiles: true,
-              });
-              items.push(
-                ...entries.map((entry) => {
-                  return { ...entry, collection };
-                })
-              );
-            }
+						for (const collection of collections) {
+							const entries = await reader.collections[collection].all({
+								resolveLinkedFiles: true,
+							});
+							items.push(
+								...entries.map((entry) => {
+									return { ...entry, collection };
+								}),
+							);
+						}
 
-            items.sort((a, z) => {
-              return compareDesc(
-                new Date(a.entry.publicationDate),
-                new Date(z.entry.publicationDate)
-              );
-            });
+						items.sort((a, z) => {
+							return compareDesc(
+								new Date(a.entry.publicationDate),
+								new Date(z.entry.publicationDate),
+							);
+						});
 
-            items = items.slice(0, count);
+						items = items.slice(0, count);
 
-            return (
-              <PageSection>
-                <PageSectionTitle>{title}</PageSectionTitle>
-                <ul class="grid gap-4 grid-fluid-cols-56" role="list">
-                  {items.map((item) => {
-                    return (
-                      <li>
-                        <Card
-                          href={`/${item.collection}/${item.slug}`}
-                          title={item.entry.title}
-                          summary={item.entry.summary}
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </PageSection>
-            );
-          }
+						return (
+							<PageSection>
+								<PageSectionTitle>{title}</PageSectionTitle>
+								<ul class="grid gap-4 grid-fluid-cols-56" role="list">
+									{items.map((item) => {
+										return (
+											<li>
+												<Card
+													href={`/${item.collection}/${item.slug}`}
+													title={item.entry.title}
+													summary={item.entry.summary}
+												/>
+											</li>
+										);
+									})}
+								</ul>
+							</PageSection>
+						);
+					}
 
-          case "links": {
-            const { links, title, variant } = section.value;
+					case "links": {
+						const { links, title, variant } = section.value;
 
-            const items = [];
+						const items = [];
 
-            for (const link of links) {
-              const item = await reader.collections.pages.readOrThrow(
-                link.value.id,
-                {
-                  resolveLinkedFiles: true,
-                }
-              );
-              items.push({ ...item, id: link.value.id });
-            }
+						for (const link of links) {
+							const item = await reader.collections.pages.readOrThrow(link.value.id, {
+								resolveLinkedFiles: true,
+							});
+							items.push({ ...item, id: link.value.id });
+						}
 
-            return (
-              <PageSection>
-                <PageSectionTitle>{title}</PageSectionTitle>
-                {variant === "cards" ? (
-                  <ul class="grid gap-4 grid-fluid-cols-56" role="list">
-                    {items.map((item) => {
-                      return (
-                        <li>
-                          <Card
-                            href={`/${item.id}`}
-                            title={item.title}
-                            summary={item.summary}
-                          />
-                        </li>
-                      );
-                    })}
-                  </ul>
-                ) : (
-                  <>
-                    <div class="hidden xs:block">
-                      <ImageCarousel title={title} slides={items} />
-                    </div>
-                    <ul
-                      class="grid gap-4 grid-fluid-cols-56 xs:hidden"
-                      role="list"
-                    >
-                      {items.map((item) => {
-                        return (
-                          <li>
-                            <Card
-                              href={`/${item.collection}/${item.slug}`}
-                              title={item.entry.title}
-                              summary={item.entry.summary}
-                            />
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </>
-                )}
-              </PageSection>
-            );
-          }
-        }
-      })
-    }
-  </MainContent>
+						return (
+							<PageSection>
+								<PageSectionTitle>{title}</PageSectionTitle>
+								{variant === "cards" ? (
+									<ul class="grid gap-4 grid-fluid-cols-56" role="list">
+										{items.map((item) => {
+											return (
+												<li>
+													<Card href={`/${item.id}`} title={item.title} summary={item.summary} />
+												</li>
+											);
+										})}
+									</ul>
+								) : (
+									<>
+										<div class="hidden xs:block">
+											<ImageCarousel title={title} slides={items} />
+										</div>
+										<ul class="grid gap-4 grid-fluid-cols-56 xs:hidden" role="list">
+											{items.map((item) => {
+												return (
+													<li>
+														<Card
+															href={`/${item.collection}/${item.slug}`}
+															title={item.entry.title}
+															summary={item.entry.summary}
+														/>
+													</li>
+												);
+											})}
+										</ul>
+									</>
+								)}
+							</PageSection>
+						);
+					}
+				}
+			})
+		}
+	</MainContent>
 </PageLayout>
