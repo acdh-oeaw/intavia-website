@@ -1,6 +1,5 @@
-import { assert, createUrl, createUrlSearchParams, request } from "@acdh-oeaw/lib";
+import { createUrl, createUrlSearchParams, request } from "@acdh-oeaw/lib";
 
-import { env } from "@/config/env.config";
 import { collections, user } from "@/config/zotero.config";
 
 export interface ZoteroItem {
@@ -26,8 +25,6 @@ export interface ZoteroItem {
 }
 
 export async function getZoteroCollections() {
-	assert(env.ZOTERO_API_KEY);
-
 	const items = [];
 
 	for (const collection of collections) {
@@ -42,7 +39,6 @@ export async function getZoteroCollections() {
 
 		const data = (await request(url, {
 			headers: {
-				"Zotero-API-Key": env.ZOTERO_API_KEY,
 				"Zotero-API-Version": "3",
 			},
 			responseType: "json",

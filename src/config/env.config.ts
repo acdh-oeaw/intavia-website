@@ -19,7 +19,6 @@ export const env = createEnv({
 			KEYSTATIC_GITHUB_CLIENT_ID: v.optional(v.pipe(v.string(), v.nonEmpty())),
 			KEYSTATIC_GITHUB_CLIENT_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
 			KEYSTATIC_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			ZOTERO_API_KEY: v.optional(v.pipe(v.string(), v.nonEmpty())),
 		});
 		return v.parse(Schema, input);
 	},
