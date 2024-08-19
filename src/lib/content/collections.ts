@@ -265,7 +265,7 @@ export const pages = createCollection((locale) => {
 });
 
 export const partners = createCollection((locale) => {
-	const { assetPath, contentPath } = createCollectionPaths("/publications/", locale);
+	const { assetPath, contentPath } = createCollectionPaths("/partners/", locale);
 
 	return collection({
 		label: "Partner institutions",
