@@ -1,0 +1,39 @@
+{
+  "name": "Austrian Academy of Sciences",
+  "country": "Austria",
+  "department": "Austrian Center for Digital Humanities and Cultural Heritage (ACDH-CH)",
+  "website": "https://www.oeaw.ac.at/acdh/",
+  "logo": "/assets/content/en/publications/austrian-academy-of-sciences/logo.png",
+  "team": [
+    {
+      "name": "Georg Vogeler",
+      "image": "/assets/content/en/publications/austrian-academy-of-sciences/team/0/image.png",
+      "description": "Georg Vogeler is a digital humanist, trained as historian with a specialisation in historical auxiliary sciences. He is doing research on digital scholarly editing and knowledge representation in particular with semantic web technologies. He is professor at the University of Graz and scientific director of the ACDH-CH at the Austrian Academy of Sciences.",
+      "website": "https://www.oeaw.ac.at/acdh/team/current-team/georg-vogeler"
+    },
+    {
+      "name": "Matthias Schlögl"
+    },
+    {
+      "name": "Ingo Börner"
+    },
+    {
+      "name": "Richard Kurdiovsky",
+      "image": "/assets/content/en/publications/austrian-academy-of-sciences/team/3/image.jpg",
+      "description": "Richard Kurdiovsky studied History of Art, History, Classical Archaeology, and Slavonic Studies in Vienna, freelancer for the Architecture Collection at the Albertina Museum in Vienna (1997–2004), researcher at the Austrian Academy of Sciences since 2005, received his doctorate on Carl Hasenauer and Gottfried Semper in 2005. Has taught inter alia at the University of Vienna. Research foci: the Vienna Hofburg in the nineteenth century, Central European architecture from the Baroque to the twentieth century, urban culture in the Habsburg Empire.",
+      "website": "https://www.oeaw.ac.at/ihb/personen/kurdiovsky-richard"
+    },
+    {
+      "name": "Maximilian Kaiser",
+      "image": "/assets/content/en/publications/austrian-academy-of-sciences/team/4/image.jpg",
+      "description": "Maximilian Kaiser studied art history at the University of Vienna. In his dissertation he examined the reception of the artistic avantgarde by Viennese art criticis. Before joining the Austrian Academy of Sciences, he worked from 2013 to 2015 as a research associate for the museum Österreichische Galerie Belvedere. From 2015 to 2019 he was part of the APIS project team. Since 2020 he is co-project manager of the VieCPro project, responsible for historical network analysis.",
+      "website": "https://www.oeaw.ac.at/ihb/personen/kaiser-maximilian"
+    },
+    {
+      "name": "Carla Ebel",
+      "image": "/assets/content/en/publications/austrian-academy-of-sciences/team/5/image.png",
+      "description": "Carla Ebel works as a Data Analyst at Austrian Academy of Sciences. She studied European Art History and Religious Studies at the University of Heidelberg and is in a master's program Digital Humanities at the University of Graz. Her focus in DH are semantic web technologies, ontology modeling and various aspects of digital art history.",
+      "website": "https://www.oeaw.ac.at/acdh/team/current-team/carla-ebel"
+    }
+  ]
+}

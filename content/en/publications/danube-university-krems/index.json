@@ -1,0 +1,37 @@
+{
+  "name": "Danube University Krems",
+  "country": "Austria",
+  "department": "Department for Arts and Cultural Studies",
+  "website": "http://www.donau-uni.ac.at/dkk/",
+  "logo": "/assets/content/en/publications/danube-university-krems/logo.jpg",
+  "team": [
+    {
+      "name": "Eva Mayr",
+      "image": "/assets/content/en/publications/danube-university-krems/team/0/image.jpg",
+      "description": "Eva Mayr is a psychologist. Her research focuses on the cognitively grounded design and evaluation of information visualizations. She coordinates the project together with Florian Windhager and leads WP07 on evaluation.",
+      "website": "https://www.donau-uni.ac.at/en/eva.mayr"
+    },
+    {
+      "name": "Florian Windhager",
+      "image": "/assets/content/en/publications/danube-university-krems/team/1/image.jpg",
+      "description": "Florian Windhager studied philosophy and sociology. His research focuses on information visualization for the digital humanities. He coordinates the project together with Eva Mayr and leads WP09 on project management and WP10 on ethics requirements.",
+      "website": "https://www.donau-uni.ac.at/en/florian.windhager"
+    },
+    {
+      "name": "Anja Grebe",
+      "image": "/assets/content/en/publications/danube-university-krems/team/2/image.jpg",
+      "description": "Anja Grebe is professor of cultural history and museum studies at Danube University Krems since 2015. In the InTaVia project she will contribute to the definition of users and case studies and add to evaluation and tool criticism.",
+      "website": "https://www.donau-uni.ac.at/en/anja.grebe"
+    },
+    {
+      "name": "Nicole High-Steskal",
+      "description": "Nicole High-Steskal is an archeologist. She works as a staff scientist at the Department for Arts and Cultural Studies and takes care of project management, case studies and evaluation tasks in the InTaVia project.",
+      "website": "https://www.donau-uni.ac.at/en/nicole.high-steskal"
+    },
+    {
+      "name": "Johannes Liem",
+      "description": "Johannes Liem is a cartographer and visualisation researcher. His research focuses on the visual and narrative communication of spatio-temporal data. He is involved in the visualisation development processes in WP05 and WP06.",
+      "website": "https://www.donau-uni.ac.at/en/johannes.liem"
+    }
+  ]
+}

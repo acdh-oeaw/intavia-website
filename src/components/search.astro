@@ -23,14 +23,14 @@ const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 		aria-label={t("Search.search")}
 		class="fixed mx-auto min-h-full w-full max-w-screen-md border bg-[#f1f1f1] backdrop:bg-[#545864a8] backdrop:backdrop-blur-sm open:grid sm:mt-[5rem] sm:max-h-[calc(100%-10rem)] sm:min-h-[16rem] sm:rounded-lg sm:shadow-lg"
 	>
-		<div class="grid size-full gap-y-4 px-8 py-6" data-dialog-content>
-			<div class="relative mt-8">
-				<div data-search-results></div>
-			</div>
+		<div class="grid size-full gap-y-4 bg-neutral-100 px-8 py-6" data-dialog-content>
 			<button class="absolute right-4 top-4 text-sm" data-search-close>
 				<Icon aria-hidden="true" class="size-4 shrink-0" name="lucide:x" />
 				<span class="sr-only">{t("Search.close-dialog")}</span>
 			</button>
+			<div class="relative mt-8">
+				<div data-search-results></div>
+			</div>
 		</div>
 	</dialog>
 </site-search>

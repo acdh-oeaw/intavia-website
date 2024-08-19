@@ -1,0 +1,27 @@
+{
+  "name": "University of Stuttgart",
+  "country": "Germany",
+  "department": "Institute for Visualization and Interactive Systems",
+  "website": "https://www.vis.uni-stuttgart.de/en/",
+  "logo": "/assets/content/en/publications/university-of-stuttgart/logo.png",
+  "team": [
+    {
+      "name": "Thomas Ertl",
+      "image": "/assets/content/en/publications/university-of-stuttgart/team/0/image.jpg",
+      "description": "Thomas Ertl is co-director of the Visualization Research Center (VISUS) and a full professor of computer science at the University of Stuttgart in the Visualization and Interactive Systems Institute (VIS). His research interests include visualization, computer graphics, and human computer interaction in general with a focus on volume rendering, flow and particle visualization, parallel and hardware-accelerated rendering, large datasets and interactive exploration, visual analytics of text collections, and social media with applications to digital humanities.",
+      "website": "https://www.vis.uni-stuttgart.de/institut/team/Ertl-00019/"
+    },
+    {
+      "name": "Steffen Koch",
+      "image": "/assets/content/en/publications/university-of-stuttgart/team/1/image.jpg",
+      "description": "Steffen Koch is a computer scientist. His main research interests are information visualization and visual analytics with a focus on explorative analysis techniques. He is a senior research fellow at the Institute for Visualization and Interactive Systems (VIS) at the University of Stuttgart, where he coordinates visual analytics and digital humanities projects.",
+      "website": "https://www.vis.uni-stuttgart.de/institut/team/Koch-00006/"
+    },
+    {
+      "name": "Samuel Beck",
+      "image": "/assets/content/en/publications/university-of-stuttgart/team/2/image.jpg",
+      "description": "Samuel Beck is a doctoral researcher at the Institute for Visualization and Interactive Systems (VIS) at the University of Stuttgart. His research interests include information visualization, visual analytics, and digital humanities. He is mainly involved with the visual analytics studio in WP5.",
+      "website": "https://www.vis.uni-stuttgart.de/en/institute/team/Beck-00008/"
+    }
+  ]
+}

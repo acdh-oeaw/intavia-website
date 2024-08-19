@@ -1,0 +1,21 @@
+{
+  "name": "University of Helsinki",
+  "country": "Finland",
+  "department": "Helsinki Centre for Digital Humanities (HELDIG)",
+  "website": "https://heldig.fi/",
+  "logo": "/assets/content/en/publications/university-of-helsinki/logo.jpg",
+  "team": [
+    {
+      "name": "Eero Hyvönen",
+      "image": "/assets/content/en/publications/university-of-helsinki/team/0/image.jpg",
+      "description": "Eero Hyvönen is director of HELDIG at UH and professor of semantic media technology in Aalto University, with interest in Semantic Web and NLP technologies and applications in Digital Humanities. ",
+      "website": "https://seco.cs.aalto.fi/u/eahyvone/"
+    },
+    {
+      "name": "Minna Tamper",
+      "image": "/assets/content/en/publications/university-of-helsinki/team/1/image.jpg",
+      "description": "Minna Tamper is a doctoral candidate at department of computer science in Aalto University. Her research interests include linked data, natural language processing and data analysis.",
+      "website": "https://seco.cs.aalto.fi/u/tamperm1/"
+    }
+  ]
+}

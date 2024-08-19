@@ -4,7 +4,6 @@ import { defaultLocale } from "@/config/i18n.config";
 import { escape } from "@/lib/safe-json-ld-replacer";
 import { expect, test } from "~/e2e/lib/test";
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const baseUrl = process.env.PUBLIC_APP_BASE_URL!;
 
 test("should set a canonical url", async ({ createIndexPage }) => {
@@ -43,7 +42,6 @@ test("should set page metadata", async ({ createIndexPage }) => {
 	await indexPage.goto();
 
 	expect(i18n.t("metadata.title")).toBeTruthy();
-	expect(i18n.t("metadata.shortTitle")).toBeTruthy();
 	expect(i18n.t("metadata.description")).toBeTruthy();
 
 	const ogType = indexPage.page.locator('meta[property="og:type"]');
@@ -53,10 +51,10 @@ test("should set page metadata", async ({ createIndexPage }) => {
 	await expect(twCard).toHaveAttribute("content", "summary_large_image");
 
 	const twCreator = indexPage.page.locator('meta[name="twitter:creator"]');
-	await expect(twCreator).toHaveAttribute("content", i18n.t("metadata.twitter"));
+	await expect(twCreator).toHaveAttribute("content", i18n.t("metadata.twitter.creator"));
 
 	const twSite = indexPage.page.locator('meta[name="twitter:site"]');
-	await expect(twSite).toHaveAttribute("content", i18n.t("metadata.twitter"));
+	await expect(twSite).toHaveAttribute("content", i18n.t("metadata.twitter.site"));
 
 	// const googleSiteVerification = indexPage.page.locator('meta[name="google-site-verification"]');
 	// await expect(googleSiteVerification).toHaveAttribute("content", "");

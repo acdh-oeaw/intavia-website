@@ -1,161 +1,124 @@
 {
   "hero": {
-    "title": "InTaVia: In/Tangible European Heritage",
+    "title": "INTAVIA: In/Tangible European Heritage",
     "subtitle": "Visual Analysis, Curation & Communication",
     "image": "/assets/content/en/index-page/hero/image.png"
   },
   "main": {
     "sections": [
       {
-        "discriminant": "cardsSection",
+        "discriminant": "links",
         "value": {
           "title": "About",
-          "variant": "four-columns",
-          "cards": [
+          "variant": "cards",
+          "links": [
             {
               "discriminant": "page",
               "value": {
                 "title": "About",
-                "reference": "about",
-                "link": {
-                  "label": "Read more"
-                }
+                "id": "about"
               }
             },
             {
               "discriminant": "page",
               "value": {
                 "title": "Team",
-                "reference": "team",
-                "link": {
-                  "label": "Read more"
-                }
+                "id": "team"
               }
             },
             {
               "discriminant": "page",
               "value": {
                 "title": "Advisory Board",
-                "reference": "advisory-board",
-                "link": {
-                  "label": "Read more"
-                }
+                "id": "advisory-board"
               }
             },
             {
               "discriminant": "page",
               "value": {
                 "title": "Associated Organizations",
-                "reference": "associated-organizations",
-                "link": {
-                  "label": "Read more"
-                }
+                "id": "associated-organizations"
               }
             }
           ]
         }
       },
       {
-        "discriminant": "slidesSection",
+        "discriminant": "links",
         "value": {
           "title": "Research Aims",
-          "slides": [
-            {
-              "discriminant": "defaultSlide",
-              "value": {
-                "title": "Overall Aims",
-                "summary": "Representations of tangible objects of European cultural heritage (such as images, texts, music, films, buildings, or artifacts) have […]",
-                "image": "/assets/content/en/index-page/main/sections/1/value/slides/0/value/image.jpg",
-                "page": "overall-aims"
-              }
-            },
-            {
-              "discriminant": "defaultSlide",
-              "value": {
-                "title": "System Architecture",
-                "summary": "The InTaVia project aims to address major research challenges and bridge the semantic gap between large object databases, biography databases, and present-day […]",
-                "image": "/assets/content/en/index-page/main/sections/1/value/slides/1/value/image.jpg",
-                "page": "system-architecture"
-              }
-            },
-            {
-              "discriminant": "defaultSlide",
-              "value": {
-                "title": "Work Packages",
-                "summary": "The InTaVia project is structured into ten work packages. These packages guide research and developments along parallel tracks, while being synchronized by […]",
-                "image": "/assets/content/en/index-page/main/sections/1/value/slides/2/value/image.png",
-                "page": "work-packages"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "discriminant": "cardsSection",
-        "value": {
-          "title": "Results",
-          "variant": "two-columns",
-          "cards": [
+          "variant": "carousel",
+          "links": [
             {
               "discriminant": "page",
               "value": {
-                "title": "Publications & presentations",
-                "reference": "publications",
-                "link": {
-                  "label": "Read more"
-                }
+                "title": "Overall Aims",
+                "id": "overall-aims"
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "System Architecture",
+                "id": "system-architecture"
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Work Packages",
+                "id": "work-packages"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "discriminant": "links",
+        "value": {
+          "title": "Results",
+          "variant": "cards",
+          "links": [
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Publications and presentations",
+                "id": "publications"
               }
             },
             {
               "discriminant": "page",
               "value": {
                 "title": "Tools",
-                "reference": "tools",
-                "link": {
-                  "label": "Read more"
-                }
+                "id": "tools"
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Tutorials",
+                "id": "tutorials"
+              }
+            },
+            {
+              "discriminant": "page",
+              "value": {
+                "title": "Case studies",
+                "id": "case-studies"
               }
             }
           ]
         }
       },
       {
-        "discriminant": "cardsSection",
+        "discriminant": "data",
         "value": {
-          "title": "News",
-          "variant": "one-column",
-          "cards": [
-            {
-              "discriminant": "page",
-              "value": {
-                "title": "InTaVia 5th Newsletter / Cultural heritage: a VAST expanse of multivarious challenges",
-                "reference": "newsletters/intavia-5th-newsletter-cultural-heritage-a-vast-expanse-of-multivarious-challenges",
-                "link": {
-                  "label": "Read more"
-                }
-              }
-            },
-            {
-              "discriminant": "page",
-              "value": {
-                "title": "CaTCH – Capturing the IntAngible of Cultural Heritage",
-                "reference": "catch-capturing-the-intangible-of-cultural-heritageultural-heritage",
-                "link": {
-                  "label": "Read more"
-                }
-              }
-            },
-            {
-              "discriminant": "page",
-              "value": {
-                "title": "InTaVia 4th Newsletter / There’s History in all Men’s Lives",
-                "reference": "newsletters/intavia-4th-newsletter-theres-history-in-all-mens-lives",
-                "link": {
-                  "label": "Read more"
-                }
-              }
-            }
-          ]
+          "title": "Activities",
+          "collections": [
+            "activities",
+            "newsletters"
+          ],
+          "count": 3
         }
       }
     ]

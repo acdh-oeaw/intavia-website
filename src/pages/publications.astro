@@ -1,0 +1,104 @@
+---
+import { isNonEmptyArray } from "@acdh-oeaw/lib";
+import { compareDesc } from "date-fns";
+
+import MainContent from "@/components/main-content.astro";
+import PageCard from "@/components/page-card.astro";
+import PageSectionTitle from "@/components/page-section-title.astro";
+import PageTitle from "@/components/page-title.astro";
+import { defaultLocale as locale } from "@/config/i18n.config";
+import PageLayout from "@/layouts/page-layout.astro";
+import { createReader } from "@/lib/content/create-reader";
+import { getMdxContent } from "@/lib/content/get-mdx-content";
+import { getFormatter } from "@/lib/formatter";
+import { getZoteroCollections, type ZoteroItem } from "@/lib/zotero";
+
+const reader = createReader();
+const page = await reader.collections.pages.readOrThrow("publications", {
+	resolveLinkedFiles: true,
+});
+
+const documentTitle = page.title;
+const { content, image, title } = page;
+const { default: Content } = await getMdxContent(content, locale);
+
+const collections = await getZoteroCollections();
+
+const formatter = getFormatter(locale);
+
+function getDate(item: ZoteroItem) {
+	return item.meta.parsedDate
+		? formatter.date.format(new Date(item.meta.parsedDate))
+		: item.data.date;
+}
+---
+
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent search="exclude">
+		<PageCard image={image}>
+			<PageTitle>{title}</PageTitle>
+			<div class="prose">
+				<Content />
+			</div>
+			{
+				collections.map((collection) => {
+					return (
+						<>
+							<PageSectionTitle id={collection.label.toLowerCase()}>
+								{collection.label}
+							</PageSectionTitle>
+							<ul class="prose" role="list">
+								{collection.data
+									.sort((a, z) => {
+										if (a.meta.parsedDate && z.meta.parsedDate) {
+											return compareDesc(new Date(a.meta.parsedDate), new Date(z.meta.parsedDate));
+										}
+										if (a.data.date && z.data.date) {
+											return a.data.date.localeCompare(z.data.date);
+										}
+										return 0;
+									})
+									.map((item) => {
+										const date = getDate(item);
+
+										return (
+											<li>
+												{isNonEmptyArray(item.data.creators) ? (
+													<span>
+														{formatter.list.format(
+															item.data.creators.map((creator) => {
+																if ("name" in creator) {
+																	return creator.name;
+																}
+
+																let name = creator.lastName;
+
+																if (creator.firstName) {
+																	name += `, ${creator.firstName.charAt(0)}.`;
+																}
+
+																return name;
+															}),
+														)}
+													</span>
+												) : null}
+												{date ? <span>({date}).</span> : null}
+												<span>{item.data.title}.</span>
+												{item.data.meetingName ? <span>{item.data.meetingName}.</span> : null}
+												{item.data.place ? <span>{item.data.place}.</span> : null}
+												{item.data.url ? (
+													<a class="block" href={item.data.url}>
+														{item.data.url}
+													</a>
+												) : null}
+											</li>
+										);
+									})}
+							</ul>
+						</>
+					);
+				})
+			}
+		</PageCard>
+	</MainContent>
+</PageLayout>

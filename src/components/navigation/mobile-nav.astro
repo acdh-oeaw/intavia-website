@@ -29,11 +29,11 @@ const navigation = await getNavigation(locale);
 					}
 
 					case "page": {
-						const { label, reference } = item.value;
+						const { label, id } = item.value;
 
 						return (
 							<li>
-								<Link class="transition hover:text-[#212529]" href={`/${reference}`}>
+								<Link class="transition hover:text-[#212529]" href={`/${id}`}>
 									{label}
 								</Link>
 							</li>
@@ -70,11 +70,11 @@ const navigation = await getNavigation(locale);
 												}
 
 												case "page": {
-													const { label, reference } = link.value;
+													const { label, id } = link.value;
 
 													return (
 														<li>
-															<Link class="transition hover:text-[#212529]" href={`/${reference}`}>
+															<Link class="transition hover:text-[#212529]" href={`/${id}`}>
 																{label}
 															</Link>
 														</li>

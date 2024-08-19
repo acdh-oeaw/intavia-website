@@ -1,0 +1,45 @@
+---
+import Card from "@/components/content/card.astro";
+import MainContent from "@/components/main-content.astro";
+import PageCard from "@/components/page-card.astro";
+import PageTitle from "@/components/page-title.astro";
+import { defaultLocale as locale } from "@/config/i18n.config";
+import PageLayout from "@/layouts/page-layout.astro";
+import { createReader } from "@/lib/content/create-reader";
+import { getMdxContent } from "@/lib/content/get-mdx-content";
+
+const reader = createReader();
+const page = await reader.collections.pages.readOrThrow("deliverables", {
+	resolveLinkedFiles: true,
+});
+
+const documentTitle = page.title;
+const { content, image, title } = page;
+const { default: Content } = await getMdxContent(content, locale);
+
+const deliverables = await reader.collections.deliverables.all({ resolveLinkedFiles: true });
+---
+
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent>
+		<PageCard image={image}>
+			<PageTitle>{title}</PageTitle>
+			<div class="prose">
+				<Content />
+			</div>
+			<ul class="grid gap-y-12" role="list">
+				{
+					deliverables.map((item) => {
+						const { title, summary } = item.entry;
+
+						return (
+							<li>
+								<Card href={`/deliverables/${item.slug}`} title={title} summary={summary} />
+							</li>
+						);
+					})
+				}
+			</ul>
+		</PageCard>
+	</MainContent>
+</PageLayout>

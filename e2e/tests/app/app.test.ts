@@ -3,7 +3,6 @@ import { createUrl } from "@acdh-oeaw/lib";
 import { defaultLocale } from "@/config/i18n.config";
 import { expect, test } from "~/e2e/lib/test";
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const baseUrl = process.env.PUBLIC_APP_BASE_URL!;
 
 test.describe("app", () => {
@@ -69,15 +68,15 @@ test.describe("app", () => {
 
 		expect(body.toString()).toEqual(
 			JSON.stringify({
-				name: i18n.t("metadata.title"),
-				short_name: i18n.t("metadata.shortTitle"),
-				description: i18n.t("metadata.description"),
+				name: i18n.t("metadata.manifest.name"),
+				short_name: i18n.t("metadata.manifest.short-name"),
+				description: i18n.t("metadata.manifest.description"),
 				icons: [
 					{ src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
 					{ src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
 				],
-				theme_color: "#28d8d8",
-				background_color: "#28d8d8",
+				theme_color: "#ccff90",
+				background_color: "#ccff90",
 				display: "standalone",
 				start_url: "/",
 			}),

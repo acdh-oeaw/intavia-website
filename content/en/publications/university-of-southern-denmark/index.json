@@ -1,0 +1,19 @@
+{
+  "name": "University of Southern Denmark",
+  "country": "Denmark",
+  "department": "Department of Mathematics and Computer Science",
+  "logo": "/assets/content/en/publications/university-of-southern-denmark/logo.png",
+  "team": [
+    {
+      "name": "Jakob Kusnick",
+      "image": "/assets/content/en/publications/university-of-southern-denmark/team/0/image.jpg",
+      "description": "Jakob Kusnick studied computer science in Leipzig, Germany, and is now a Ph.D. student at the University of Southern Denmark. He researches and develops user-centered interactive information visualization tools for cultural heritage with a focus on musicology. For the project, he is mainly involved in the visual storytelling for digitized cultural objects and actors."
+    },
+    {
+      "name": "Stefan Jänicke",
+      "image": "/assets/content/en/publications/university-of-southern-denmark/team/1/image.jpg",
+      "description": "Stefan Jänicke is Associate Professor for Data Science at the Department of Mathematics and Computer Science at the University of Southern Denmark, Odense, Denmark. He received his PhD degree in computer science in 2016 from Leipzig University, Germany. His research interests relate to information visualization and visual analytics with a focus on text-, time- and geovisualization, and their application in research areas like (digital) humanities, linguistics, social sciences, biology and sports.",
+      "website": "https://imada.sdu.dk/~stjaenicke/"
+    }
+  ]
+}

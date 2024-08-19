@@ -10,16 +10,19 @@ const config: Config = {
 		"./src/@(components|layouts|pages)/**/*.@(astro|css|ts|tsx)",
 		"./src/styles/**/*.css",
 	],
-	darkMode: undefined,
 	presets: [preset],
 	theme: {
 		extend: {
 			colors: {
 				brand: {
 					DEFAULT: "hsl(87.6 100% 78.2% / <alpha-value>)",
-					intent: "hsl(88.3 51.4% 58.8% / <alpha-value>)",
+					intent: "hsl(88.3 71.4% 58.8% / <alpha-value>)",
 				},
 			},
+			screens: {
+				lg: "70rem",
+			},
+
 			typography: {
 				DEFAULT: {
 					css: {

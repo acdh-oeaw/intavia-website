@@ -1,40 +1,48 @@
 ---
-import { Image } from "astro:assets";
-
 import MainContent from "@/components/main-content.astro";
-import PageSection from "@/components/page-section.astro";
+import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { getCollectionName } from "@/lib/content/get-collection-name";
-import { processMdx } from "@/lib/content/mdx";
-import { reader } from "@/lib/content/reader";
-import { getImageImport } from "@/lib/get-image-import";
+import { createReader } from "@/lib/content/create-reader";
+import { getMdxContent } from "@/lib/content/get-mdx-content";
 
 export async function getStaticPaths() {
-	const collection = getCollectionName("pages", locale);
-	const pages = await reader().collections[collection].all();
+	const reader = createReader();
+	const pages = await reader.collections.pages.all({ resolveLinkedFiles: true });
 
-	return pages.map((page) => {
-		return { params: { id: page.slug }, props: { page: page.entry } };
-	});
+	return pages
+		.filter((page) => {
+			return ![
+				"activities",
+				"case-studies",
+				"conference-proceedings",
+				"deliverables",
+				"newsletter",
+				"publications",
+				"team",
+				"tutorials",
+			].includes(page.slug);
+		})
+		.map((page) => {
+			return { params: { id: page.slug }, props: { page: page.entry } };
+		});
 }
 
 const { page } = Astro.props;
 
 const documentTitle = page.title;
-const { title, image } = page;
-const { default: Content } = await processMdx(await page.content(), locale);
+const { content, image, title } = page;
+const { default: Content } = await getMdxContent(content, locale);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
 	<MainContent>
-		<PageSection>
-			{image && <Image alt="" src={getImageImport(image)} class="h-56 object-cover" />}
+		<PageCard image={image}>
 			<PageTitle>{title}</PageTitle>
-			<div class="prose prose-lg prose-em:italic">
+			<div class="prose">
 				<Content />
 			</div>
-		</PageSection>
+		</PageCard>
 	</MainContent>
 </PageLayout>

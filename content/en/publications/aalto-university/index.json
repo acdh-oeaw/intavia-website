@@ -1,0 +1,39 @@
+{
+  "name": "Aalto University",
+  "country": "Finland",
+  "department": "Department of Computer Science",
+  "website": "http://cs.aalto.fi/",
+  "logo": "/assets/content/en/publications/aalto-university/logo.png",
+  "team": [
+    {
+      "name": "Jouni Tuominen",
+      "image": "/assets/content/en/publications/aalto-university/team/0/image.jpg",
+      "description": "Jouni Tuominen is a computer scientist. His research focuses on ontology repositories and services, linked data publishing methods, ontology models for legacy data, and tooling for digital humanities. He leads WP02 on information & system architecture.",
+      "website": "https://seco.cs.aalto.fi/u/jwtuomin/"
+    },
+    {
+      "name": "Heikki Rantala",
+      "description": "Heikki Rantala is a doctoral candidate at department of computer science in Aalto University. He is interested in creating computational tools and methods to aid the research of cultural heritage.",
+      "website": "https://seco.cs.aalto.fi/u/rantalh3/"
+    },
+    {
+      "name": "Mikko Koho",
+      "description": "Mikko Koho is a computer science researcher at Aalto University. His research focuses on Knowledge Graph generation, Linked Data applications, ontologies, data modelling, and tooling and data analysis in interdisciplinary Digital Humanities research.",
+      "website": "https://seco.cs.aalto.fi/u/mkoho/"
+    },
+    {
+      "name": "Petri Leskinen",
+      "description": "Petri Leskinen is a doctoral candidate at department of computer science in Aalto University. He is doing his dissertation on actor ontologies and biographical data.",
+      "website": "https://seco.cs.aalto.fi/u/ptleskin/"
+    },
+    {
+      "name": "Rafael Leal",
+      "description": "Rafael Leal is a doctoral candidate at the Department of Computer Science in Aalto University with a background in Computational Linguistics and History who is interested in integrating Linked Data and Natural Language Processing."
+    },
+    {
+      "name": "Joonas Kesäniemi",
+      "image": "/assets/content/en/publications/aalto-university/team/5/image.jpg",
+      "description": "Joonas Kesäniemi is a doctoral candidate at Aalto University. His research interests revolve around management of knowledge graphs in the context of open data and science. He is passionate about making the most of the data, both old and new. Before joining Aalto in 2020, he spent more than a decade in the public and private sector advocating and putting linked data and semantic web technologies to work in organizations by implementing production systems and more experimental projects in roles ranging from developer to information architect."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Research Centre of the Slovenian Academy of Sciences & Arts",
+  "country": "Slovenia",
+  "logo": "/assets/content/en/publications/research-centre-of-the-slovenian-academy-of-sciences-and-arts/logo.jpg",
+  "team": [
+    {
+      "name": "Tomaž Erjavec",
+      "image": "/assets/content/en/publications/research-centre-of-the-slovenian-academy-of-sciences-and-arts/team/0/image.png",
+      "description": "Tomaž Erjavec is a computational linguist. His research interests are in the fields of language technologies, compilation of language resources, development of encoding standards, and text-based digital humanities. He participates in WP04, mostly as regards processing of the Slovenian data.",
+      "website": "http://nl.ijs.si/et/"
+    },
+    {
+      "name": "Neža Zajc",
+      "image": "/assets/content/en/publications/research-centre-of-the-slovenian-academy-of-sciences-and-arts/team/1/image.jpg",
+      "description": "Neža Zajc specializes in the early Renaissance period. Her research interest include paleographical tools in manuscripts (and other archive materials) and individual (biographical, linguistical, semiotical) contributions to the history of humankind. She participates in WP1 and WP8.",
+      "website": "https://ikz.zrc-sazu.si/en/sodelavci/ne%C5%BEa-zajc-en/"
+    },
+    {
+      "name": "Gregor Pobežin",
+      "image": "/assets/content/en/publications/research-centre-of-the-slovenian-academy-of-sciences-and-arts/team/2/image.jpg",
+      "description": "Gregor Pobežin is a classical philologist and historian of Greece and Rome. He also specializes in the Humanist literature of the 15th and 16th century and the Latin epigraphy of the late medieval and early modern period. He participates in WP1 and leads the WP8.",
+      "website": "https://ikz.zrc-sazu.si/en/sodelavci/gregor-pobezin-sl-0"
+    },
+    {
+      "name": "Matija Ogrin",
+      "image": "/assets/content/en/publications/research-centre-of-the-slovenian-academy-of-sciences-and-arts/team/3/image.jpg",
+      "description": "Matija Ogrin focuses on the studies in early modern Slovenian literature are based on the research of primary sources and their traditional scholarly treatment: transcription, commentary and critical editing. He participates in WP3.",
+      "website": "https://isllv.zrc-sazu.si/en/sodelavci/matija-ogrin-en"
+    },
+    {
+      "name": "Petra Testen Koren",
+      "image": "/assets/content/en/publications/research-centre-of-the-slovenian-academy-of-sciences-and-arts/team/4/image.jpg",
+      "description": "Petra Testen Koren is a historian. Her research centres on: cultural history, challenges of oral history, history of everyday life, history of women, history of family, memory, etc. She participates in WP8.",
+      "website": "https://ikz.zrc-sazu.si/en/sodelavci/petra-testen-en"
+    },
+    {
+      "name": "Ahac Meden",
+      "image": "/assets/content/en/publications/research-centre-of-the-slovenian-academy-of-sciences-and-arts/team/5/image.jpg",
+      "description": "Ahac Meden is the co-editor for Popular Culture, Media Art and New Media, and the technical web editor on the project of the New Slovenian Biographical Lexicon (NSBL). He participates in WP8.",
+      "website": "https://ikz.zrc-sazu.si/en/sodelavci/ahac-meden-en"
+    },
+    {
+      "name": "Joh Dokler"
+    }
+  ]
+}

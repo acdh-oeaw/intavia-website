@@ -1,0 +1,37 @@
+{
+  "name": "Vrije Universiteit Amsterdam",
+  "country": "Netherlands",
+  "website": "http://cs.vu.nl/",
+  "logo": "/assets/content/en/publications/vrije-universiteit-amsterdam/logo.jpg",
+  "team": [
+    {
+      "name": "Victor de Boer",
+      "image": "/assets/content/en/publications/vrije-universiteit-amsterdam/team/0/image.jpg",
+      "description": "Victor de Boer is a computer scientist at the User-Centric Data Science group of the Vrije Universiteit Amsterdam. In his research, he combines (Semantic) Web technologies with Human-Computer Interaction, Knowledge Representation and Information Extraction to tackle research challenges in various domains. These include Cultural Heritage, Digital Humanities and ICT for Development (ICT4D).",
+      "website": "http://www.victordeboer.com/"
+    },
+    {
+      "name": "Antske Fokkens",
+      "image": "/assets/content/en/publications/vrije-universiteit-amsterdam/team/1/image.jpg",
+      "description": "Antske Fokkens is a computational linguist at VU. Her main interest lies in methodological aspects of research in Computational Linguistics. She is driven by the question of how computational models of language work: what patterns and systems are found in natural language? How can they be modeled computationally? Which computational methods are suitable for modeling or analyzing which phenomena.",
+      "website": "http://wordpress.let.vupr.nl/antske/"
+    },
+    {
+      "name": "Angel Daza",
+      "image": "/assets/content/en/publications/vrije-universiteit-amsterdam/team/2/image.jpg",
+      "description": "Angel Daza is a computer scientist with expertise in Natural Language Processing. He completed his Ph.D. research at Heidelberg University where he worked on multilingual models for Semantic Role Labeling, and recently joined as a postdoc for the CLTL group at the Vrije Universiteit Amsterdam.",
+      "website": "https://daza-science.com/"
+    },
+    {
+      "name": "Piek Th.J.M. Vossen",
+      "image": "/assets/content/en/publications/vrije-universiteit-amsterdam/team/3/image.jpg",
+      "description": "Piek Th.J.M. Vossen is professor of computational lexicology at the VU University Amsterdam, head of the Computational Lexicology & Terminology Lab, and founder and president of the Global WordNet Association.",
+      "website": "https://vossen.info/"
+    },
+    {
+      "name": "Go Sugimoto",
+      "description": "Go Sugimoto is originally an archaeologist and have studied archaeological computing and heritage management. He specialises in cultural heritage documentation, knowledge management, and Semantic technologies. He has worked in different organisations across the globe, inlcuding Europeana, Wessex Archaeology in UK, National Archives of Netherlands, National Museum of Modern Art, Tokyo, and Academy of Sciences in Austira.",
+      "website": "https://orcid.org/0000-0003-2646-6784"
+    }
+  ]
+}

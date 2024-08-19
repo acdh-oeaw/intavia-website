@@ -1,0 +1,20 @@
+{
+  "name": "Fluxguide Ausstellungssysteme GmbH",
+  "country": "Austria",
+  "website": "http://www.fluxguide.com/",
+  "logo": "/assets/content/en/publications/fluxguide-ausstellungssysteme/logo.png",
+  "team": [
+    {
+      "name": "Carina Doppler",
+      "description": "Carina Doppler is a project manager with several years of experience in the conception and implementation of interdisciplinary projects in the cultural and media sector. She managed augmented reality mediation projects for international institutions, clients and partners."
+    },
+    {
+      "name": "Kasra Seirafi",
+      "description": "Kasra Seirafi holds a PhD from the University of Vienna (Austria) and Stanford University (USA), M.A. from University of Vienna (Austria), B.Sc. from University of Derby (UK). As professional in leading positions, Dr. Kasra Seirafi contributed to the field of knowledge management systems, E-Learning, mobile innovations, cultural heritage technologies, and other related topics. Currently he works as founder and managing director at the technology SME Fluxguide. He has 20+ years of experience in industry and research projects worldwide as well as a researcher and lecturer at international universities. Dr. Seirafi provides experience both in leading and contribution functions within several FP7 and Horizon 2020 projects and local funded research activities."
+    },
+    {
+      "name": "Linnéa Richter",
+      "description": "Linnéa Richter studied International Development (University of Vienna) and Digital Media and Society (University of Uppsala) with a focus on digital transformations in museums. She has several years of experience in project management in the field of education, sustainability and cultural institutions. She successfully implements didactic requirements for digital concepts. At Fluxguide she is currently engaged in product development regarding cultural heritage collections and digital learning platforms."
+    }
+  ]
+}

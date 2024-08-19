@@ -5,16 +5,17 @@ export function useObjectUrl(data: Uint8Array | null, contentType: string | unde
 	const [url, setUrl] = useState<string | null>(null);
 
 	useEffect(() => {
-		if (data) {
-			const url = URL.createObjectURL(new Blob([data], { type: contentType }));
-			setUrl(url);
-			return () => {
-				URL.revokeObjectURL(url);
-			};
-		} else {
+		if (data == null) {
 			setUrl(null);
 			return undefined;
 		}
+
+		const url = URL.createObjectURL(new Blob([data], { type: contentType }));
+		setUrl(url);
+
+		return () => {
+			URL.revokeObjectURL(url);
+		};
 	}, [contentType, data]);
 
 	return url;

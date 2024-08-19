@@ -1,23 +1,23 @@
 ---
 import { Image } from "astro:assets";
+import { compareDesc } from "date-fns";
 
+import Card from "@/components/content/card.astro";
 import ImageCarousel from "@/components/content/image-carousel.astro";
-import Link from "@/components/link.astro";
 import MainContent from "@/components/main-content.astro";
 import PageSection from "@/components/page-section.astro";
+import PageSectionTitle from "@/components/page-section-title.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { getCollectionName } from "@/lib/content/get-collection-name";
-import { getSingletonName } from "@/lib/content/get-singleton-name";
-import { reader } from "@/lib/content/reader";
+import { createReader } from "@/lib/content/create-reader";
 import { getImageImport } from "@/lib/get-image-import";
 import { createI18n } from "@/lib/i18n";
 
 const { t } = await createI18n(locale);
 
-const singleton = getSingletonName("indexPage", locale);
-const page = await reader().singletons[singleton].readOrThrow();
+const reader = createReader();
+const page = await reader.singletons.indexPage.readOrThrow({ resolveLinkedFiles: true });
 
 const documentTitle = t("IndexPage.meta.title");
 const { hero, main } = page;
@@ -25,110 +25,96 @@ const { hero, main } = page;
 
 <PageLayout locale={locale} title={documentTitle}>
 	<MainContent>
-		<PageSection>
-			<div class="flex flex-col gap-2">
-				<div
-					style={"background-image: url(" + hero.image + ")"}
-					class="-m-4 flex aspect-[3.5] flex-col justify-end gap-2 bg-[rgba(0,0,0,0.2)] bg-cover p-4 text-white bg-blend-multiply"
-				>
-					<PageTitle>{hero.title}</PageTitle>
-					<p class="text-lg">{hero.subtitle}</p>
-				</div>
-			</div>
-		</PageSection>
+		<div class="relative bg-black py-8 text-white">
+			<Image
+				alt=""
+				class="absolute inset-0 size-full object-cover opacity-60"
+				src={getImageImport(hero.image)}
+			/>
+			<PageSection class="relative">
+				<PageTitle>{hero.title}</PageTitle>
+				<p class="text-3xl">{hero.subtitle}</p>
+			</PageSection>
+		</div>
 
 		{
-			main.sections.map((section) => {
+			main.sections.map(async (section) => {
 				switch (section.discriminant) {
-					case "cardsSection": {
-						const { title, cards, variant } = section.value;
+					case "data": {
+						const { collections, count, title } = section.value;
 
-						const variants = {
-							"one-column": "grid-cols-1",
-							fluid: "grid-fluid-cols-80",
-							"two-columns": "grid-cols-2",
-							"three-columns": "grid-cols-3",
-							"four-columns": "grid-cols-4",
-						};
+						let items = [];
+
+						for (const collection of collections) {
+							const entries = await reader.collections[collection].all({
+								resolveLinkedFiles: true,
+							});
+							items.push(
+								...entries.map((entry) => {
+									return { ...entry, collection };
+								}),
+							);
+						}
+
+						items.sort((a, z) => {
+							return compareDesc(
+								new Date(a.entry.publicationDate),
+								new Date(z.entry.publicationDate),
+							);
+						});
+
+						items = items.slice(0, count);
 
 						return (
-							<PageSection class="border-t">
-								<h2 class="text-3xl font-black">{title}</h2>
-								<ul class:list={["grid gap-8", variants[variant]]} role="list">
-									{cards.map(async (card) => {
-										switch (card.discriminant) {
-											case "custom": {
-												const { title, image, summary, link } = card.value;
-
-												return (
-													<li>
-														<article>
-															{image ? <Image alt="" src={getImageImport(image)} /> : null}
-															<h3>{title}</h3>
-															<p>{summary}</p>
-															<footer>
-																<Link href={link.href}>{link.label}</Link>
-															</footer>
-														</article>
-													</li>
-												);
-											}
-
-											case "page": {
-												const id = card.value.reference;
-												const collectionName = getCollectionName("pages", locale);
-												const page = await reader().collections[collectionName].readOrThrow(id);
-												const {
-													title,
-													//	image,
-													summary,
-												} = page;
-
-												return (
-													<li class="overflow-hidden rounded-md border">
-														<article class="flex h-full flex-col justify-between">
-															<div>
-																{/* {image ? <Image alt="" src={getImageImport(image)} /> : null} */}
-																<h2 class="p-2 text-xl font-semibold">{title}</h2>
-																<p class="p-2">{summary}</p>
-															</div>
-															<footer class="flex justify-end">
-																<Link href={`/${id}`} class="m-2 rounded-md border p-2">
-																	{card.value.link.label}
-																</Link>
-															</footer>
-														</article>
-													</li>
-												);
-											}
-
-											default: {
-												return null;
-											}
-										}
+							<PageSection>
+								<PageSectionTitle>{title}</PageSectionTitle>
+								<ul class="grid gap-4 grid-fluid-cols-56" role="list">
+									{items.map((item) => {
+										return (
+											<li>
+												<Card
+													href={`/${item.collection}/${item.slug}`}
+													title={item.entry.title}
+													summary={item.entry.summary}
+												/>
+											</li>
+										);
 									})}
 								</ul>
 							</PageSection>
 						);
 					}
 
-					case "slidesSection": {
-						const { title, slides } = section.value;
+					case "links": {
+						const { links, title, variant } = section.value;
+
+						const items = [];
+
+						for (const link of links) {
+							const item = await reader.collections.pages.readOrThrow(link.value.id, {
+								resolveLinkedFiles: true,
+							});
+							items.push({ ...item, id: link.value.id });
+						}
 
 						return (
-							<PageSection class="border-t">
-								<h2 class="text-3xl font-black">{title}</h2>
-								<ImageCarousel
-									title="Carousel"
-									delay={9000}
-									slides={slides.map((slide) => slide.value)}
-								/>
+							<PageSection>
+								<PageSectionTitle>{title}</PageSectionTitle>
+								{variant === "cards" ? (
+									<ul class="grid gap-4 grid-fluid-cols-56" role="list">
+										{items.map((item) => {
+											return (
+												<li>
+													<Card href={`/${item.id}`} title={item.title} summary={item.summary} />
+												</li>
+											);
+										})}
+									</ul>
+								) : (
+									<ImageCarousel title={title} slides={items} />
+								)}
 							</PageSection>
 						);
-					}
-
-					default: {
-						return null;
 					}
 				}
 			})

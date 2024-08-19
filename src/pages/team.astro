@@ -1,0 +1,84 @@
+---
+import { Image } from "astro:assets";
+
+import MainContent from "@/components/main-content.astro";
+import PageCard from "@/components/page-card.astro";
+import PageTitle from "@/components/page-title.astro";
+import { defaultLocale as locale } from "@/config/i18n.config";
+import PageLayout from "@/layouts/page-layout.astro";
+import { createReader } from "@/lib/content/create-reader";
+import { getMdxContent } from "@/lib/content/get-mdx-content";
+import { getImageImport } from "@/lib/get-image-import";
+
+const reader = createReader();
+const page = await reader.collections.pages.readOrThrow("team", { resolveLinkedFiles: true });
+
+const documentTitle = page.title;
+const { content, image, title } = page;
+const { default: Content } = await getMdxContent(content, locale);
+
+const partners = await reader.collections.partners.all({ resolveLinkedFiles: true });
+---
+
+<PageLayout locale={locale} title={documentTitle}>
+	<MainContent>
+		<PageCard image={image}>
+			<PageTitle>{title}</PageTitle>
+			<div class="prose">
+				<Content />
+			</div>
+			<ul class="grid gap-y-12" role="list">
+				{
+					partners.map((partner) => {
+						const { department, logo, name, team, website } = partner.entry;
+
+						return (
+							<li>
+								<article class="grid gap-x-8 lg:grid-cols-[auto_1fr] ">
+									<div class="relative hidden size-24 lg:block">
+										<Image
+											alt=""
+											class="absolute inset-0 size-full object-contain"
+											src={getImageImport(logo)}
+										/>
+									</div>
+									<div class="grid gap-y-3">
+										<div class="grid content-start gap-y-1">
+											<h2 class="text-2xl font-bold">{name}</h2>
+											{department ? <p>{department}</p> : null}
+											{website ? (
+												<a class="underline hover:no-underline" href={website}>
+													Website
+												</a>
+											) : null}
+										</div>
+										<div class="grid content-start gap-y-2">
+											<h3 class="text-xl font-bold">Team</h3>
+											<ul class="grid gap-y-4" role="list">
+												{team.map((person) => {
+													const { description, name, website } = person;
+
+													return (
+														<li>
+															<h4 class="text-lg font-bold">{name}</h4>
+															<p>{description}</p>
+															{website ? (
+																<a class="underline hover:no-underline" href={website}>
+																	Website
+																</a>
+															) : null}
+														</li>
+													);
+												})}
+											</ul>
+										</div>
+									</div>
+								</article>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</PageCard>
+	</MainContent>
+</PageLayout>

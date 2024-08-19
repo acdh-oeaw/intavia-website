@@ -1,198 +1,155 @@
 {
-  "links": [
-    {
-      "discriminant": "menu",
-      "value": {
-        "label": "About",
-        "links": [
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "About",
-              "reference": "about"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Team",
-              "reference": "team"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Advisory Board",
-              "reference": "advisory-board"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Associated Organizations",
-              "reference": "associated-organizations"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Imprint",
-              "reference": "imprint"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "discriminant": "menu",
-      "value": {
-        "label": "Research",
-        "links": [
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Overall Aims",
-              "reference": "overall-aims"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "System Architecture",
-              "reference": "system-architecture"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Work Packages",
-              "reference": "work-packages"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "discriminant": "menu",
-      "value": {
-        "label": "Results",
-        "links": [
-          {
-            "discriminant": "collection",
-            "value": {
-              "label": "Activities",
-              "reference": "events"
-            }
-          },
-          {
-            "discriminant": "collection",
-            "value": {
-              "label": "Case studies",
-              "reference": "case-studies"
-            }
-          },
-          {
-            "discriminant": "collection",
-            "value": {
-              "label": "Conference proceedings",
-              "reference": "conference-proceedings"
-            }
-          },
-          {
-            "discriminant": "collection",
-            "value": {
-              "label": "Deliverables",
-              "reference": "deliverables"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Publications & Presentations",
-              "reference": "publications"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Tools",
-              "reference": "tools"
-            }
-          },
-          {
-            "discriminant": "collection",
-            "value": {
-              "label": "Tutorials",
-              "reference": "tutorials"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "discriminant": "collection",
-      "value": {
-        "label": "News",
-        "reference": "newsletters"
-      }
-    },
-    {
-      "discriminant": "menu",
-      "value": {
-        "label": "Follow us",
-        "links": [
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Subscribe",
-              "reference": "subscribe"
-            }
-          },
-          {
-            "discriminant": "link",
-            "value": {
-              "label": "X (fka Twitter)",
-              "href": "https://x.com/projectintavia"
-            }
-          },
-          {
-            "discriminant": "link",
-            "value": {
-              "label": "YouTube",
-              "href": "https://www.youtube.com/@InTaVia/playlists"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "discriminant": "menu",
-      "value": {
-        "label": "Events",
-        "links": [
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "CaTCH – Capturing the IntAngible of Cultural Heritage",
-              "reference": "events/catch-capturing-the-intangible-of-cultural-heritage"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "There is History in All Men’s Lives, Ljubljana, September 25th-26th",
-              "reference": "theres-history-in-all-mens-lives-ljubljana-25-26-september"
-            }
-          },
-          {
-            "discriminant": "page",
-            "value": {
-              "label": "Smashing the Silos! The Future of Cultural Heritage Information and Visualization, Graz, July 9th",
-              "reference": "events/smashing-the-silos-the-future-of-cultural-heritage-information-and-visualization-graz-july-9th"
-            }
-          }
-        ]
-      }
-    }
-  ]
+	"links": [
+		{
+			"discriminant": "menu",
+			"value": {
+				"label": "About",
+				"links": [
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "About",
+							"id": "about"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Team",
+							"id": "team"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Advisory Board",
+							"id": "advisory-board"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Associated Organizations",
+							"id": "associated-organizations"
+						}
+					}
+				]
+			}
+		},
+		{
+			"discriminant": "menu",
+			"value": {
+				"label": "Research",
+				"links": [
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Overall Aims",
+							"id": "overall-aims"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "System Architecture",
+							"id": "system-architecture"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Work Packages",
+							"id": "work-packages"
+						}
+					}
+				]
+			}
+		},
+		{
+			"discriminant": "menu",
+			"value": {
+				"label": "Results",
+				"links": [
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Activities",
+							"id": "activities"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Case studies",
+							"id": "case-studies"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Conference proceedings",
+							"id": "conference-proceedings"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Deliverables",
+							"id": "deliverables"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Publications and presentations",
+							"id": "publications"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Tools",
+							"id": "tools"
+						}
+					},
+					{
+						"discriminant": "page",
+						"value": {
+							"label": "Tutorials",
+							"id": "tutorials"
+						}
+					}
+				]
+			}
+		},
+		{
+			"discriminant": "menu",
+			"value": {
+				"label": "Follow us",
+				"links": [
+					{
+						"discriminant": "link",
+						"value": {
+							"label": "Twitter",
+							"href": "https://twitter.com/projectintavia"
+						}
+					},
+					{
+						"discriminant": "link",
+						"value": {
+							"label": "YouTube",
+							"href": "https://www.youtube.com/@InTaVia/playlists"
+						}
+					}
+				]
+			}
+		},
+		{
+			"discriminant": "page",
+			"value": {
+				"label": "Newsletters",
+				"id": "newsletters"
+			}
+		}
+	]
 }

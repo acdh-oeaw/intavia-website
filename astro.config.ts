@@ -22,16 +22,22 @@ export default defineConfig({
 		mode: "standalone",
 	}),
 	base: env.PUBLIC_APP_BASE_PATH,
-	experimental: {
-		// actions: true,
-		contentCollectionCache: true,
-		rewriting: true,
-	},
 	integrations: [
 		icon({
 			/** @see https://www.astroicon.dev/reference/configuration/#include */
 			include: {
-				lucide: ["chevron-down", "menu", "message-circle", "search", "square-arrow-left", "x"],
+				lucide: [
+					"chevron-down",
+					"chevron-left",
+					"chevron-right",
+					"circle-play",
+					"circle-pause",
+					"menu",
+					"message-circle",
+					"search",
+					"square-arrow-left",
+					"x",
+				],
 			},
 			svgoOptions: {
 				multipass: true,
@@ -49,10 +55,14 @@ export default defineConfig({
 		}),
 		keystatic(),
 		mdx(),
-		react(),
+		/**
+		 * @see https://docs.astro.build/en/guides/integrations-guide/solid-js/#combining-multiple-jsx-frameworks
+		 * @see https://github.com/Thinkmill/keystatic/discussions/951
+		 */
+		react({ include: ["**/keystatic/*"] }),
 		sitemap(),
 	],
-	/** Use `@/lib/content/mdx.ts` instead of astro's built-in markdown processor. */
+	/** Use `@/lib/content/get-mdx-content.ts` instead of astro's built-in markdown processor. */
 	// // @ts-expect-error Astro types are incomplete.
 	// markdown: {
 	// 	...(await createMdxConfig(defaultLocale)),

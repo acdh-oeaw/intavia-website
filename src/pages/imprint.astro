@@ -2,7 +2,7 @@
 import { request } from "@acdh-oeaw/lib";
 
 import MainContent from "@/components/main-content.astro";
-import PageSection from "@/components/page-section.astro";
+import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import { createImprintUrl } from "@/config/imprint.config";
@@ -20,9 +20,9 @@ const imprintHtml = await request(imprintUrl, { responseType: "text" });
 
 <PageLayout locale={locale} title={documentTitle}>
 	<MainContent search="exclude">
-		<PageSection>
+		<PageCard>
 			<PageTitle>{title}</PageTitle>
-			<div class="prose prose-sm" set:html={imprintHtml} />
-		</PageSection>
+			<div class="prose" set:html={imprintHtml} />
+		</PageCard>
 	</MainContent>
 </PageLayout>

@@ -11,7 +11,9 @@
 		"strings": true
 	},
 	"editor.rulers": [100],
+	"editor.snippetSuggestions": "bottom",
 	"editor.stickyScroll.enabled": true,
+	"emmet.showSuggestionsAsSnippets": true,
 	"eslint.enable": true,
 	"eslint.options": {
 		"ignorePath": ".gitignore"

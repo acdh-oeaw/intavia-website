@@ -1,6 +1,13 @@
 {
-	"title": "ACDH-CH Website",
-	"shortTitle": "ACDH-CH Website",
-	"description": "A project website.",
-	"twitter": "@acdh_oeaw"
+	"title": "InTaVia",
+	"description": "INTAVIA: In/Tangible European Heritage. Visual Analysis, Curation & Communication.",
+	"twitter": {
+		"creator": "@projectintavia",
+		"site": "@projectintavia"
+	},
+	"manifest": {
+		"name": "InTaVia",
+		"short-name": "InTaVia",
+		"description": "INTAVIA: In/Tangible European Heritage. Visual Analysis, Curation & Communication."
+	}
 }

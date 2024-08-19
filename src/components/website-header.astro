@@ -13,7 +13,7 @@ import Search from "@/components/search.astro";
 import { defaultLocale, type Locale } from "@/config/i18n.config";
 import { getNavigation } from "@/lib/get-navigation";
 import { createI18n } from "@/lib/i18n";
-import logoLight from "~/public/assets/images/intavia-logos/intavia_logo_short_1000dpi_transparent.png";
+import logo from "~/public/assets/images/logo.png";
 
 const locale = (Astro.currentLocale as Locale | undefined) ?? defaultLocale;
 const { t } = await createI18n(locale);
@@ -22,21 +22,15 @@ const navigation = await getNavigation(locale);
 
 <header class="border-b-[3px]">
 	<div
-		class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 py-6 text-sm font-medium"
+		class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 py-3 text-sm font-medium"
 	>
 		<Navigation class="h-fit flex-1" label={t("WebsiteHeader.navigation-primary")}>
 			<NavMenuLink class="-ml-4 inline-flex shrink-0 items-center gap-x-2" href="/">
-				<Image
-					alt=""
-					class="block h-20 w-auto"
-					fetchpriority="high"
-					loading="eager"
-					src={logoLight}
-				/>
+				<Image alt="" class="block h-14 w-auto" fetchpriority="high" loading="eager" src={logo} />
 				<span class="sr-only">{t("WebsiteHeader.links.home")}</span>
 			</NavMenuLink>
 
-			<ul class="hidden flex-1 flex-wrap items-center gap-x-2 text-xl lg:flex" role="list">
+			<ul class="hidden flex-1 flex-wrap items-center gap-x-2 text-lg lg:flex" role="list">
 				{
 					navigation.links.map((item) => {
 						switch (item.discriminant) {
@@ -49,22 +43,13 @@ const navigation = await getNavigation(locale);
 									</li>
 								);
 							}
-							case "collection": {
-								const { label, reference } = item.value;
-
-								return (
-									<li>
-										<NavMenuLink href={`/collections/${String(reference)}`}>{label}</NavMenuLink>
-									</li>
-								);
-							}
 
 							case "page": {
-								const { label, reference } = item.value;
+								const { label, id } = item.value;
 
 								return (
 									<li>
-										<NavMenuLink href={`/${reference}`}>{label}</NavMenuLink>
+										<NavMenuLink href={`/${id}`}>{label}</NavMenuLink>
 									</li>
 								);
 							}
@@ -92,23 +77,12 @@ const navigation = await getNavigation(locale);
 																);
 															}
 
-															case "collection": {
-																const { label, reference } = link.value;
-
-																return (
-																	<li>
-																		<NavMenuItem href={`/collections/${String(reference)}`}>
-																			{label}
-																		</NavMenuItem>
-																	</li>
-																);
-															}
 															case "page": {
-																const { label, reference } = link.value;
+																const { label, id } = link.value;
 
 																return (
 																	<li>
-																		<NavMenuItem href={`/${reference}`}>{label}</NavMenuItem>
+																		<NavMenuItem href={`/${id}`}>{label}</NavMenuItem>
 																	</li>
 																);
 															}
@@ -142,7 +116,7 @@ const navigation = await getNavigation(locale);
 			</div>
 		</Navigation>
 
-		<div class="-mr-4 hidden items-center gap-x-4 text-xl lg:mr-0 lg:flex">
+		<div class="-mr-4 hidden items-center gap-x-4 text-lg lg:mr-0 lg:flex">
 			<Search />
 		</div>
 	</div>

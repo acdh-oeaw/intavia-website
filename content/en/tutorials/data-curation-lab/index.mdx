@@ -1,0 +1,76 @@
+---
+title: 'Data Curation Lab (DCL): Mastering Data Curation'
+publicationDate: 2024-08-18
+summary: 'Data Curation Lab (DCL): Mastering Data Curation'
+---
+The Data Curation Lab (DCL) page of the InTaVia web application offers tools for searching, finding, collecting, and curating information on historic persons, cultural heritage objects (CHO), groups and institutions, places, and the relations between them. This section presents a video-supported tutorial on how to use the DCL. For instructions on how to install and locally run the web application and links to the code repositories we refer to Deliverable 5.4.
+
+## Searching Entities in the DCL
+
+InTaVia's landing page and the DCL present the user with a prominent search bar that can be used to search for entities of all supported entity types (persons, CHO, groups, and places). Users can enter text queries into the search field and all entities in the InTaVia Knowledge Graph (IKG) whose label matches the query are presented in a list view and in a visual overview by entity type on the left side of the page. The result list is sorted by relevance. Each list entry indicates an entity's type with a small icon and includes a short summary of the number of events associated with the entity and additional information saved in the IKG. The result overview tab shows the number of entities of each kind that were returned as a result of the query in bar chart. By selecting a bar, users can constrain the query further to return only entities of the desired type.
+
+<Video provider="youtube" id="3Q2MFiVvbco">
+
+</Video>
+
+For more refined queries to the IKG the DCL includes an advanced search mode. It contains multiple search filters that allow the user to filter by entity type and by related entities. For the latter, users can specify that they want to retrieve entities related to a specific entity and further constrain the search results by specifying the kind of relation that the search entity has to the specified related entity. Entities and the result set of entire queries can be added to collections for further use in the VAS and STS. We will go into more detail about collection and how to manage them in the next paragraph.
+
+<Video provider="youtube" id="SKmkLscU9Rs">
+
+</Video>
+
+## Creating and Managing Collections
+
+Collections are a key concept in the InTaVia web application. They are used throughout the DCL, VAS, and STS as user-defined sets of entities to save and manage the data that a user is working with. Users can manage their collections on the right side of the DCL page. A toolbar allows to switch between collections, create new collections, and delete collections. Below the toolbar is a list of all the entities that have been added to the selected collection, similar to the search result list on the left.Again, each list entry indicates the entity's type and includes a short summary of the available data for this entity. Also, a short remark informs users if an entity has been added or changed locally.
+
+There are two ways to create collections in the DCL: (i) clicking on the "Create collection" button in the toolbar creates an empty collection, and (ii) clicking on the "Add all" button above the search results and selecting the "New collection from query" option creates a new collection that contains all entities returned by the current query. For large result sets this might take some time as added entities have to be retrieved from the InTaVia API.
+
+Entities can be added to a collection by (i) clicking on the plus icon next to them in the search result list, (ii) clicking on the "Add all" button above the search results and selecting the "Add to current collection" option to add all entities returned by the current query to the currently selected collection, or (iii) clicking on the "Add to collection" button on an entity's detail page, which is introduced below.
+
+Similarly, entities can be removed from a collection by clicking on the "X" icon next to them in the collection list.
+
+Users can delete the currently selected collection by clicking on the delete button in the toolbar. This will delete the collection but not the entities if they are locally imported (see below). However, we would like to remark that it is not possible to find locally imported entities (without knowing their ID) if they are not part of a collection. For this reason, we recommend beingcareful when deleting collections containing locally imported entities that users do not want to lose.
+
+<Video provider="youtube" id="tBculF3m-wk">
+
+</Video>
+
+## Local Data Import
+
+Besides giving users the ability to access the entities in the IKG, the DCL allows them to upload their own data locally into the web application. It is important to highlight that this data will not be shared with the public knowledge graph and is only stored locally in the browser's local storage. The data can be persisted permanently and shared by exporting the current session as an InTaVia Project File, as explained below. However, outside of an exported project file it is not possible to access local data from other devices or even other browsers on the same device. More importantly, if the browser's local storage is deleted, all local data, visualizations, and stories not exported in a project file are permanently lost. For this reason, we recommend frequentlysaving the current session as an InTaVia project.
+
+Data can be imported either from Excel sheets that follow the [InTaVia Excel Template](https://github.com/InTaVia/data-import/tree/main/public/data)1 or from JSON files that follow the IDM-JSON introduced in Deliverable 3.4. The possibility to import IDM-JSON files allows to upload data from the Wikipedia NLP Pipeline described in Section 3.3. To import data, users open the import & export page via the navbar at the top. On the page, users can select the file that they want to import on their device. The component shows a short summary of the data in the file and any errors that occurred while attempting to read it. By clicking the "Import Data" button, the selected entities, events, and collections are imported into the tool. As described above, locally imported entities cannot be searched. Therefore, it is important that they are part of a collection as users would not be able to find them in the application otherwise.
+
+To persist their work and share it with others, users can additionally export their entire application state as an InTaVia Project File on the import & export page, containing their data, collections, visualizations, and stories.
+
+<Video provider="youtube" id="0nyz5IsE9-U">
+
+</Video>
+
+## Detail Page
+
+By clicking on an entity, users can navigate to a detail page that presents all the information on the entity stored in the IKG or curated locally together with visualizations of the entity's relations and geo-spatial events. The top of the page shows the entity's label together with its type and a remark if the entity is stored locally. The buttons on the right allow to add the entity to a collection, to edit it locally, or to share it. Below is a gallery showing the media files connected to the entity besides basic information like linked IDs and occupations. Further down the page are three visualizations that give different perspectives on the entity and related events: (i) an ego-network with the entity at the center, showing its relations to other entities in the data, (ii) a map that shows dot markers indicating where the entity's events took place and a line indicating the entity's trajectory over time, and (iii) a timeline of the entity's events. A tooltip shows information on entities and events when hovering over them. The visualizations are described in detail in Section 3.6. At the bottom of the page is a list of all events and relations of the entity. They are sorted by time with the events that are missing temporal information listed at the bottom. Each list item indicates the type of the event, the role that the entity played in it, and other entities that were involved in the event. Additionally, each event has a prominent label. The three visualizations and the relation list are coordinated with each other. Hovering over a data item highlights the event or entity in the other views. By clicking on an entity in the network or the relation list, users can navigate to the detail page of the respective entity. If the entity is a person, any biographies that are linked in the data are shown next to the relation list to support close reading.
+
+<Video provider="youtube" id="D389Y3xonXA">
+
+</Video>
+
+## Data Curation
+
+One of the DCL's main features is manual data curation, i.e., locally enriching the available data by editing and adding entities and events. Entities can be edited by clicking on the edit icon in the result or collection list views or on an entity's detail page.This opens the entity in the edit page where users can edit, add, and remove basic entity information, events, media, and biographies. Basic information like labels, linked URLs, occupations, and more can be edited on the left side. The right side of the edit page contains three tabs: relations, media, and biographies.
+
+The relations tab shows a list of the events that are related to the entity. Each event provides information on the event label, type, entities related to it, and the start and end date of the event. A warning indicates if the event is missing temporal data. Events can be deleted by clicking on the "X" button at the top right of the list element and edited by clicking on the edit icon. Users can use the edit dialog to change the event type, the entity's role in the event, the event's label, and its start and end date. The possible values for the event type and role fields can be selected from a select box, dates must adhere to the ISO standard format "YYYY-MM-DD". Additionally, users can add more entities to an event by clicking on the "Add related entity" button. In the subsequent dialog they have to select the entity they want to add and its role in the event. New events can be created by clicking on the "Add" button at the bottom of the event list and filling in the same dialog as for editing events.
+
+Next, the media tab shows a list of the images, documents, videos, and other media resources that have been linked to the entity. Media resources can be edited and deleted similarly to events. Users can specify the media resource kind, the URL that links to the resource, a label, attribution, and a short description. By clicking on the "Add" button at the bottom of the list, it is possible to add new media resources.
+
+If the edited entity is a person, a final biographies tab lists the biographies linked to the person. Again, it is possible to edit, add, and delete biographies. Besides the biography text itself, users can specify a title, abstract, and citation for each biography.
+
+Any edits to an entity must be saved before leaving the page by clicking on the "Save entity" button at the very bottom of the page.
+
+<Video provider="youtube" id="pGdZo0ha0_U">
+
+</Video>
+
+## Transferring Data to the VAS and STS
+
+Any data found, imported, and curated in the DCL is intended for analysis and/or storytelling in the other parts of the InTaViaweb application. Structuring entities in collections is the method for using this data in the VAS and STS pages. All collections created and curated in the DCL can be selected in the data panel of the VAS and STS to work with the data there, as we will explore in Section 3.6. The navigation between the DCL, VAS, and STS pages works via the navbar at the top of the application. The state of the respective page is not lost when navigating to another page of the application.

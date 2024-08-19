@@ -1,3 +1,7 @@
 :root {
 	--font-body: "Abel";
 }
+
+.overflow-wrap-anywhere {
+	overflow-wrap: anywhere;
+}

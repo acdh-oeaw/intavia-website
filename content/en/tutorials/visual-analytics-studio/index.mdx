@@ -1,0 +1,78 @@
+---
+title: 'Visual Analytics Studio (VAS): Insights through Visualization'
+publicationDate: 2024-08-18
+summary: 'Visual Analytics Studio (VAS): Insights through Visualization'
+---
+The Visual Analytics Studio (VAS) page of the InTaVia web application provides spatial, temporal, spatio-temporal, categorical, and/or relational perspectives on biographies and cultural heritage objects. The data panel on the left side of the page allows users to manage the data in the visualizations while the main panel of the VAS contains workspaces in which users can create and work with visualizations of the data. In this section we will give a video-supported tutorial on how to use the VAS. Again, for instructions on how to install and locally run the web application and links to the code repositories we refer to Deliverable 5.4.
+
+## Data Panel
+
+The collapsible data panel on the left side of the VAS allows users to manage the data that is shown in the visualizations of the VAS. It can be resized by dragging its right border or collapsed by clicking on the arrow button in the VAS toolbar.
+
+In the collections tab, users can select a collection that they created in the DCL (see Section 3.5) to show a list of its entities. By default, a collection's entities are grouped by entity type to provide a better overview of large collections. This option can be changed in the data panel settings underneath the selected collection. Entities are ordered alphabetically when grouped. If they are not grouped, they are ordered by the number of related events. Entities with most related events are on the top. Clicking on an entity group expands or collapses it to show the individual entities. When hovering over an entity, a tooltip shows more information about the entity like images and any visual representations of the entity or its events in the visualization views are highlighted. Also, two buttons appear on the right side of the entity list item. Clicking on the dark button opens the entity's detail page while clicking on the plus icon button adds the entity and all its events to the visualizations of the current workspaces (more about workspaces in the next paragraph). All entities of a category can be added at once by clicking the plus icon button next to the category and the "Add all entities" button underneath the collection selection box allows adding all entities of the collection to the visualizations. Another method of adding an entity or an event to a specific visualization is to drag and drop it onto a visualization with the mouse cursor. Clicking on an entity expands the view with its related events. The events are displayed in chronological order. Individual events can be added to map and timeline views in a similar fashion by clicking the plus icon button next to them or by dragging them onto a specific visualization.
+
+The other tab in the data panel, visualized, shows a list of all the entities and events that are visualized in a selected visualization and allows the users to delete specific entities or events that they want to remove from the visualization. In the selection box at the top of the panel users can either select a specific visualization or view the entities and events of all currently visible visualizations. Below, the panel shows a list of all entities and a list of all events shown in the visualization. By clicking on the delete button next to the headers, users can remove all entities or all events from the visualization or single entities or events by clicking on the delete button of an individual list item.
+
+<Video provider="youtube" id="6NT3nYOrpsc">
+
+</Video>
+
+## Workspaces, View Layouts, and Visualization Wizard
+
+The center panel of the VAS shows the visualizations created by the user in different layouts and workspaces that turn the VAS into a flexible tool allowing users to explore and analyze the data from various perspectives. A workspace can contain up to four visualizations at a time arranged in user-defined layouts. Creating multiple workspaces in the bottom toolbar gives users the option to seamlessly switch between different views, layouts, and datasets. The visualization wizard allows users to open visualizations from one workspace in other workspaces to continue exploring the data or adapting the visualization. Each workspace and view can contain data from multiple collections at the same time. When a workspace is closed, all visualizations are saved and can be reopened in other workspaces.
+
+The default layout of a workspace contains a single view that fills the whole panel. By clicking on the "Layout" button in the top toolbar, users can select from a range of layout options that support up to four visualizations in different arrangements. Visualizations can be swapped in the layout by dragging their header to a different slot. The header also allows users to close a visualization and to access their configuration options by clicking on the respective buttons. The multiple visualizations in a workspace and the data panel list views are all coordinated with each other. If an entity or event is highlighted by hovering over it in one view, it is highlighted in all the other views as well.
+
+Users add new visualizations or open saved ones with the visualization wizard. An initially empty visualization is created by clicking on any of the "New Timeline", "New Map", or "New Network" buttons. Subsequently the visualization can be populated with data through the data panel, as described in the paragraph above. Besides creating new visualizations, the visualization wizard can be used to manage existing visualizations. Users can select a visualization from the selection box and open it with a click on the "Open" button, duplicate it with a click on the "Copy" button, delete it with a click on the "Delete" button, or transform it into a visualization of another visualization type with the same data with a click on one of the "Turn into" buttons.
+
+<Video provider="youtube" id="5xyPuB_fT8g">
+
+</Video>
+
+## Timeline View
+
+The multi-focal timeline of the VAS visualizes entities and events in various modes regarding the context and number of items. An individual timeline visualizes the details of one individual entity on a single line or "lane" – starting with its first event and ending with its last one. If clustering is deactivated, each of the entities events is represented by a small circle and annotated with a label. If an event didn't take place on a specific date, hovering over it shows a bar that encodes the time period during which it took place. The axis at the bottom or left of the view, depending on its orientation, shows the time. The plus and minus buttons at the top right of the view can be used to semantically zoom in and out of the view to allow users to inspect events that took place in close temporal proximity. A legend at the bottom right of the view explains the meaning of the different shapes and colors used to encode data in the visualization. The legend is part of all visualization types included in the VAS. The timeline view supports three different color encodings for entities and events that are described in a paragraph below.
+
+To prevent visual clutter when an entity has many events in close temporal proximity, users can enable clustering in the timeline's configuration dialog that can be accessed via the button in the header of the view. There are three different clustering methods that users can choose from. Donut clustering, which is enabled by default, displays overlapping events as small donut charts. The radius of the donut encodes the total number of events, the ratio of different event types is indicated by the size of correspondingly colored ring segments. Pie chart clustering works in a similar fashion but with small pie charts instead of donut charts. Finally, bee swarm clustering applies a force-driven algorithm to render a circle for every event as closely as possible at its original position on the timeline but without overlapping other events.
+
+Furthermore, users can use the options dialog to configure if the labels for events should be rendered, the timeline's orientation, the label's font size, and the thickness of the lines that represent an entity. Also, visualization can be named to make reusing them at a later point easier.
+
+Multiple entities can be added to the view for direct comparison of their timelines. Depending on the orientation they are placed above or next to each other. Clicking on a timeline navigates the detail page of the respective entity. If the user adds more than 15 entities to a single timeline view, the visualization gives a smore abstract view on their timelines by representing their entire life span by a single bar without showing individual events. The abstraction allows for prosopographic use cases and the comparison of large numbers of timelines. Users can configure in the options whether entities should be sorted by time and whether entities should be stacked next to each other to save vertical space.
+
+<Video provider="youtube" id="S5cTQFubxJ0">
+
+</Video>
+
+## Map View
+
+Provided that the selected events have a location associated with them, the interactive map visualization of the VAS allows users to explore and analyze geo-spatial perspectives of biographies. For the background map we provide several options users can select in the options dialog.
+
+Events are placed as simple markers on the map according to their longitude and latitude. The visual encoding of events, a marker's shape and color is identical to the timeline. On mouse over further vent details are shown in a tooltip. Using the options dialog, users can choose to connect events chronologically with lines. For each entity (e.g., person or object) a separate line is drawn.
+
+Often multiple events happened at the very same geo-location which leads to occlusion and a cluttered map display. Like the timeline, the map visualization offers a cluster mode. When selected, events are either grouped by spatial proximity in a donut chart, where donut segments indicate event-type frequency, or single events are arranged in a spiral dot cluster around the geolocation. When many data points are shown on a map the clusters views can help to better identify single events but also receive a better overview over all the events.
+
+As explained below, temporal coloring provides a spatio-temporal perspective. The map visualization provides an additionalspace-time perspective: a space time cube mode. In this three-dimensional view the vertical axis of the space is used to plot time from bottom to top. The vertical distances between events show the elapsed time. What is special about this visualization technique is that users can see the temporal and spatial relationships of the different events in one single view with a single encoding (space and time are both encoded through distance/proximity). Several interactive settings (top left of the map) can be used to tweak the space-time-cube's settings, including cube dimensions and map clipping.
+
+<Video provider="youtube" id="FoDEu3e04W0">
+
+</Video>
+
+## Network View
+
+The network view allows users to explore the social networks of historical actors and relations between different entities. When an entity is added to the view, the entity itself and all entities that are related to it through events are represented by nodes in a force-directed node link diagram. The types of the entities are encoded by the shape and the color of the nodes, as explained by the legend. The links between the nodes represent the events that connect the entities. Hovering over a node or link shows a tooltip with more information about the respective entity or event. Scrolling with the mouse wheel or pinching on a mouse pad allows to zoom in or out. When more entities are added to a network view, relations to shared entities are made visible by connecting the corresponding nodes with links in the graph. Clicking on a node opens the detail page of the respective entity. By default, the nodes of entities that have been explicitly added to the view are annotated with the entities' labels. Users can configure in the options dialog that labels should be shown for all nodes. Furthermore, users can filter which entity types should be shown in the network to prevent clutter and focus on the relations that are important to them.
+
+<Video provider="youtube" id="KFgSzh8kscU">
+
+</Video>
+
+## Color Encodings
+
+The timeline and map views support different color encodings for events to support different kinds of analysis tasks. Users can change the color encoding in the options dialog. The default encoding is coloring events by event type to easily differentiate between birth, death, life, production, career events, and more. If donut or pie chart clustering is activated, the color encoding is used to show the distribution of event types in the chart.
+
+The next color encoding option is to encode temporal information of the events with color. This is done with a relative color gradient for each entity ranging from bright red for its first event to a dark red for its last event. Temporal color encoding is especially useful in the map view to provide spatio-temporal information in a single view. The color gradient does not only show the chronology of events but also their spatial order (or direction of an entity's "journey").
+
+Finally, to facilitate the comparison of multiple entities in a single view, the timeline and map views also support coloringevents by entity identity. This option gives all events of an entity a single distinct color to make it possible to distinguish the events of different entities at a glance.
+
+<Video provider="youtube" id="J9DDFf5Eius">
+
+</Video>

@@ -1,5 +1,5 @@
 ---
-import type { Toc } from "@/lib/content/table-of-contents";
+import type { Toc } from "@/lib/content/with-table-of-contents";
 
 interface Props {
 	headings: Toc;
@@ -17,7 +17,7 @@ const { depth = 0, headings } = Astro.props;
 					{heading.id != null ? (
 						<a
 							class="inline-flex underline decoration-dotted transition hover:text-[#212529] hover:decoration-solid"
-							href={"#" + heading.id}
+							href={`#${heading.id}`}
 						>
 							{heading.value}
 						</a>
