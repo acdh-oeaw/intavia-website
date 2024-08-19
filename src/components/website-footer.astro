@@ -1,7 +1,10 @@
 ---
+import { Image } from "astro:assets";
+
 import Link from "@/components/link.astro";
 import type { Locale } from "@/config/i18n.config";
 import { createI18n } from "@/lib/i18n";
+import { getImageImport } from "@/lib/get-image-import";
 
 const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 
@@ -9,36 +12,39 @@ const imprint = t("WebsiteFooter.links.imprint");
 ---
 
 <footer class="grid gap-y-6 border-t py-6">
-	<div
-		class="mx-auto flex w-full max-w-screen-lg items-center justify-between gap-x-4 px-4 text-sm"
-	>
-		<img alt="" loading="lazy" class="h-10" src="/assets/images/eu.svg" />
-		<p>
-			This project has received funding from the European Union's Horizon 2020 research and
-			innovation programme under grant agreement No. 101004825. This website reflects only the
-			authors' views and the European Union is not liable for any use that may be made of the
-			information contained therein.
-		</p>
-	</div>
+  <div
+    class="mx-auto flex w-full max-w-screen-lg items-center justify-between gap-x-4 px-4 text-sm"
+  >
+    <Image alt="" class="h-10" src={getImageImport("/assets/images/eu.svg")} />
+    <p>
+      This project has received funding from the European Union's Horizon 2020
+      research and innovation programme under grant agreement No. 101004825.
+      This website reflects only the authors' views and the European Union is
+      not liable for any use that may be made of the information contained
+      therein.
+    </p>
+  </div>
 
-	<div class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 text-sm">
-		<div>
-			<Link
-				class="underline decoration-dotted underline-offset-4 hover:no-underline"
-				href="/imprint"
-			>
-				{imprint}
-			</Link>
-		</div>
+  <div
+    class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 text-sm"
+  >
+    <div>
+      <Link
+        class="underline decoration-dotted underline-offset-4 hover:no-underline"
+        href="/imprint"
+      >
+        {imprint}
+      </Link>
+    </div>
 
-		<div>
-			&copy; {new Date().getUTCFullYear()}
-			<a
-				class="underline decoration-dotted underline-offset-4 hover:no-underline"
-				href="https://www.oeaw.ac.at/acdh"
-			>
-				ACDH-CH
-			</a>
-		</div>
-	</div>
+    <div>
+      &copy; {new Date().getUTCFullYear()}
+      <a
+        class="underline decoration-dotted underline-offset-4 hover:no-underline"
+        href="https://www.oeaw.ac.at/acdh"
+      >
+        ACDH-CH
+      </a>
+    </div>
+  </div>
 </footer>
