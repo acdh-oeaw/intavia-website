@@ -11,7 +11,7 @@ const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 
 <site-search transition:persist>
 	<button
-		class="inline-flex items-center gap-x-2 px-4 py-2 hover:text-[#212529]"
+		class="inline-flex items-center gap-x-2 px-4 py-2 text-neutral-700 transition hover:text-neutral-950"
 		data-search-open
 		disabled
 	>
@@ -21,7 +21,7 @@ const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 
 	<dialog
 		aria-label={t("Search.search")}
-		class="fixed mx-auto min-h-full w-full max-w-screen-md border bg-[#f1f1f1] backdrop:bg-[#545864a8] backdrop:backdrop-blur-sm open:grid sm:mt-[5rem] sm:max-h-[calc(100%-10rem)] sm:min-h-[16rem] sm:rounded-lg sm:shadow-lg"
+		class="fixed mx-auto min-h-full w-full max-w-screen-md border bg-neutral-100 backdrop:bg-neutral-600/65 backdrop:backdrop-blur-sm open:grid sm:mt-[5rem] sm:max-h-[calc(100%-10rem)] sm:min-h-[16rem] sm:rounded-lg sm:shadow-lg"
 	>
 		<div class="grid size-full gap-y-4 bg-neutral-100 px-8 py-6" data-dialog-content>
 			<button class="absolute right-4 top-4 text-sm" data-search-close>

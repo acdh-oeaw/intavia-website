@@ -37,7 +37,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 		<div data-controls>
 			<div class="absolute left-8 top-8 z-10">
 				<button
-					class="rounded-md bg-[#00000080] p-2 text-white transition hover:bg-[#000000a0] focus-visible:bg-[#000000a0] focus-visible:outline-white"
+					class="rounded-md bg-black/50 p-2 text-white transition hover:bg-black/65 focus-visible:bg-black/65 focus-visible:outline-white"
 					data-control-toggle
 					type="button"
 				>
@@ -57,7 +57,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 				<button
 					aria-controls={id}
 					aria-label={t("ImageCarousel.previous")}
-					class="rounded-md bg-[#00000080] p-2 text-white transition hover:bg-[#000000a0] focus-visible:bg-[#000000a0] focus-visible:outline-white"
+					class="rounded-md bg-black/50 p-2 text-white transition hover:bg-black/65 focus-visible:bg-black/65 focus-visible:outline-white"
 					data-control-previous
 					type="button"
 				>
@@ -66,7 +66,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 				<button
 					aria-controls={id}
 					aria-label={t("ImageCarousel.next")}
-					class="rounded-md bg-[#00000080] p-2 text-white transition hover:bg-[#000000a0] focus-visible:bg-[#000000a0] focus-visible:outline-white"
+					class="rounded-md bg-black/50 p-2 text-white transition hover:bg-black/65 focus-visible:bg-black/65 focus-visible:outline-white"
 					data-control-next
 					type="button"
 				>

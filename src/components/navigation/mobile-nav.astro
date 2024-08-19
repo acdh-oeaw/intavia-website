@@ -12,7 +12,7 @@ const navigation = await getNavigation(locale);
 ---
 
 <div id={mobileNavId} hidden class="px-4 pb-6 lg:hidden" data-mobile-nav>
-	<ul class="grid gap-y-2 text-[#444]" role="list">
+	<ul class="grid gap-y-2 text-neutral-700" role="list">
 		{
 			navigation.links.map((item) => {
 				switch (item.discriminant) {
@@ -21,7 +21,7 @@ const navigation = await getNavigation(locale);
 
 						return (
 							<li>
-								<Link class="transition hover:text-[#212529]" href={href}>
+								<Link class="transition hover:text-neutral-950" href={href}>
 									{label}
 								</Link>
 							</li>
@@ -33,7 +33,7 @@ const navigation = await getNavigation(locale);
 
 						return (
 							<li>
-								<Link class="transition hover:text-[#212529]" href={`/${id}`}>
+								<Link class="transition hover:text-neutral-950" href={`/${id}`}>
 									{label}
 								</Link>
 							</li>
@@ -46,7 +46,7 @@ const navigation = await getNavigation(locale);
 						return (
 							<li>
 								<details class="group">
-									<summary class="inline-flex cursor-pointer items-center gap-x-1.5">
+									<summary class="inline-flex cursor-pointer items-center gap-x-1.5 transition hover:text-neutral-950">
 										{label}
 										<Icon
 											aria-hidden="true"
@@ -62,7 +62,7 @@ const navigation = await getNavigation(locale);
 
 													return (
 														<li>
-															<Link class="transition hover:text-[#212529]" href={href}>
+															<Link class="transition hover:text-neutral-950" href={href}>
 																{label}
 															</Link>
 														</li>
@@ -74,7 +74,7 @@ const navigation = await getNavigation(locale);
 
 													return (
 														<li>
-															<Link class="transition hover:text-[#212529]" href={`/${id}`}>
+															<Link class="transition hover:text-neutral-950" href={`/${id}`}>
 																{label}
 															</Link>
 														</li>
