@@ -20,6 +20,7 @@ const config: Config = {
 				},
 			},
 			screens: {
+				xs: "30rem",
 				lg: "70rem",
 			},
 
