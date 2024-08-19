@@ -124,11 +124,7 @@ const { hero, main } = page;
 											{items.map((item) => {
 												return (
 													<li>
-														<Card
-															href={`/${item.collection}/${item.slug}`}
-															title={item.entry.title}
-															summary={item.entry.summary}
-														/>
+														<Card href={`/${item.id}`} title={item.title} summary={item.summary} />
 													</li>
 												);
 											})}

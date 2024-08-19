@@ -3,8 +3,8 @@ import { Image } from "astro:assets";
 
 import Link from "@/components/link.astro";
 import type { Locale } from "@/config/i18n.config";
-import { createI18n } from "@/lib/i18n";
 import { getImageImport } from "@/lib/get-image-import";
+import { createI18n } from "@/lib/i18n";
 
 const { t } = await createI18n(Astro.currentLocale as Locale | undefined);
 
