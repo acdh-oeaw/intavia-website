@@ -5,6 +5,7 @@ import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
 import { createReader } from "@/lib/content/create-reader";
+import { getBaseUrl } from "@/lib/content/get-base-url";
 import { getMdxContent } from "@/lib/content/get-mdx-content";
 
 export async function getStaticPaths() {
@@ -12,15 +13,17 @@ export async function getStaticPaths() {
 	const pages = await reader.collections.conferenceProceedings.all({ resolveLinkedFiles: true });
 
 	return pages.map((page) => {
-		return { params: { id: page.slug }, props: { page: page.entry } };
+		const baseUrl = getBaseUrl(reader.config.collections.conferenceProceedings, page.slug);
+
+		return { params: { id: page.slug }, props: { baseUrl, page: page.entry } };
 	});
 }
 
-const { page } = Astro.props;
+const { baseUrl, page } = Astro.props;
 
 const documentTitle = page.title;
 const { content, title } = page;
-const { default: Content } = await getMdxContent(content, locale);
+const { default: Content } = await getMdxContent(content, locale, baseUrl);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>

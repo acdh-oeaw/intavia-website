@@ -1,6 +1,3 @@
-import { join } from "node:path";
-import { pathToFileURL } from "node:url";
-
 import type { CompileOptions } from "@mdx-js/mdx";
 import withSyntaxHighlighter from "@shikijs/rehype";
 import type { ElementContent } from "hast";
@@ -34,8 +31,6 @@ export async function createMdxConfig(locale: Locale): Promise<CompileOptions> {
 	const { t } = await createI18n(locale);
 
 	const config: CompileOptions = {
-		/** Keystatic will always save assets to the public folder. */
-		baseUrl: pathToFileURL(join(process.cwd(), "public")),
 		elementAttributeNameCase: "html",
 		jsxImportSource: "astro",
 		remarkPlugins: [

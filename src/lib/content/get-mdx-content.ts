@@ -17,10 +17,11 @@ interface MdxContent<T extends Record<string, unknown>> extends MDXModule {
 export async function getMdxContent<T extends Record<string, unknown>>(
 	code: string,
 	locale: Locale,
+	baseUrl: URL,
 ): Promise<MdxContent<T>> {
 	const processor = await createMdxProcessor(locale);
 	const file = await processor.process(code);
 
 	// @ts-expect-error Upstream type issue.
-	return run(file, { ...runtime, useMDXComponents });
+	return run(file, { ...runtime, baseUrl, useMDXComponents });
 }

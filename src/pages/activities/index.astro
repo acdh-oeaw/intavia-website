@@ -6,14 +6,16 @@ import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
 import { createReader } from "@/lib/content/create-reader";
+import { getBaseUrl } from "@/lib/content/get-base-url";
 import { getMdxContent } from "@/lib/content/get-mdx-content";
 
 const reader = createReader();
 const page = await reader.collections.pages.readOrThrow("activities", { resolveLinkedFiles: true });
+const baseUrl = getBaseUrl(reader.config.collections.pages, "activities");
 
 const documentTitle = page.title;
 const { content, image, title } = page;
-const { default: Content } = await getMdxContent(content, locale);
+const { default: Content } = await getMdxContent(content, locale, baseUrl);
 
 const activities = await reader.collections.activities.all({ resolveLinkedFiles: true });
 ---
