@@ -5,23 +5,15 @@ import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { createReader } from "@/lib/content/create-reader";
-import { getBaseUrl } from "@/lib/content/get-base-url";
-import { getMdxContent } from "@/lib/content/get-mdx-content";
+import { createResource } from "@/lib/content/create-resource";
 
-const reader = createReader();
-const page = await reader.collections.pages.readOrThrow("deliverables", {
-	resolveLinkedFiles: true,
-});
-const baseUrl = getBaseUrl(reader.config.collections.pages, "deliverables");
+const page = await createResource("pages", locale).read("deliverables");
 
-const documentTitle = page.title;
-const { content, image, title } = page;
-const { default: Content } = await getMdxContent(content, locale, baseUrl);
+const documentTitle = page.data.title;
+const { content, image, title } = page.data;
+const { default: Content } = await page.compile(content);
 
-const conferenceProceedings = await reader.collections.conferenceProceedings.all({
-	resolveLinkedFiles: true,
-});
+const conferenceProceedings = await createResource("conferenceProceedings", locale).all();
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
@@ -33,13 +25,13 @@ const conferenceProceedings = await reader.collections.conferenceProceedings.all
 			</div>
 			<ul class="grid gap-y-12" role="list">
 				{
-					conferenceProceedings.map((item) => {
-						const { title, summary } = item.entry;
+					conferenceProceedings.map((conferenceProceeding) => {
+						const { title, summary } = conferenceProceeding.data;
 
 						return (
 							<li>
 								<Card
-									href={`/conference-proceedings/${item.slug}`}
+									href={`/conference-proceedings/${conferenceProceeding.id}`}
 									title={title}
 									summary={summary}
 								/>

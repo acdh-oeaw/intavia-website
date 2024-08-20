@@ -4,13 +4,10 @@ import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { createReader } from "@/lib/content/create-reader";
-import { getBaseUrl } from "@/lib/content/get-base-url";
-import { getMdxContent } from "@/lib/content/get-mdx-content";
+import { createResource } from "@/lib/content/create-resource";
 
 export async function getStaticPaths() {
-	const reader = createReader();
-	const pages = await reader.collections.pages.all({ resolveLinkedFiles: true });
+	const pages = await createResource("pages", locale).all();
 
 	return pages
 		.filter((page) => {
@@ -23,20 +20,18 @@ export async function getStaticPaths() {
 				"publications",
 				"team",
 				"tutorials",
-			].includes(page.slug);
+			].includes(page.id);
 		})
 		.map((page) => {
-			const baseUrl = getBaseUrl(reader.config.collections.pages, page.slug);
-
-			return { params: { id: page.slug }, props: { baseUrl, page: page.entry } };
+			return { params: { id: page.id }, props: { page } };
 		});
 }
 
-const { baseUrl, page } = Astro.props;
+const { page } = Astro.props;
 
-const documentTitle = page.title;
-const { content, image, title } = page;
-const { default: Content } = await getMdxContent(content, locale, baseUrl);
+const documentTitle = page.data.title;
+const { content, image, title } = page.data;
+const { default: Content } = await page.compile(content);
 ---
 
 <PageLayout locale={locale} title={documentTitle}>
