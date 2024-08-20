@@ -8,7 +8,10 @@ import { createReader } from "@/lib/content/create-reader";
 import { getMdxContent } from "@/lib/content/get-mdx-content";
 import type config from "~/keystatic.config";
 
-export function createResource<T extends keyof typeof config.collections>(name: T, locale: Locale) {
+export function createCollectionResource<T extends keyof typeof config.collections>(
+	name: T,
+	locale: Locale,
+) {
 	const reader = createReader();
 
 	const collectionReader = reader.collections[name];
@@ -51,6 +54,41 @@ export function createResource<T extends keyof typeof config.collections>(name: 
 		baseUrl,
 		compile,
 		list,
+		read,
+	};
+}
+
+export function createSingletonResource<T extends keyof typeof config.singletons>(
+	name: T,
+	locale: Locale,
+) {
+	const reader = createReader();
+
+	const singletonReader = reader.singletons[name];
+	const singletonConfig = reader.config.singletons[name];
+
+	assert(singletonConfig.path);
+
+	function baseUrl() {
+		return pathToFileURL(join(process.cwd(), singletonConfig.path!));
+	}
+
+	function compile(code: string) {
+		return getMdxContent(code, locale, baseUrl());
+	}
+
+	async function read() {
+		const data = await singletonReader.readOrThrow({ resolveLinkedFiles: true });
+
+		return {
+			data,
+			compile,
+		};
+	}
+
+	return {
+		baseUrl,
+		compile,
 		read,
 	};
 }

@@ -5,15 +5,15 @@ import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { createResource } from "@/lib/content/create-resource";
+import { createCollectionResource } from "@/lib/content/create-resource";
 
-const page = await createResource("pages", locale).read("deliverables");
+const page = await createCollectionResource("pages", locale).read("deliverables");
 
 const documentTitle = page.data.title;
 const { content, image, title } = page.data;
 const { default: Content } = await page.compile(content);
 
-const conferenceProceedings = await createResource("conferenceProceedings", locale).all();
+const conferenceProceedings = await createCollectionResource("conferenceProceedings", locale).all();
 ---
 
 <PageLayout locale={locale} title={documentTitle}>

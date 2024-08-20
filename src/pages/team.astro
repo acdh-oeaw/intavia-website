@@ -6,16 +6,16 @@ import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { createResource } from "@/lib/content/create-resource";
+import { createCollectionResource } from "@/lib/content/create-resource";
 import { getImageImport } from "@/lib/get-image-import";
 
-const page = await createResource("pages", locale).read("team");
+const page = await createCollectionResource("pages", locale).read("team");
 
 const documentTitle = page.data.title;
 const { content, image, title } = page.data;
 const { default: Content } = await page.compile(content);
 
-const partners = await createResource("partners", locale).all();
+const partners = await createCollectionResource("partners", locale).all();
 ---
 
 <PageLayout locale={locale} title={documentTitle}>

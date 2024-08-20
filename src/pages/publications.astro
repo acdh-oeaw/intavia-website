@@ -8,11 +8,11 @@ import PageSectionTitle from "@/components/page-section-title.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { createResource } from "@/lib/content/create-resource";
+import { createCollectionResource } from "@/lib/content/create-resource";
 import { getFormatter } from "@/lib/formatter";
 import { getZoteroCollections, type ZoteroItem } from "@/lib/zotero";
 
-const page = await createResource("pages", locale).read("publications");
+const page = await createCollectionResource("pages", locale).read("publications");
 
 const documentTitle = page.data.title;
 const { content, image, title } = page.data;

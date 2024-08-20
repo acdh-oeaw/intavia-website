@@ -4,10 +4,10 @@ import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
 import { defaultLocale as locale } from "@/config/i18n.config";
 import PageLayout from "@/layouts/page-layout.astro";
-import { createResource } from "@/lib/content/create-resource";
+import { createCollectionResource } from "@/lib/content/create-resource";
 
 export async function getStaticPaths() {
-	const pages = await createResource("caseStudies", locale).all();
+	const pages = await createCollectionResource("caseStudies", locale).all();
 
 	return pages.map((page) => {
 		return { params: { id: page.id }, props: { page } };
