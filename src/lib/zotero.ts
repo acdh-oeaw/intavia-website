@@ -2,26 +2,8 @@ import { createUrl, createUrlSearchParams, request } from "@acdh-oeaw/lib";
 
 import { collections, user } from "@/config/zotero.config";
 
-export interface ZoteroItem {
-	data: {
-		title: string;
-		creators: Array<
-			| {
-					firstName: string;
-					lastName: string;
-			  }
-			| {
-					name: string;
-			  }
-		>;
-		date?: string;
-		place?: string;
-		meetingName?: string;
-		url?: string;
-	};
-	meta: {
-		parsedDate?: string;
-	};
+interface ZoteroItem {
+	bib: string;
 }
 
 export async function getZoteroCollections() {
@@ -33,7 +15,10 @@ export async function getZoteroCollections() {
 			pathname: `/groups/${user}/collections/${collection.id}/items`,
 			searchParams: createUrlSearchParams({
 				itemType: "-attachment",
-				include: "data",
+				/** @see https://www.zotero.org/support/dev/web_api/v3/basics?parameters_for_format_bib_includecontent_bib_includecontent_citation */
+				include: "bib",
+				linkwrap: 1,
+				style: "apa",
 			}),
 		});
 
@@ -42,6 +27,7 @@ export async function getZoteroCollections() {
 				"Zotero-API-Version": "3",
 			},
 			responseType: "json",
+			timeout: 20_000,
 		})) as Array<ZoteroItem>;
 
 		items.push({ id: collection.id, label: collection.label, data });
