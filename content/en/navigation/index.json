@@ -1,155 +1,162 @@
 {
-	"links": [
-		{
-			"discriminant": "menu",
-			"value": {
-				"label": "About",
-				"links": [
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "About",
-							"id": "about"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Team",
-							"id": "team"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Advisory Board",
-							"id": "advisory-board"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Associated Organizations",
-							"id": "associated-organizations"
-						}
-					}
-				]
-			}
-		},
-		{
-			"discriminant": "menu",
-			"value": {
-				"label": "Research",
-				"links": [
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Overall Aims",
-							"id": "overall-aims"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "System Architecture",
-							"id": "system-architecture"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Work Packages",
-							"id": "work-packages"
-						}
-					}
-				]
-			}
-		},
-		{
-			"discriminant": "menu",
-			"value": {
-				"label": "Results",
-				"links": [
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Activities",
-							"id": "activities"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Case studies",
-							"id": "case-studies"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Conference proceedings",
-							"id": "conference-proceedings"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Deliverables",
-							"id": "deliverables"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Publications and presentations",
-							"id": "publications"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Tools",
-							"id": "tools"
-						}
-					},
-					{
-						"discriminant": "page",
-						"value": {
-							"label": "Tutorials",
-							"id": "tutorials"
-						}
-					}
-				]
-			}
-		},
-		{
-			"discriminant": "menu",
-			"value": {
-				"label": "Follow us",
-				"links": [
-					{
-						"discriminant": "link",
-						"value": {
-							"label": "Twitter",
-							"href": "https://twitter.com/projectintavia"
-						}
-					},
-					{
-						"discriminant": "link",
-						"value": {
-							"label": "YouTube",
-							"href": "https://www.youtube.com/@InTaVia/playlists"
-						}
-					}
-				]
-			}
-		},
-		{
-			"discriminant": "page",
-			"value": {
-				"label": "Newsletters",
-				"id": "newsletters"
-			}
-		}
-	]
+  "links": [
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "About",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "About",
+              "id": "about"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Team",
+              "id": "team"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Advisory Board",
+              "id": "advisory-board"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Associated Organizations",
+              "id": "associated-organizations"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Research",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Overall Aims",
+              "id": "overall-aims"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "System Architecture",
+              "id": "system-architecture"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Work Packages",
+              "id": "work-packages"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Results",
+        "links": [
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Activities",
+              "id": "activities"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Case studies",
+              "id": "case-studies"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Conference proceedings",
+              "id": "conference-proceedings"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Deliverables",
+              "id": "deliverables"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Publications and presentations",
+              "id": "publications"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Tools",
+              "id": "tools"
+            }
+          },
+          {
+            "discriminant": "page",
+            "value": {
+              "label": "Tutorials",
+              "id": "tutorials"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "menu",
+      "value": {
+        "label": "Follow us",
+        "links": [
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "Twitter",
+              "href": "https://twitter.com/projectintavia"
+            }
+          },
+          {
+            "discriminant": "link",
+            "value": {
+              "label": "YouTube",
+              "href": "https://www.youtube.com/@InTaVia/playlists"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "discriminant": "page",
+      "value": {
+        "label": "Newsletters",
+        "id": "newsletters"
+      }
+    },
+    {
+      "discriminant": "link",
+      "value": {
+        "label": "Application",
+        "href": "https://intavia.acdh-dev.oeaw.ac.at"
+      }
+    }
+  ]
 }
