@@ -193,6 +193,10 @@ const links = {
 				label: "URL",
 				validation: { isRequired: true },
 			}),
+			highlight: fields.checkbox({
+				label: "Highlight",
+				defaultValue: false,
+			}),
 		},
 		{
 			label: "Link",

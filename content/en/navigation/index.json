@@ -131,14 +131,16 @@
             "discriminant": "link",
             "value": {
               "label": "Twitter",
-              "href": "https://twitter.com/projectintavia"
+              "href": "https://twitter.com/projectintavia",
+              "highlight": false
             }
           },
           {
             "discriminant": "link",
             "value": {
               "label": "YouTube",
-              "href": "https://www.youtube.com/@InTaVia/playlists"
+              "href": "https://www.youtube.com/@InTaVia/playlists",
+              "highlight": false
             }
           }
         ]
@@ -155,7 +157,8 @@
       "discriminant": "link",
       "value": {
         "label": "Application",
-        "href": "https://intavia.acdh-dev.oeaw.ac.at"
+        "href": "https://intavia.acdh-dev.oeaw.ac.at",
+        "highlight": true
       }
     }
   ]

@@ -35,11 +35,13 @@ const navigation = await getNavigation(locale);
 					navigation.links.map((item) => {
 						switch (item.discriminant) {
 							case "link": {
-								const { label, href } = item.value;
+								const { label, href, highlight } = item.value;
 
 								return (
 									<li>
-										<NavMenuLink href={href}>{label}</NavMenuLink>
+										<NavMenuLink href={href} variant={highlight ? "highlight" : undefined}>
+											{label}
+										</NavMenuLink>
 									</li>
 								);
 							}

@@ -4,15 +4,19 @@ import Link from "@/components/link.astro";
 interface Props {
 	class?: string;
 	href: URL | string;
+	variant?: "highlight";
 }
 
-const { class: className, ...rest } = Astro.props;
+const { class: className, variant, ...rest } = Astro.props;
 ---
 
 <Link
 	{...rest}
 	class:list={[
-		"rounded inline-flex px-4 py-2 text-neutral-700 transition hover:text-neutral-950",
+		"rounded inline-flex px-4 py-2 transition ",
+		variant === "highlight"
+			? "mx-4 rounded-md bg-brand text-neutral-950 shadow hover:bg-brand-intent"
+			: "text-neutral-700 hover:text-neutral-950",
 		className,
 	]}
 	data-nav-link
