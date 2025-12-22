@@ -92,6 +92,11 @@ export default defineConfig({
 			destination:
 				"https://raw.githubusercontent.com/InTaVia/idm-rdf/refs/heads/main/idm-OWL/intavia_idm1.1.ttl",
 		},
+		"/apis/[page]/[...id]": {
+			status: 302,
+			destination:
+				"https://apis.acdh.oeaw.ac.at/apis/api2/entity/[id]/?format=rdf%2Bturtle",
+		},
 	},
 	scopedStyleStrategy: "where",
 	security: {
