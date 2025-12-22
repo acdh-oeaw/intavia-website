@@ -87,7 +87,7 @@ export default defineConfig({
 			destination:
 				"https://raw.githubusercontent.com/InTaVia/idm-rdf/refs/heads/main/idm-OWL/intavia_idm1.1.ttl",
 		},
-		"/idm-core/*": {
+		"/idm-core/[...slug]": {
 			status: 302,
 			destination:
 				"https://raw.githubusercontent.com/InTaVia/idm-rdf/refs/heads/main/idm-OWL/intavia_idm1.1.ttl",
