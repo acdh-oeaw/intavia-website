@@ -82,6 +82,16 @@ export default defineConfig({
 				: "/keystatic",
 			status: 307,
 		},
+		"/idm-core": {
+			status: 302,
+			destination:
+				"https://raw.githubusercontent.com/InTaVia/idm-rdf/refs/heads/main/idm-OWL/intavia_idm1.1.ttl",
+		},
+		"/idm-core/*": {
+			status: 302,
+			destination:
+				"https://raw.githubusercontent.com/InTaVia/idm-rdf/refs/heads/main/idm-OWL/intavia_idm1.1.ttl",
+		},
 	},
 	scopedStyleStrategy: "where",
 	security: {
