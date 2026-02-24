@@ -1,0 +1,7 @@
+---
+export const prerender = false;
+
+const { id } = Astro.params as { type: string; id: string };
+
+return Astro.redirect(`https://biografiasampo.fi/henkilo/${id}`, 302);
+---
