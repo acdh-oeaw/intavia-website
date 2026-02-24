@@ -3,8 +3,5 @@ export const prerender = false;
 
 const { id } = Astro.params as { type: string; id: string };
 
-return Astro.redirect(
-	`https://www.slovenska-biografija.si/oseba/${id}/`,
-	302,
-);
+return Astro.redirect(`https://www.slovenska-biografija.si/oseba/${id}/`, 302);
 ---
