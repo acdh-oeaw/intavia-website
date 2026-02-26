@@ -1,16 +1,22 @@
 ---
 export const prerender = false;
 
-const path = Astro.url.pathname;
-const allowedPrefixes = ["/test", "/bs", "/apis"];
+const { url } = Astro;
+
+const allowedPrefixes = ["/apis/", "/bs/", "/sbi/", "/bnet/", "/name/"];
+
+const path = url.pathname;
 
 const shouldRedirect = allowedPrefixes.some((prefix) => path.startsWith(prefix));
 
 if (shouldRedirect) {
-	const requestedUrl = Astro.url.toString();
-	return Astro.redirect(`https://second_website?url=${encodeURIComponent(requestedUrl)}`, 302);
+	const requestedUrl = "DESCRIBE <http://www.intavia.eu" + path + ">";
+
+	return Astro.redirect(
+		`https://intavia-ts-backend.acdh-dev.oeaw.ac.at/?query=${requestedUrl}`,
+		302,
+	);
 }
 
-// For non-matching paths, return 404
 return new Response("Not Found", { status: 404 });
 ---
