@@ -1,0 +1,16 @@
+---
+export const prerender = false;
+
+const path = Astro.url.pathname;
+const allowedPrefixes = ["/test", "/bs", "/apis"];
+
+const shouldRedirect = allowedPrefixes.some((prefix) => path.startsWith(prefix));
+
+if (shouldRedirect) {
+	const requestedUrl = Astro.url.toString();
+	return Astro.redirect(`https://second_website?url=${encodeURIComponent(requestedUrl)}`, 302);
+}
+
+// For non-matching paths, return 404
+return new Response("Not Found", { status: 404 });
+---
