@@ -1,6 +1,5 @@
 :3000 {
 	root * /usr/share/caddy
-	encode zstd gzip
 
 	@baseRoot expression `'{$APP_BASE_PATH}' != '' && {http.request.uri.path} == '{$APP_BASE_PATH}'`
 	redir @baseRoot {$APP_BASE_PATH}/ 308
