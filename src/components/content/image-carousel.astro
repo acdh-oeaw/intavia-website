@@ -81,59 +81,59 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 			class="relative aspect-square sm:aspect-[2.125]"
 			data-carousel-items
 		>
-			{
-				slides.map((slide, index) => {
-					assert(slide.image);
+			{slides.map((slide, index) => {
+				assert(slide.image);
 
-					const alignments = {
-						left: "left-0",
-						right: "right-0",
-					};
+				const alignments = {
+					left: "left-0",
+					right: "right-0",
+				};
 
-					const href = `/${slide.id}`;
+				const href = `/${slide.id}`;
 
-					return (
-						<div
-							data-carousel-item
-							data-active={index === 0 ? "" : undefined}
-							role="group"
-							aria-roledescription="slide"
-							aria-label={t("ImageCarousel.slide", {
-								current: index,
-								total: slides.length,
-							})}
-							class="group relative size-full"
+				return (
+					<div
+						data-carousel-item
+						data-active={index === 0 ? "" : undefined}
+						role="group"
+						aria-roledescription="slide"
+						aria-label={t("ImageCarousel.slide", {
+							current: index,
+							total: slides.length,
+						})}
+						class="group relative size-full"
+					>
+						<a
+							class="block size-full -outline-offset-2 focus-visible:outline-white"
+							aria-label={slide.title}
+							href={href}
 						>
-							<a
-								class="block size-full -outline-offset-2 focus-visible:outline-white"
-								aria-label={slide.title}
-								href={href}
-							>
-								<Image
-									alt=""
-									class="size-full object-cover"
-									loading={index === 0 ? "eager" : undefined}
-									src={getImageImport(slide.image)}
-								/>
-							</a>
-							<div
-								class:list={[
-									"absolute bottom-0 grid w-full gap-y-2 border-t-4 border-brand bg-black/75 p-8 text-white",
-									alignments[slide.alignment ?? "left"],
-								]}
-							>
-								<h2 class="text-xl font-bold">
-									<a class="focus-visible:outline-white" href={href}>
-										{slide.title}
-									</a>
-								</h2>
-								<hr class="my-1 border-neutral-400" />
-								<div>{slide.summary}</div>
-							</div>
+							<Image
+								alt=""
+								class="size-full object-cover"
+								loading={index === 0 ? "eager" : undefined}
+								src={getImageImport(slide.image)}
+								widths={[480, 768, 1280]}
+								sizes="(max-width: 1280px) 100vw, 1280px"
+							/>
+						</a>
+						<div
+							class:list={[
+								"absolute bottom-0 grid w-full gap-y-2 border-t-4 border-brand bg-black/75 p-8 text-white",
+								alignments[slide.alignment ?? "left"],
+							]}
+						>
+							<h2 class="text-xl font-bold">
+								<a class="focus-visible:outline-white" href={href}>
+									{slide.title}
+								</a>
+							</h2>
+							<hr class="my-1 border-neutral-400" />
+							<div>{slide.summary}</div>
 						</div>
-					);
-				})
-			}
+					</div>
+				);
+			})}
 		</div>
 	</div>
 </image-carousel>
@@ -222,8 +222,8 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 				}
 				state.paused = false;
 				timer = setInterval(onNextSlide, delay);
-				root!.dataset.state = "playing";
-				liveRegion!.setAttribute("aria-live", "off");
+				root?.setAttribute("data-state", "playing");
+				liveRegion?.setAttribute("aria-live", "off");
 			}
 
 			function pause(force?: boolean) {
@@ -233,7 +233,7 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 				state.paused = true;
 				if (timer) clearInterval(timer);
 				timer = null;
-				root!.dataset.state = "paused";
+				root?.setAttribute("data-state", "paused");
 			}
 
 			function onTogglePlayState() {
@@ -269,14 +269,14 @@ const { t } = await createI18n((Astro.currentLocale as Locale | undefined) ?? de
 
 			function onFocusIn(event: FocusEvent) {
 				const elementLosingFocus = event.relatedTarget as Element | null;
-				if (elementLosingFocus == null || !root!.contains(elementLosingFocus)) {
+				if (elementLosingFocus == null || !root?.contains(elementLosingFocus)) {
 					pause();
 				}
 			}
 
 			function onFocusOut(event: FocusEvent) {
 				const elementReceivingFocus = event.relatedTarget as Element | null;
-				if (elementReceivingFocus == null || !root!.contains(elementReceivingFocus)) {
+				if (elementReceivingFocus == null || !root?.contains(elementReceivingFocus)) {
 					autoplay();
 				}
 			}

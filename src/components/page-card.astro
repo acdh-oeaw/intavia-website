@@ -13,11 +13,19 @@ const { class: className, image } = Astro.props;
 
 <section
 	class:list={[
-		"mx-auto w-full max-w-screen-lg border-t-4 border-neutral-300 lg:my-6 lg:rounded-b-md lg:bg-white lg:shadow",
+		"mx-auto w-full max-w-(--breakpoint-lg) border-t-4 border-neutral-300 lg:my-6 lg:rounded-b-md lg:bg-white lg:shadow-sm",
 		className,
 	]}
 >
-	{image && <Image alt="" src={getImageImport(image)} class="h-56 object-cover" />}
+	{image && (
+		<Image
+			alt=""
+			src={getImageImport(image)}
+			class="h-56 w-full object-cover"
+			widths={[480, 768, 1024]}
+			sizes="(max-width: 1024px) 100vw, 1024px"
+		/>
+	)}
 	<div class="grid gap-y-6 px-6 pb-12 pt-6">
 		<slot />
 	</div>

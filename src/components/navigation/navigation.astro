@@ -161,7 +161,7 @@ const { class: className, label } = Astro.props;
 				if (current == null) return;
 
 				const element = event.relatedTarget as Node | null;
-				if (!root!.contains(element)) {
+				if (!root?.contains(element)) {
 					closeMenu(current);
 				}
 			}

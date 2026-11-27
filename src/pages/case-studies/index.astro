@@ -24,17 +24,15 @@ const caseStudies = await createCollectionResource("caseStudies", locale).all();
 				<Content />
 			</div>
 			<ul class="grid gap-y-12" role="list">
-				{
-					caseStudies.map((caseStudy) => {
-						const { title, summary } = caseStudy.data;
+				{caseStudies.map((caseStudy) => {
+					const { title, summary } = caseStudy.data;
 
-						return (
-							<li>
-								<Card href={`/case-studies/${caseStudy.id}`} title={title} summary={summary} />
-							</li>
-						);
-					})
-				}
+					return (
+						<li>
+							<Card href={`/case-studies/${caseStudy.id}`} title={title} summary={summary} />
+						</li>
+					);
+				})}
 			</ul>
 		</PageCard>
 	</MainContent>

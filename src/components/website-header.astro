@@ -21,96 +21,100 @@ const navigation = await getNavigation(locale);
 ---
 
 <header class="border-b-[3px]">
-	<div
-		class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 py-3 text-sm font-medium"
-	>
+	<div class="mx-auto flex w-full max-w-(--breakpoint-lg) items-center justify-between px-4 py-3 text-sm font-medium">
 		<Navigation class="h-fit flex-1" label={t("WebsiteHeader.navigation-primary")}>
 			<NavMenuLink class="-ml-4 inline-flex shrink-0 items-center gap-x-2" href="/">
-				<Image alt="" class="block h-14 w-auto" fetchpriority="high" loading="eager" src={logo} />
+				<Image
+					alt=""
+					class="block h-14 w-auto"
+					fetchpriority="high"
+					loading="eager"
+					height={56}
+					densities={[1, 2]}
+					src={logo}
+				/>
 				<span class="sr-only">{t("WebsiteHeader.links.home")}</span>
 			</NavMenuLink>
 
 			<ul class="hidden flex-1 flex-wrap items-center gap-x-2 text-lg lg:flex" role="list">
-				{
-					navigation.links.map((item) => {
-						switch (item.discriminant) {
-							case "link": {
-								const { label, href, highlight } = item.value;
+				{navigation.links.map((item) => {
+					switch (item.discriminant) {
+						case "link": {
+							const { label, href, highlight } = item.value;
 
-								return (
-									<li>
-										<NavMenuLink href={href} variant={highlight ? "highlight" : undefined}>
-											{label}
-										</NavMenuLink>
-									</li>
-								);
-							}
-
-							case "page": {
-								const { label, id } = item.value;
-
-								return (
-									<li>
-										<NavMenuLink href={`/${id}`}>{label}</NavMenuLink>
-									</li>
-								);
-							}
-
-							case "menu": {
-								const { label, links } = item.value;
-
-								return (
-									<li>
-										<NavMenu>
-											<NavMenuTrigger>{label}</NavMenuTrigger>
-											<NavMenuPopover>
-												<ul role="list">
-													{links.map((link) => {
-														switch (link.discriminant) {
-															case "link": {
-																const { label, href } = link.value;
-
-																return (
-																	<li>
-																		<NavMenuItem target="_blank" href={href}>
-																			{label}
-																		</NavMenuItem>
-																	</li>
-																);
-															}
-
-															case "page": {
-																const { label, id } = link.value;
-
-																return (
-																	<li>
-																		<NavMenuItem href={`/${id}`}>{label}</NavMenuItem>
-																	</li>
-																);
-															}
-
-															case "separator": {
-																return <hr />;
-															}
-
-															default: {
-																return null;
-															}
-														}
-													})}
-												</ul>
-											</NavMenuPopover>
-										</NavMenu>
-									</li>
-								);
-							}
-
-							default: {
-								return null;
-							}
+							return (
+								<li>
+									<NavMenuLink href={href} variant={highlight ? "highlight" : undefined}>
+										{label}
+									</NavMenuLink>
+								</li>
+							);
 						}
-					})
-				}
+
+						case "page": {
+							const { label, id } = item.value;
+
+							return (
+								<li>
+									<NavMenuLink href={`/${id}`}>{label}</NavMenuLink>
+								</li>
+							);
+						}
+
+						case "menu": {
+							const { label, links } = item.value;
+
+							return (
+								<li>
+									<NavMenu>
+										<NavMenuTrigger>{label}</NavMenuTrigger>
+										<NavMenuPopover>
+											<ul role="list">
+												{links.map((link) => {
+													switch (link.discriminant) {
+														case "link": {
+															const { label, href } = link.value;
+
+															return (
+																<li>
+																	<NavMenuItem target="_blank" href={href}>
+																		{label}
+																	</NavMenuItem>
+																</li>
+															);
+														}
+
+														case "page": {
+															const { label, id } = link.value;
+
+															return (
+																<li>
+																	<NavMenuItem href={`/${id}`}>{label}</NavMenuItem>
+																</li>
+															);
+														}
+
+														case "separator": {
+															return <hr />;
+														}
+
+														default: {
+															return null;
+														}
+													}
+												})}
+											</ul>
+										</NavMenuPopover>
+									</NavMenu>
+								</li>
+							);
+						}
+
+						default: {
+							return null;
+						}
+					}
+				})}
 			</ul>
 
 			<div class="ml-auto lg:hidden">

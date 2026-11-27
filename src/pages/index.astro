@@ -29,6 +29,7 @@ const { hero, main } = page.data;
 				alt=""
 				class="absolute inset-0 size-full object-cover opacity-60"
 				loading="eager"
+				fetchpriority="high"
 				sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, 100vw"
 				src={getImageImport(hero.image)}
 				widths={[480, 768, 1280]}
@@ -39,69 +40,79 @@ const { hero, main } = page.data;
 			</PageSection>
 		</div>
 
-		{
-			main.sections.map(async (section) => {
-				switch (section.discriminant) {
-					case "data": {
-						const { collections, count, title } = section.value;
+		{main.sections.map(async (section) => {
+			switch (section.discriminant) {
+				case "data": {
+					const { collections, count, title } = section.value;
 
-						let items = [];
+					let items = [];
 
-						for (const collection of collections) {
-							const entries = await createCollectionResource(collection, locale).all();
+					for (const collection of collections) {
+						const entries = await createCollectionResource(collection, locale).all();
 
-							items.push(
-								...entries.map((entry) => {
-									return { ...entry, collection };
-								}),
-							);
-						}
+						items.push(
+							...entries.map((entry) => {
+								return { ...entry, collection };
+							}),
+						);
+					}
 
-						items.sort((a, z) => {
-							return compareDesc(
-								new Date(a.data.publicationDate),
-								new Date(z.data.publicationDate),
-							);
-						});
+					items.sort((a, z) => {
+						return compareDesc(new Date(a.data.publicationDate), new Date(z.data.publicationDate));
+					});
 
-						items = items.slice(0, count);
+					items = items.slice(0, count);
 
-						return (
-							<PageSection>
-								<PageSectionTitle>{title}</PageSectionTitle>
+					return (
+						<PageSection>
+							<PageSectionTitle>{title}</PageSectionTitle>
+							<ul class="grid gap-4 grid-fluid-cols-56" role="list">
+								{items.map((item) => {
+									return (
+										<li>
+											<Card
+												href={`/${item.collection}/${item.id}`}
+												title={item.data.title}
+												summary={item.data.summary}
+											/>
+										</li>
+									);
+								})}
+							</ul>
+						</PageSection>
+					);
+				}
+
+				case "links": {
+					const { links, title, variant } = section.value;
+
+					const items = [];
+
+					for (const link of links) {
+						const item = await createCollectionResource("pages", locale).read(link.value.id);
+
+						items.push({ ...item.data, id: item.id });
+					}
+
+					return (
+						<PageSection>
+							<PageSectionTitle>{title}</PageSectionTitle>
+							{variant === "cards" ? (
 								<ul class="grid gap-4 grid-fluid-cols-56" role="list">
 									{items.map((item) => {
 										return (
 											<li>
-												<Card
-													href={`/${item.collection}/${item.id}`}
-													title={item.data.title}
-													summary={item.data.summary}
-												/>
+												<Card href={`/${item.id}`} title={item.title} summary={item.summary} />
 											</li>
 										);
 									})}
 								</ul>
-							</PageSection>
-						);
-					}
-
-					case "links": {
-						const { links, title, variant } = section.value;
-
-						const items = [];
-
-						for (const link of links) {
-							const item = await createCollectionResource("pages", locale).read(link.value.id);
-
-							items.push({ ...item.data, id: item.id });
-						}
-
-						return (
-							<PageSection>
-								<PageSectionTitle>{title}</PageSectionTitle>
-								{variant === "cards" ? (
-									<ul class="grid gap-4 grid-fluid-cols-56" role="list">
+							) : (
+								<>
+									<div class="hidden xs:block">
+										<ImageCarousel title={title} slides={items} />
+									</div>
+									<ul class="grid gap-4 grid-fluid-cols-56 xs:hidden" role="list">
 										{items.map((item) => {
 											return (
 												<li>
@@ -110,27 +121,12 @@ const { hero, main } = page.data;
 											);
 										})}
 									</ul>
-								) : (
-									<>
-										<div class="hidden xs:block">
-											<ImageCarousel title={title} slides={items} />
-										</div>
-										<ul class="grid gap-4 grid-fluid-cols-56 xs:hidden" role="list">
-											{items.map((item) => {
-												return (
-													<li>
-														<Card href={`/${item.id}`} title={item.title} summary={item.summary} />
-													</li>
-												);
-											})}
-										</ul>
-									</>
-								)}
-							</PageSection>
-						);
-					}
+								</>
+							)}
+						</PageSection>
+					);
 				}
-			})
-		}
+			}
+		})}
 	</MainContent>
 </PageLayout>

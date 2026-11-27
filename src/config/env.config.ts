@@ -15,11 +15,7 @@ export const env = createEnv({
 		return v.parse(Schema, input);
 	},
 	private(input) {
-		const Schema = v.object({
-			KEYSTATIC_GITHUB_CLIENT_ID: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			KEYSTATIC_GITHUB_CLIENT_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			KEYSTATIC_SECRET: v.optional(v.pipe(v.string(), v.nonEmpty())),
-		});
+		const Schema = v.object({});
 		return v.parse(Schema, input);
 	},
 	public(input) {
@@ -28,10 +24,6 @@ export const env = createEnv({
 			PUBLIC_APP_BASE_URL: v.pipe(v.string(), v.url()),
 			PUBLIC_BOTS: v.optional(v.picklist(["disabled", "enabled"]), "disabled"),
 			PUBLIC_GOOGLE_SITE_VERIFICATION: v.optional(v.string()),
-			PUBLIC_KEYSTATIC_GITHUB_APP_SLUG: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			PUBLIC_KEYSTATIC_GITHUB_REPO_NAME: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER: v.optional(v.pipe(v.string(), v.nonEmpty())),
-			PUBLIC_KEYSTATIC_MODE: v.optional(v.picklist(["github", "local"]), "local"),
 			PUBLIC_MATOMO_BASE_URL: v.optional(v.pipe(v.string(), v.url())),
 			PUBLIC_MATOMO_ID: v.optional(
 				v.pipe(v.string(), v.transform(Number), v.number(), v.integer(), v.minValue(1)),
@@ -54,8 +46,7 @@ export const env = createEnv({
 		if (error instanceof v.ValiError) {
 			const message = "Invalid environment variables";
 
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			log.error(`${message}:`, v.flatten<any>(error.issues).nested);
+			log.error(`${message}:`, v.flatten(error.issues).nested);
 
 			const validationError = new Error(message);
 			delete validationError.stack;

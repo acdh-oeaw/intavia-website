@@ -4,13 +4,11 @@ import { assert } from "@acdh-oeaw/lib";
 import type { ImageMetadata } from "astro";
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
-	"/public/assets/**/*.@(avif|bmp|gif|jpeg|jpg|png|svg|webp)",
+	"/public/assets/**/*.{avif,bmp,gif,jpeg,jpg,png,svg,webp}",
 );
 
 export function getImageImport(path: string) {
-	/** Upstream type issue. */
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-explicit-any
-	if (!path.startsWith("/")) return path as any;
+	assert(path.startsWith("/"), "Expected a local image path.");
 
 	const publicPath = join("/public", decodeURIComponent(path));
 	const image = images[publicPath];

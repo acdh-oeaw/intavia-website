@@ -13,9 +13,9 @@ const { class: className, variant, ...rest } = Astro.props;
 <Link
 	{...rest}
 	class:list={[
-		"rounded inline-flex px-4 py-2 transition ",
+		"rounded-sm inline-flex px-4 py-2 transition ",
 		variant === "highlight"
-			? "mx-4 rounded-md bg-brand text-neutral-950 shadow hover:bg-brand-intent"
+			? "mx-4 rounded-md bg-brand text-neutral-950 shadow-sm hover:bg-brand-intent"
 			: "text-neutral-700 hover:text-neutral-950",
 		className,
 	]}

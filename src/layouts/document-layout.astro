@@ -1,10 +1,9 @@
 ---
-import "tailwindcss/tailwind.css";
 import "@fontsource/abel/latin.css";
 import "@/styles/index.css";
 
 import abel from "@fontsource/abel/files/abel-latin-400-normal.woff2";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import type { WebSite, WithContext } from "schema-dts";
 
 import Analytics from "@/components/analytics.astro";
@@ -85,21 +84,18 @@ const googleSiteVerification = env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 		<link rel="preload" as="font" type="font/woff2" href={abel} crossorigin />
 
-		<ViewTransitions />
+		<ClientRouter />
 
 		<script
 			is:inline
 			set:html={JSON.stringify(jsonLd, safeJsonLdReplacer)}
 			type="application/ld+json"
 		/>
-
 		{matomoBaseUrl && matomoId ? <Analytics baseUrl={matomoBaseUrl} id={matomoId} /> : null}
 
-		{
-			googleSiteVerification != null ? (
-				<meta name="google-site-verification" content={googleSiteVerification} />
-			) : null
-		}
+		{googleSiteVerification != null ? (
+			<meta name="google-site-verification" content={googleSiteVerification} />
+		) : null}
 	</head>
 
 	<body>

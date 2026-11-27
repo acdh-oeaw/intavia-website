@@ -1,3 +1,5 @@
+import type { URL } from "node:url";
+
 import { run } from "@mdx-js/mdx";
 import * as runtime from "astro/jsx-runtime";
 import type { MDXModule } from "mdx/types";

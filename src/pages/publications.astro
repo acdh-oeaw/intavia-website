@@ -24,22 +24,20 @@ const collections = await getZoteroCollections();
 			<div class="prose">
 				<Content />
 			</div>
-			{
-				collections.map((collection) => {
-					return (
-						<>
-							<PageSectionTitle id={collection.label.toLowerCase()}>
-								{collection.label}
-							</PageSectionTitle>
-							<ul class="prose" role="list">
-								{collection.data.map((item) => {
-									return <li set:html={item.bib} />;
-								})}
-							</ul>
-						</>
-					);
-				})
-			}
+			{collections.map((collection) => {
+				return (
+					<>
+						<PageSectionTitle id={collection.label.toLowerCase()}>
+							{collection.label}
+						</PageSectionTitle>
+						<ul class="prose" role="list">
+							{collection.data.map((item) => {
+								return <li set:html={item.bib} />;
+							})}
+						</ul>
+					</>
+				);
+			})}
 		</PageCard>
 	</MainContent>
 </PageLayout>

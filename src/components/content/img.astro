@@ -6,17 +6,46 @@ import { getImageImport } from "@/lib/get-image-import";
 
 interface Props extends HTMLAttributes<"img"> {}
 
-const { alt = "", src, ...rest } = Astro.props;
+const {
+	alt = "",
+	src,
+	width: requestedWidth,
+	height: requestedHeight,
+	sizes,
+	...rest
+} = Astro.props;
+const image = src?.startsWith("/") ? (await getImageImport(src)).default : undefined;
+const width = image
+	? Math.min(Number(requestedWidth) || image.width, image.width, 1120)
+	: undefined;
+const widths = width ? [...new Set([320, 640, 960, width].filter((value) => value <= width))] : [];
+const height =
+	image && width
+		? Math.round(
+				width * (Number(requestedHeight) / Number(requestedWidth) || image.height / image.width),
+			)
+		: undefined;
 ---
 
-{
-	src != null ? (
-		src.startsWith("/") ? (
-			/* @ts-expect-error Upstream type issue. */
-			// prettier-ignore
-			<Image {...rest} alt={alt} src={getImageImport(src)} />
-		) : (
-			<img {...rest} alt={alt} src={src} />
-		)
-	) : null
-}
+{image ? (
+	<Image
+		{...rest}
+		alt={alt}
+		src={image}
+		width={width}
+		height={height}
+		widths={widths}
+		sizes={sizes ?? "(max-width: 1120px) calc(100vw - 3rem), 1072px"}
+	/>
+) : src ? (
+	<img
+		{...rest}
+		alt={alt}
+		src={src}
+		width={requestedWidth}
+		height={requestedHeight}
+		sizes={sizes}
+		loading={rest.loading ?? "lazy"}
+		decoding={rest.decoding ?? "async"}
+	/>
+) : null}

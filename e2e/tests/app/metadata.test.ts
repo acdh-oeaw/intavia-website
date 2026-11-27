@@ -4,7 +4,7 @@ import { defaultLocale } from "@/config/i18n.config";
 import { escape } from "@/lib/safe-json-ld-replacer";
 import { expect, test } from "~/e2e/lib/test";
 
-const baseUrl = process.env.PUBLIC_APP_BASE_URL!;
+const baseUrl = process.env.PUBLIC_APP_BASE_URL ?? "http://localhost:3000";
 
 test("should set a canonical url", async ({ createIndexPage }) => {
 	const { indexPage } = await createIndexPage();
@@ -87,7 +87,6 @@ test("should add json+ld metadata", async ({ createIndexPage }) => {
 	await indexPage.goto();
 
 	const metadata = await indexPage.page.locator('script[type="application/ld+json"]').textContent();
-	// eslint-disable-next-line playwright/prefer-web-first-assertions
 	expect(metadata).toBe(
 		JSON.stringify({
 			"@context": "https://schema.org",

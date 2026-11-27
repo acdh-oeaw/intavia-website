@@ -3,7 +3,7 @@ import { createUrl } from "@acdh-oeaw/lib";
 import { defaultLocale } from "@/config/i18n.config";
 import { expect, test } from "~/e2e/lib/test";
 
-const baseUrl = process.env.PUBLIC_APP_BASE_URL!;
+const baseUrl = process.env.PUBLIC_APP_BASE_URL ?? "http://localhost:3000";
 
 test.describe("app", () => {
 	if (process.env.PUBLIC_BOTS !== "enabled") {

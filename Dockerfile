@@ -1,75 +1,40 @@
 # syntax=docker/dockerfile:1
-
-# using alpine base image to avoid `sharp` memory leaks.
-# @see https://sharp.pixelplumbing.com/install#linux-memory-allocator
-
-# base
-FROM node:24-alpine AS base
-
-RUN corepack enable
-
-RUN mkdir /app && chown -R node:node /app
+FROM node:26-alpine AS build
+RUN npm install --global pnpm@12.23.0
+RUN mkdir /app && chown node:node /app
 WORKDIR /app
-
 USER node
-
-COPY --chown=node:node .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-
-RUN pnpm fetch --prod
-RUN pnpm install --frozen-lockfile --ignore-scripts --offline --prod
-
-# build
-FROM base as build
-
-RUN pnpm fetch --dev
-
-COPY --chown=node:node ./ ./
-
-# astro assets cache
-COPY --chown=node:node ./node_modules/.astro ./node_modules/.astro
-
+ENV CI=true PNPM_CONFIG_RUNTIME=false
+COPY --chown=node:node package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
+RUN pnpm fetch
+RUN pnpm install --frozen-lockfile --offline --ignore-scripts
+# Build dependency scripts before copying content; defer the project Git hook setup in CI.
+RUN pnpm rebuild --pending
+COPY --chown=node:node --exclude=Caddyfile ./ ./
 ARG PUBLIC_APP_BASE_PATH
 ARG PUBLIC_APP_BASE_URL
 ARG PUBLIC_BOTS
 ARG PUBLIC_GOOGLE_SITE_VERIFICATION
-ARG PUBLIC_KEYSTATIC_GITHUB_APP_SLUG
-ARG PUBLIC_KEYSTATIC_GITHUB_REPO_NAME
-ARG PUBLIC_KEYSTATIC_GITHUB_REPO_OWNER
-ARG PUBLIC_KEYSTATIC_MODE
 ARG PUBLIC_MATOMO_BASE_URL
 ARG PUBLIC_MATOMO_ID
 ARG PUBLIC_REDMINE_ID
+ENV ENV_VALIDATION=public NODE_ENV=production
+RUN pnpm run build && mkdir -p node_modules/.astro/assets node_modules/.astro/fonts node_modules/.astro/remote-content
 
-# disable validation for runtime environment variables
-ENV ENV_VALIDATION=public
+FROM scratch AS astro-cache
+COPY --from=build /app/node_modules/.astro/assets /assets
+COPY --from=build /app/node_modules/.astro/fonts /fonts
+COPY --from=build /app/node_modules/.astro/remote-content /remote-content
 
-RUN pnpm install --frozen-lockfile --prefer-offline
-
-ENV NODE_ENV=production
-
-RUN --mount=type=secret,id=KEYSTATIC_GITHUB_CLIENT_ID,uid=1000 \
-		--mount=type=secret,id=KEYSTATIC_GITHUB_CLIENT_SECRET,uid=1000 \
-		--mount=type=secret,id=KEYSTATIC_SECRET,uid=1000 \
-			KEYSTATIC_GITHUB_CLIENT_ID=$(cat /run/secrets/KEYSTATIC_GITHUB_CLIENT_ID) \
-			KEYSTATIC_GITHUB_CLIENT_SECRET=$(cat /run/secrets/KEYSTATIC_GITHUB_CLIENT_SECRET) \
-			KEYSTATIC_SECRET=$(cat /run/secrets/KEYSTATIC_SECRET) \
-		pnpm run build
-
-# serve
-FROM node:24-alpine AS serve
-
-RUN mkdir /app && chown -R node:node /app
-WORKDIR /app
-
-USER node
-
-COPY --from=base --chown=node:node /app/node_modules ./node_modules
-COPY --from=build --chown=node:node /app/dist ./
-
-ENV NODE_ENV=production
-ENV HOST=0.0.0.0
-ENV PORT=3000
-
+FROM caddy:2-alpine AS serve
+RUN addgroup -S -g 10001 caddy && adduser -S -D -H -u 10001 -G caddy caddy \
+    && chown -R caddy:caddy /config /data
+WORKDIR /usr/share/caddy
+ARG PUBLIC_APP_BASE_PATH
+ENV APP_BASE_PATH=${PUBLIC_APP_BASE_PATH}
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /app/dist /usr/share/caddy
+USER 10001:10001
+RUN caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
 EXPOSE 3000
-
-CMD [ "node", "./server/entry.mjs" ]
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
