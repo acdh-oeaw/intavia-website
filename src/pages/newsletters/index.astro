@@ -24,17 +24,15 @@ const newsletters = await createCollectionResource("newsletters", locale).all();
 				<Content />
 			</div>
 			<ul class="grid gap-y-12" role="list">
-				{
-					newsletters.map((newsletter) => {
-						const { title, summary } = newsletter.data;
+				{newsletters.map((newsletter) => {
+					const { title, summary } = newsletter.data;
 
-						return (
-							<li>
-								<Card href={`/newsletters/${newsletter.id}`} title={title} summary={summary} />
-							</li>
-						);
-					})
-				}
+					return (
+						<li>
+							<Card href={`/newsletters/${newsletter.id}`} title={title} summary={summary} />
+						</li>
+					);
+				})}
 			</ul>
 		</PageCard>
 	</MainContent>

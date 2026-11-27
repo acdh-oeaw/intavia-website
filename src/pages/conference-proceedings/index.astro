@@ -24,21 +24,19 @@ const conferenceProceedings = await createCollectionResource("conferenceProceedi
 				<Content />
 			</div>
 			<ul class="grid gap-y-12" role="list">
-				{
-					conferenceProceedings.map((conferenceProceeding) => {
-						const { title, summary } = conferenceProceeding.data;
+				{conferenceProceedings.map((conferenceProceeding) => {
+					const { title, summary } = conferenceProceeding.data;
 
-						return (
-							<li>
-								<Card
-									href={`/conference-proceedings/${conferenceProceeding.id}`}
-									title={title}
-									summary={summary}
-								/>
-							</li>
-						);
-					})
-				}
+					return (
+						<li>
+							<Card
+								href={`/conference-proceedings/${conferenceProceeding.id}`}
+								title={title}
+								summary={summary}
+							/>
+						</li>
+					);
+				})}
 			</ul>
 		</PageCard>
 	</MainContent>

@@ -12,9 +12,7 @@ const imprint = t("WebsiteFooter.links.imprint");
 ---
 
 <footer class="grid gap-y-6 border-t py-6">
-	<div
-		class="mx-auto flex w-full max-w-screen-lg items-center justify-between gap-x-4 px-4 text-sm"
-	>
+	<div class="mx-auto flex w-full max-w-(--breakpoint-lg) items-center justify-between gap-x-4 px-4 text-sm">
 		<Image alt="" class="h-10 w-auto" src={getImageImport("/assets/images/eu.svg")} />
 		<p>
 			This project has received funding from the European Union's Horizon 2020 research and
@@ -24,7 +22,7 @@ const imprint = t("WebsiteFooter.links.imprint");
 		</p>
 	</div>
 
-	<div class="mx-auto flex w-full max-w-screen-lg items-center justify-between px-4 text-sm">
+	<div class="mx-auto flex w-full max-w-(--breakpoint-lg) items-center justify-between px-4 text-sm">
 		<div>
 			<Link
 				class="underline decoration-dotted underline-offset-4 hover:no-underline"

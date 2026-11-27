@@ -24,17 +24,15 @@ const deliverables = await createCollectionResource("deliverables", locale).all(
 				<Content />
 			</div>
 			<ul class="grid gap-y-12" role="list">
-				{
-					deliverables.map((deliverable) => {
-						const { title, summary } = deliverable.data;
+				{deliverables.map((deliverable) => {
+					const { title, summary } = deliverable.data;
 
-						return (
-							<li>
-								<Card href={`/deliverables/${deliverable.id}`} title={title} summary={summary} />
-							</li>
-						);
-					})
-				}
+					return (
+						<li>
+							<Card href={`/deliverables/${deliverable.id}`} title={title} summary={summary} />
+						</li>
+					);
+				})}
 			</ul>
 		</PageCard>
 	</MainContent>

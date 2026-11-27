@@ -81,6 +81,7 @@ export function withMdxTableOfContents() {
 					body: [
 						{
 							type: "ExportNamedDeclaration",
+							attributes: [],
 							source: null,
 							specifiers: [],
 							declaration: {

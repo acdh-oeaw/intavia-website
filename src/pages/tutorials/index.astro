@@ -24,17 +24,15 @@ const tutorials = await createCollectionResource("tutorials", locale).all();
 				<Content />
 			</div>
 			<ul class="grid gap-y-12" role="list">
-				{
-					tutorials.map((tutorial) => {
-						const { title, summary } = tutorial.data;
+				{tutorials.map((tutorial) => {
+					const { title, summary } = tutorial.data;
 
-						return (
-							<li>
-								<Card href={`/tutorials/${tutorial.id}`} title={title} summary={summary} />
-							</li>
-						);
-					})
-				}
+					return (
+						<li>
+							<Card href={`/tutorials/${tutorial.id}`} title={title} summary={summary} />
+						</li>
+					);
+				})}
 			</ul>
 		</PageCard>
 	</MainContent>

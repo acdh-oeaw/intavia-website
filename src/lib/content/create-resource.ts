@@ -17,10 +17,12 @@ export function createCollectionResource<T extends keyof typeof config.collectio
 	const collectionReader = reader.collections[name];
 	const collectionConfig = reader.config.collections[name];
 
-	assert(collectionConfig.path);
+	const contentPath = collectionConfig.path;
+	assert(contentPath);
 
 	function baseUrl(id: string) {
-		return pathToFileURL(join(process.cwd(), collectionConfig.path!.replace(/\*+/, id)));
+		assert(contentPath);
+		return pathToFileURL(join(process.cwd(), contentPath.replace(/\*+/, id)));
 	}
 
 	function compile(id: string, code: string) {
@@ -67,10 +69,12 @@ export function createSingletonResource<T extends keyof typeof config.singletons
 	const singletonReader = reader.singletons[name];
 	const singletonConfig = reader.config.singletons[name];
 
-	assert(singletonConfig.path);
+	const contentPath = singletonConfig.path;
+	assert(contentPath);
 
 	function baseUrl() {
-		return pathToFileURL(join(process.cwd(), singletonConfig.path!));
+		assert(contentPath);
+		return pathToFileURL(join(process.cwd(), contentPath));
 	}
 
 	function compile(code: string) {

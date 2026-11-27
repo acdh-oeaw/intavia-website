@@ -5,12 +5,15 @@ import { expect, test } from "~/e2e/lib/test";
 if (process.env.PUBLIC_MATOMO_BASE_URL && process.env.PUBLIC_MATOMO_ID) {
 	test.describe("analytics service", () => {
 		const baseUrl = String(
-			createUrl({ baseUrl: process.env.PUBLIC_MATOMO_BASE_URL!, pathname: "/**" }),
+			createUrl({
+				baseUrl: process.env.PUBLIC_MATOMO_BASE_URL ?? "http://localhost:3000",
+				pathname: "/**",
+			}),
 		);
 
 		test("should track page views", async ({ page }) => {
 			const initialResponsePromise = page.waitForResponse(baseUrl);
-			await page.goto("/en/");
+			await page.goto("/");
 			const initialResponse = await initialResponsePromise;
 			expect(initialResponse.status()).toBe(204);
 

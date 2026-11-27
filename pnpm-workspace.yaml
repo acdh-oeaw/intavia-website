@@ -1,8 +1,9 @@
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
-  - simple-git-hooks
+allowBuilds:
+  esbuild: true
+  sharp: true
+  lefthook: true
 
 shellEmulator: true
-
 strictDepBuilds: true
+
+engineStrict: true

@@ -4,7 +4,6 @@ import { createAssetPaths } from "@/lib/content/create-asset-paths";
 import { createCollection } from "@/lib/content/create-collection";
 import { createComponents, headingLevels } from "@/lib/content/create-components";
 import { createCollectionPaths } from "@/lib/content/create-paths";
-// import { createPreviewUrl } from "@/lib/content/create-preview-url";
 
 export const activities = createCollection((locale) => {
 	const { assetPath, contentPath } = createCollectionPaths("/activities/", locale);
@@ -14,7 +13,6 @@ export const activities = createCollection((locale) => {
 		path: contentPath,
 		slugField: "title",
 		format: { contentField: "content" },
-		// previewUrl: createPreviewUrl("/activities/{slug}"),
 		entryLayout: "content",
 		columns: ["title"],
 		schema: {
@@ -67,7 +65,6 @@ export const caseStudies = createCollection((locale) => {
 		path: contentPath,
 		slugField: "title",
 		format: { contentField: "content" },
-		// previewUrl: createPreviewUrl("/case-studies/{slug}"),
 		entryLayout: "content",
 		columns: ["title"],
 		schema: {
@@ -107,7 +104,6 @@ export const conferenceProceedings = createCollection((locale) => {
 		path: contentPath,
 		slugField: "title",
 		format: { contentField: "content" },
-		// previewUrl: createPreviewUrl("/conference-proceedings/{slug}"),
 		entryLayout: "content",
 		columns: ["title"],
 		schema: {
@@ -147,7 +143,6 @@ export const deliverables = createCollection((locale) => {
 		path: contentPath,
 		slugField: "title",
 		format: { contentField: "content" },
-		// previewUrl: createPreviewUrl("/deliverables/{slug}"),
 		entryLayout: "content",
 		columns: ["title"],
 		schema: {
@@ -187,7 +182,6 @@ export const newsletters = createCollection((locale) => {
 		path: contentPath,
 		slugField: "title",
 		format: { contentField: "content" },
-		// previewUrl: createPreviewUrl("/newsletters/{slug}"),
 		entryLayout: "content",
 		columns: ["title"],
 		schema: {
@@ -232,7 +226,6 @@ export const pages = createCollection((locale) => {
 		path: contentPath,
 		slugField: "title",
 		format: { contentField: "content" },
-		// previewUrl: createPreviewUrl("/{slug}"),
 		entryLayout: "content",
 		columns: ["title"],
 		schema: {
@@ -272,7 +265,6 @@ export const partners = createCollection((locale) => {
 		path: contentPath,
 		slugField: "name",
 		format: { data: "json" },
-		// previewUrl: createPreviewUrl("/partners/{slug}"),
 		entryLayout: "form",
 		schema: {
 			name: fields.slug({
@@ -344,7 +336,6 @@ export const tutorials = createCollection((locale) => {
 		path: contentPath,
 		slugField: "title",
 		format: { contentField: "content" },
-		// previewUrl: createPreviewUrl("/tutorials/{slug}"),
 		entryLayout: "content",
 		columns: ["title"],
 		schema: {

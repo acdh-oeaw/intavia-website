@@ -2,7 +2,6 @@ import { fields, singleton } from "@keystatic/core";
 
 import { createAssetPaths } from "@/lib/content/create-asset-paths";
 import { createSingletonPaths } from "@/lib/content/create-paths";
-// import { createPreviewUrl } from "@/lib/content/create-preview-url";
 import { createSingleton } from "@/lib/content/create-singleton";
 import * as validation from "@/lib/content/validation";
 
@@ -13,7 +12,6 @@ export const indexPage = createSingleton((locale) => {
 		label: "Home page",
 		path: contentPath,
 		format: { data: "json" },
-		// previewUrl: createPreviewUrl("/"),
 		entryLayout: "form",
 		schema: {
 			hero: fields.object(

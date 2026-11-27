@@ -1,6 +1,4 @@
 ---
-import { request } from "@acdh-oeaw/lib";
-
 import MainContent from "@/components/main-content.astro";
 import PageCard from "@/components/page-card.astro";
 import PageTitle from "@/components/page-title.astro";
@@ -8,6 +6,7 @@ import { defaultLocale as locale } from "@/config/i18n.config";
 import { createImprintUrl } from "@/config/imprint.config";
 import PageLayout from "@/layouts/page-layout.astro";
 import { createI18n } from "@/lib/i18n";
+import { requestRemoteContent } from "@/lib/request-remote-content";
 
 const { t } = await createI18n(locale);
 
@@ -15,7 +14,7 @@ const documentTitle = t("ImprintPage.meta.title");
 const title = t("ImprintPage.title");
 
 const imprintUrl = createImprintUrl(locale);
-const imprintHtml = await request(imprintUrl, { responseType: "text" });
+const imprintHtml = await requestRemoteContent(String(imprintUrl), { responseType: "text" });
 ---
 
 <PageLayout locale={locale} title={documentTitle}>

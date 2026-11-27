@@ -24,17 +24,15 @@ const activities = await createCollectionResource("activities", locale).all();
 				<Content />
 			</div>
 			<ul class="grid gap-y-12" role="list">
-				{
-					activities.map((activity) => {
-						const { title, summary } = activity.data;
+				{activities.map((activity) => {
+					const { title, summary } = activity.data;
 
-						return (
-							<li>
-								<Card href={`/activities/${activity.id}`} title={title} summary={summary} />
-							</li>
-						);
-					})
-				}
+					return (
+						<li>
+							<Card href={`/activities/${activity.id}`} title={title} summary={summary} />
+						</li>
+					);
+				})}
 			</ul>
 		</PageCard>
 	</MainContent>
